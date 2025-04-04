@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState, useEffect } from 'react';
-import { Heart } from 'lucide-react-native';
+import { Heart, ChevronLeft } from 'lucide-react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -82,55 +82,71 @@ export default function MovieScreen() {
 
   if (!movie) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.backButtonContainer}>
+          <TouchableOpacity 
+            style={styles.backButton}
+            onPress={() => router.back()}>
+            <ChevronLeft size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.loading}>Loading...</Text>
-      </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <Image
-        source={{
-          uri: `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`,
-        }}
-        style={styles.backdrop}
-      />
-      <View style={styles.content}>
-        <View style={styles.header}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{movie.title}</Text>
-            <Text style={styles.rating}>⭐ {movie.vote_average.toFixed(1)}</Text>
-          </View>
-          <TouchableOpacity
-            style={[
-              styles.watchlistButton,
-              isInWatchlist && styles.watchlistButtonActive,
-            ]}
-            onPress={toggleWatchlist}>
-            <Heart
-              size={24}
-              color={isInWatchlist ? '#E21221' : '#FFFFFF'}
-              fill={isInWatchlist ? '#E21221' : 'none'}
-            />
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.backButtonContainer}>
+          <TouchableOpacity 
+            style={styles.backButton}
+            onPress={() => router.back()}>
+            <ChevronLeft size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
-
-        <View style={styles.genreContainer}>
-          {movie.genres.map((genre) => (
-            <View key={genre.id} style={styles.genreTag}>
-              <Text style={styles.genreText}>{genre.name}</Text>
+        <Image
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`,
+          }}
+          style={styles.backdrop}
+        />
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>{movie.title}</Text>
+              <Text style={styles.rating}>⭐ {movie.vote_average.toFixed(1)}</Text>
             </View>
-          ))}
+            <TouchableOpacity
+              style={[
+                styles.watchlistButton,
+                isInWatchlist && styles.watchlistButtonActive,
+              ]}
+              onPress={toggleWatchlist}>
+              <Heart
+                size={24}
+                color={isInWatchlist ? '#E21221' : '#FFFFFF'}
+                fill={isInWatchlist ? '#E21221' : 'none'}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.genreContainer}>
+            {movie.genres.map((genre) => (
+              <View key={genre.id} style={styles.genreTag}>
+                <Text style={styles.genreText}>{genre.name}</Text>
+              </View>
+            ))}
+          </View>
+
+          <Text style={styles.releaseDate}>
+            Released: {new Date(movie.release_date).toLocaleDateString()}
+          </Text>
+
+          <Text style={styles.overview}>{movie.overview}</Text>
         </View>
-
-        <Text style={styles.releaseDate}>
-          Released: {new Date(movie.release_date).toLocaleDateString()}
-        </Text>
-
-        <Text style={styles.overview}>{movie.overview}</Text>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -138,6 +154,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#13111C',
+  },
+  scrollContainer: {
+    flex: 1,
+  },
+  backButtonContainer: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 10 : 10,
+    left: 10,
+    zIndex: 10,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   backdrop: {
     width: '100%',
