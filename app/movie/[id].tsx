@@ -33,7 +33,7 @@ export default function MovieScreen() {
         `https://api.themoviedb.org/3/movie/${id}`,
         {
           params: {
-            api_key: 'YOUR_TMDB_API_KEY', // Replace with your TMDB API key
+            api_key: '3e3f0a46d6f2abc8e557d06b3fc21a77', // Replace with your TMDB API key
           },
         }
       );
@@ -63,11 +63,18 @@ export default function MovieScreen() {
       if (isInWatchlist) {
         movies = movies.filter((m: MovieDetails) => m.id !== Number(id));
       } else if (movie) {
-        movies.push(movie);
+        movies.push({
+          id: movie.id,
+          title: movie.title,
+          poster_path: movie.poster_path,
+          vote_average: movie.vote_average
+        });
       }
 
       await AsyncStorage.setItem('watchlist', JSON.stringify(movies));
       setIsInWatchlist(!isInWatchlist);
+      
+      // Remove page reload to avoid white flash
     } catch (error) {
       console.error('Error updating watchlist:', error);
     }

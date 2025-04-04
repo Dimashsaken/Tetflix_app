@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Trash2 } from 'lucide-react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface Movie {
   id: number;
@@ -18,6 +19,12 @@ export default function WatchlistScreen() {
   useEffect(() => {
     loadWatchlist();
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadWatchlist();
+    }, [])
+  );
 
   const loadWatchlist = async () => {
     try {
@@ -35,6 +42,9 @@ export default function WatchlistScreen() {
       const updatedWatchlist = watchlist.filter((movie) => movie.id !== movieId);
       await AsyncStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
       setWatchlist(updatedWatchlist);
+      
+      // Force reload the watchlist to reflect changes
+      loadWatchlist();
     } catch (error) {
       console.error('Error removing from watchlist:', error);
     }
