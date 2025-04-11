@@ -1,19 +1,23 @@
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Trash2 } from 'lucide-react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import axios from 'axios';
 
 interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-  vote_average: number;
+  id?: number;
+  title?: string;
+  poster_path?: string;
+  vote_average?: number;
+  overview?: string;
 }
 
 export default function WatchlistScreen() {
-  const [watchlist, setWatchlist] = useState<Movie[]>([]);
+  const [watchlistIds, setWatchlistIds] = useState<number[]>([]);
+  const [watchlistMovies, setWatchlistMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,32 +31,100 @@ export default function WatchlistScreen() {
   );
 
   const loadWatchlist = async () => {
+    setIsLoading(true);
     try {
-      const savedWatchlist = await AsyncStorage.getItem('watchlist');
-      if (savedWatchlist) {
-        setWatchlist(JSON.parse(savedWatchlist));
+      const savedWatchlistIds = await AsyncStorage.getItem('watchlist');
+      if (savedWatchlistIds) {
+        // Parse the IDs from storage
+        const ids: number[] = JSON.parse(savedWatchlistIds);
+        
+        // Filter out any undefined or null IDs
+        const validIds = ids.filter((id): id is number => 
+          id !== undefined && id !== null && typeof id === 'number'
+        );
+        
+        setWatchlistIds(validIds);
+        
+        // Fetch details for all movies in the watchlist
+        fetchWatchlistDetails(validIds);
+      } else {
+        setWatchlistIds([]);
+        setWatchlistMovies([]);
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('Error loading watchlist:', error);
+      setIsLoading(false);
+    }
+  };
+  
+  const fetchWatchlistDetails = async (ids: number[]) => {
+    if (ids.length === 0) {
+      setWatchlistMovies([]);
+      setIsLoading(false);
+      return;
+    }
+    
+    try {
+      // Fetch details for each movie
+      const moviePromises = ids.map(id => 
+        axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+          params: {
+            api_key: '3e3f0a46d6f2abc8e557d06b3fc21a77'
+          }
+        })
+        .then(response => response.data)
+        .catch(error => {
+          console.error(`Error fetching movie ${id}:`, error);
+          return null;
+        })
+      );
+      
+      const moviesData = await Promise.all(moviePromises);
+      // Filter out any null responses from failed requests
+      const validMovies = moviesData.filter(movie => movie !== null);
+      
+      setWatchlistMovies(validMovies);
+    } catch (error) {
+      console.error('Error fetching watchlist details:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const removeFromWatchlist = async (movieId: number) => {
+  const removeFromWatchlist = async (movieId: number | undefined) => {
+    if (movieId === undefined) {
+      console.error('Cannot remove undefined movie ID from watchlist');
+      return;
+    }
+    
     try {
-      const updatedWatchlist = watchlist.filter((movie) => movie.id !== movieId);
-      await AsyncStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
-      setWatchlist(updatedWatchlist);
+      // Remove from watchlist IDs
+      const updatedIds = watchlistIds.filter(id => id !== movieId);
+      setWatchlistIds(updatedIds);
       
-      // Force reload the watchlist to reflect changes
-      loadWatchlist();
+      // Remove from watchlist movies
+      const updatedMovies = watchlistMovies.filter(movie => movie.id !== movieId);
+      setWatchlistMovies(updatedMovies);
+      
+      // Update AsyncStorage
+      await AsyncStorage.setItem('watchlist', JSON.stringify(updatedIds));
     } catch (error) {
       console.error('Error removing from watchlist:', error);
     }
   };
 
+  if (isLoading) {
+    return (
+      <View style={[styles.container, styles.loadingContainer]}>
+        <ActivityIndicator size="large" color="#E50914" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {watchlist.length === 0 ? (
+      {watchlistMovies.length === 0 ? (
         <View style={styles.emptyState}>
           <Text style={styles.emptyText}>Your watchlist is empty</Text>
           <Text style={styles.emptySubtext}>
@@ -61,27 +133,34 @@ export default function WatchlistScreen() {
         </View>
       ) : (
         <FlatList
-          data={watchlist}
-          keyExtractor={(item) => item.id.toString()}
+          data={watchlistMovies}
+          keyExtractor={(item) => (item.id !== undefined ? item.id.toString() : Math.random().toString())}
           renderItem={({ item }) => (
             <View style={styles.movieItem}>
               <TouchableOpacity
                 style={styles.movieContent}
-                onPress={() => router.push(`/movie/${item.id}`)}>
+                onPress={() => item.id !== undefined && router.push(`/movie/${item.id}`)}>
                 <Image
                   source={{
-                    uri: `https://image.tmdb.org/t/p/w200${item.poster_path}`,
+                    uri: item.poster_path 
+                      ? `https://image.tmdb.org/t/p/w200${item.poster_path}`
+                      : 'https://via.placeholder.com/200x300?text=No+Image',
                   }}
                   style={styles.poster}
                 />
                 <View style={styles.movieInfo}>
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.rating}>⭐ {item.vote_average.toFixed(1)}</Text>
+                  <Text style={styles.title}>{item.title || 'Untitled'}</Text>
+                  <Text style={styles.rating}>⭐ {(item.vote_average || 0).toFixed(1)}</Text>
+                  {item.overview && (
+                    <Text style={styles.overview} numberOfLines={2}>
+                      {item.overview}
+                    </Text>
+                  )}
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.removeButton}
-                onPress={() => removeFromWatchlist(item.id)}>
+                onPress={() => item.id !== undefined && removeFromWatchlist(item.id)}>
                 <Trash2 size={20} color="#E21221" />
               </TouchableOpacity>
             </View>
@@ -97,6 +176,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#13111C',
     padding: 16,
+  },
+  loadingContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   emptyState: {
     flex: 1,
@@ -143,6 +226,12 @@ const styles = StyleSheet.create({
   rating: {
     color: '#FFC107',
     fontSize: 14,
+    marginBottom: 4,
+  },
+  overview: {
+    color: '#9E9E9E',
+    fontSize: 12,
+    lineHeight: 16,
   },
   removeButton: {
     padding: 16,

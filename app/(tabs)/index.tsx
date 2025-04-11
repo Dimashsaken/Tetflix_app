@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 interface Movie {
@@ -16,6 +16,15 @@ export default function MoviesScreen() {
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
   const [topRatedMovies, setTopRatedMovies] = useState<Movie[]>([]);
   const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
+  const [popularPage, setPopularPage] = useState(1);
+  const [topRatedPage, setTopRatedPage] = useState(1);
+  const [trendingPage, setTrendingPage] = useState(1);
+  const [isLoadingMore, setIsLoadingMore] = useState({
+    popular: false,
+    topRated: false,
+    trending: false
+  });
+  const scrollViewRef = useRef<ScrollView>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -24,52 +33,122 @@ export default function MoviesScreen() {
     fetchTrendingMovies();
   }, []);
 
-  const fetchPopularMovies = async () => {
+  const fetchPopularMovies = async (page = 1) => {
+    if (isLoadingMore.popular && page > 1) return;
+    
     try {
+      setIsLoadingMore({...isLoadingMore, popular: true});
       const response = await axios.get(
         'https://api.themoviedb.org/3/movie/popular',
         {
           params: {
             api_key: '3e3f0a46d6f2abc8e557d06b3fc21a77',
+            page,
           },
         }
       );
-      setPopularMovies(response.data.results);
+      
+      if (page === 1) {
+        setPopularMovies(response.data.results);
+      } else {
+        setPopularMovies([...popularMovies, ...response.data.results]);
+      }
+      
+      setPopularPage(page);
     } catch (error) {
       console.error('Error fetching popular movies:', error);
+    } finally {
+      setIsLoadingMore({...isLoadingMore, popular: false});
     }
   };
 
-  const fetchTopRatedMovies = async () => {
+  const fetchTopRatedMovies = async (page = 1) => {
+    if (isLoadingMore.topRated && page > 1) return;
+    
     try {
+      setIsLoadingMore({...isLoadingMore, topRated: true});
       const response = await axios.get(
         'https://api.themoviedb.org/3/movie/top_rated',
         {
           params: {
             api_key: '3e3f0a46d6f2abc8e557d06b3fc21a77',
+            page,
           },
         }
       );
-      setTopRatedMovies(response.data.results);
+      
+      if (page === 1) {
+        setTopRatedMovies(response.data.results);
+      } else {
+        setTopRatedMovies([...topRatedMovies, ...response.data.results]);
+      }
+      
+      setTopRatedPage(page);
     } catch (error) {
       console.error('Error fetching top rated movies:', error);
+    } finally {
+      setIsLoadingMore({...isLoadingMore, topRated: false});
     }
   };
 
-  const fetchTrendingMovies = async () => {
+  const fetchTrendingMovies = async (page = 1) => {
+    if (isLoadingMore.trending && page > 1) return;
+    
     try {
+      setIsLoadingMore({...isLoadingMore, trending: true});
       const response = await axios.get(
         'https://api.themoviedb.org/3/trending/movie/day',
         {
           params: {
             api_key: '3e3f0a46d6f2abc8e557d06b3fc21a77',
+            page,
           },
         }
       );
-      setTrendingMovies(response.data.results);
+      
+      if (page === 1) {
+        setTrendingMovies(response.data.results);
+      } else {
+        setTrendingMovies([...trendingMovies, ...response.data.results]);
+      }
+      
+      setTrendingPage(page);
     } catch (error) {
       console.error('Error fetching trending movies:', error);
+    } finally {
+      setIsLoadingMore({...isLoadingMore, trending: false});
     }
+  };
+
+  const loadMorePopular = () => {
+    if (!isLoadingMore.popular) {
+      fetchPopularMovies(popularPage + 1);
+    }
+  };
+
+  const loadMoreTopRated = () => {
+    if (!isLoadingMore.topRated) {
+      fetchTopRatedMovies(topRatedPage + 1);
+    }
+  };
+
+  const loadMoreTrending = () => {
+    if (!isLoadingMore.trending) {
+      fetchTrendingMovies(trendingPage + 1);
+    }
+  };
+
+  const renderFooter = (section: 'popular' | 'topRated' | 'trending') => {
+    if (!isLoadingMore[section]) return null;
+    
+    return (
+      <View style={[
+        styles.loaderContainer, 
+        section !== 'popular' && styles.horizontalLoaderContainer
+      ]}>
+        <ActivityIndicator size="small" color="#E50914" />
+      </View>
+    );
   };
 
   const renderPopularMovie = ({ item }: { item: Movie }) => (
@@ -134,10 +213,29 @@ export default function MoviesScreen() {
     </TouchableOpacity>
   );
 
+  const handleMainScroll = (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 20; // Adjust this value as needed
+    const isCloseToBottom = layoutMeasurement.height + contentOffset.y >= 
+      contentSize.height - paddingToBottom;
+      
+    if (isCloseToBottom && !isLoadingMore.popular) {
+      loadMorePopular();
+    }
+  };
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+      style={styles.container}
+      ref={scrollViewRef}
+      onScroll={handleMainScroll}
+      scrollEventThrottle={400} // Adjust this value as needed
+    >
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Trending Now</Text>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Trending Now</Text>
+          <Text style={styles.sectionHint}>Swipe for more →</Text>
+        </View>
         <FlatList
           data={trendingMovies}
           renderItem={renderTrendingMovie}
@@ -145,11 +243,17 @@ export default function MoviesScreen() {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.horizontalList}
+          onEndReached={loadMoreTrending}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={() => renderFooter('trending')}
         />
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Top Rated</Text>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Top Rated</Text>
+          <Text style={styles.sectionHint}>Swipe for more →</Text>
+        </View>
         <FlatList
           data={topRatedMovies}
           renderItem={renderTopRatedMovie}
@@ -157,6 +261,9 @@ export default function MoviesScreen() {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.horizontalList}
+          onEndReached={loadMoreTopRated}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={() => renderFooter('topRated')}
         />
       </View>
 
@@ -169,8 +276,14 @@ export default function MoviesScreen() {
           numColumns={2}
           scrollEnabled={false}
           contentContainerStyle={styles.gridList}
+          ListFooterComponent={() => renderFooter('popular')}
         />
       </View>
+      {isLoadingMore.popular && (
+        <View style={styles.mainLoaderContainer}>
+          <ActivityIndicator size="large" color="#E50914" />
+        </View>
+      )}
     </ScrollView>
   );
 }
@@ -183,12 +296,21 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 24,
   },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 16,
+    marginBottom: 12,
+  },
   sectionTitle: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginHorizontal: 16,
-    marginBottom: 12,
+  },
+  sectionHint: {
+    color: '#9E9E9E',
+    fontSize: 12,
   },
   horizontalList: {
     paddingLeft: 16,
@@ -196,6 +318,21 @@ const styles = StyleSheet.create({
   },
   gridList: {
     paddingHorizontal: 8,
+  },
+  loaderContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    justifyContent: 'center', 
+    alignItems: 'center'
+  },
+  horizontalLoaderContainer: {
+    width: 60, // This gives space for the loading indicator at the end of horizontal lists
+  },
+  mainLoaderContainer: {
+    paddingVertical: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
   },
   
   // Popular movies (grid layout)
