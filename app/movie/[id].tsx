@@ -505,7 +505,7 @@ const styles = StyleSheet.create({
   },
   posterContainer: {
     position: 'absolute',
-    bottom: -70,
+    bottom: -130,
     left: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 5 },
@@ -535,7 +535,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 10,
     paddingHorizontal: 16,
   },
   header: {
@@ -544,10 +544,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 130,
     marginBottom: 10,
+    paddingTop: 5,
   },
   titleContainer: {
     flex: 1,
     marginRight: 16,
+    justifyContent: 'center',
   },
   title: {
     color: '#FFFFFF',

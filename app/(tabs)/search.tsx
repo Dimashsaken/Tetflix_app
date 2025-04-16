@@ -6,6 +6,7 @@ import { Search as SearchIcon, Filter, X, Clock, Trash2, TrendingUp, LayoutGrid,
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { debounce } from 'lodash';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface Movie {
   id: number;
@@ -48,7 +49,7 @@ export default function SearchScreen() {
   // Temporary filter states (used in the modal)
   const [tempSelectedGenres, setTempSelectedGenres] = useState<number[]>([]);
   const [tempMinRating, setTempMinRating] = useState(0);
-  const [tempYearRange, setTempYearRange] = useState<[number, number]>([1900, new Date().getFullYear()]);
+  const [tempYearRange, setTempYearRange] = useState<[number, number]>([2000, new Date().getFullYear()]);
   
   // Year picker modal states
   const [yearPickerVisible, setYearPickerVisible] = useState(false);
@@ -58,7 +59,7 @@ export default function SearchScreen() {
   // Active filter states (applied to results)
   const [activeGenres, setActiveGenres] = useState<number[]>([]);
   const [activeMinRating, setActiveMinRating] = useState(0);
-  const [activeYearRange, setActiveYearRange] = useState<[number, number]>([1900, new Date().getFullYear()]);
+  const [activeYearRange, setActiveYearRange] = useState<[number, number]>([2000, new Date().getFullYear()]);
   
   // Rename favorites to watchlist
   const [watchlist, setWatchlist] = useState<number[]>([]);
@@ -73,6 +74,13 @@ export default function SearchScreen() {
     loadUserPreferences();
     loadWatchlist();
   }, []);
+
+  // Add useFocusEffect to reload watchlist when tab is focused
+  useFocusEffect(
+    useCallback(() => {
+      loadWatchlist();
+    }, [])
+  );
 
   useEffect(() => {
     if (query.length > 2) {
@@ -187,7 +195,7 @@ export default function SearchScreen() {
       }
       
       // Add release date range filter
-      if (activeYearRange[0] > 1900 || activeYearRange[1] < new Date().getFullYear()) {
+      if (activeYearRange[0] > 2000 || activeYearRange[1] < new Date().getFullYear()) {
         params.primary_release_date_gte = `${activeYearRange[0]}-01-01`;
         params.primary_release_date_lte = `${activeYearRange[1]}-12-31`;
       }
@@ -350,13 +358,13 @@ export default function SearchScreen() {
   const clearTempFilters = () => {
     setTempSelectedGenres([]);
     setTempMinRating(0);
-    setTempYearRange([1900, new Date().getFullYear()]);
+    setTempYearRange([2000, new Date().getFullYear()]);
   };
   
   const clearActiveFilters = () => {
     setActiveGenres([]);
     setActiveMinRating(0);
-    setActiveYearRange([1900, new Date().getFullYear()]);
+    setActiveYearRange([2000, new Date().getFullYear()]);
   };
   
   const openFilterModal = () => {
@@ -521,7 +529,7 @@ export default function SearchScreen() {
   const generateYears = () => {
     const currentYear = new Date().getFullYear();
     const years = [];
-    for (let year = 1900; year <= currentYear; year++) {
+    for (let year = currentYear; year >= 1900; year--) {
       years.push(year);
     }
     return years;
@@ -999,7 +1007,7 @@ export default function SearchScreen() {
 
               <TouchableOpacity
                 style={styles.resetYearButton}
-                onPress={() => setTempYearRange([1900, new Date().getFullYear()])}
+                onPress={() => setTempYearRange([2000, new Date().getFullYear()])}
               >
                 <Text style={styles.resetYearButtonText}>Reset to All Years</Text>
               </TouchableOpacity>
