@@ -2,6 +2,20 @@
 
 A modern mobile application built with React Native and Expo that allows users to discover, search, and manage their favorite movies. The app provides a seamless experience for movie enthusiasts to explore movies, view detailed information, and maintain a personal watchlist.
 
+## About
+A movie app with features for finding movies, theaters, and managing your watchlist.
+
+## New Feature: Movie Theater Locator
+
+We've enhanced the app with a new feature that helps users find movie theaters near their current location. This feature uses both Mapbox and Google Places API for the most accurate results.
+
+### How It Works
+1. The app gets your current location
+2. It searches for nearby movie theaters using Google Places API (primary) and Mapbox API (backup)
+3. Theaters are displayed as markers on the map with details like name, address and ratings
+4. You can tap on a marker to see more information and add reviews or photos
+
+
 ## Features
 
 ### 1. Movie Discovery

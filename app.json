@@ -8,20 +8,54 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
-    },
+    
+  
     "web": {
       "bundler": "metro",
       "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos."
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
-      "TMDB_API_KEY": "3e3f0a46d6f2abc8e557d06b3fc21a77"
+      "TMDB_API_KEY": "3e3f0a46d6f2abc8e557d06b3fc21a77",
+      "RADAR_API_KEY": "prj_live_pk_c304ba4caedd5b31da09e9318381a32f0c74f518",
+      "mapboxApiKey": "pk.eyJ1IjoiZG1hc2hzYWtlbiIsImEiOiJjbTlrc2I1emYwcm41MmpwcWxjaHphZW1oIn0.1a8e6NyXWkxslcNY9pgULw"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses your location to find nearby movie theatres.",
+        "NSPhotoLibraryUsageDescription": "This app uses your photo library to allow you to add photos to theatre reviews."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#1F1D2B"
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
     }
   }
 }

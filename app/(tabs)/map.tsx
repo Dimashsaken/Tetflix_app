@@ -10,7 +10,8 @@ import {
   ScrollView,
   ActivityIndicator,
   Platform,
-  Alert
+  Alert,
+  Animated
 } from 'react-native';
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -39,6 +40,7 @@ interface Theatre {
   address: string;
   photos: string[];
   reviews: Review[];
+  searchTerm?: string; // Optional field to track which search term found this theater
 }
 
 // Default region for Hong Kong
@@ -58,13 +60,25 @@ export default function MapScreen() {
   const [reviewRating, setReviewRating] = useState(5);
   const [isLoading, setIsLoading] = useState(true);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [lastSearchedRegion, setLastSearchedRegion] = useState<any>(null);
+  const [isMapMoved, setIsMapMoved] = useState(false);
   const mapRef = useRef<MapView | null>(null);
+  
+  // Only keep the map type state, remove the other UI-related states
+  const [mapType, setMapType] = useState<'standard' | 'satellite' | 'hybrid'>('standard');
 
   // Load theatres from storage or use API
   const loadTheatresData = async (latitude: number, longitude: number) => {
     try {
       console.log(`Loading theatres near: ${latitude}, ${longitude}`);
       setIsLoading(true);
+      
+      // Store this region as the last searched region
+      setLastSearchedRegion({
+        latitude,
+        longitude,
+        timestamp: Date.now()
+      });
       
       // Always get fresh data from API to ensure theatres are near current location
       const nearbyTheatres = await findNearbyTheatres(latitude, longitude);
@@ -78,6 +92,7 @@ export default function MapScreen() {
           userLocation: { latitude, longitude },
           data: nearbyTheatres
         }));
+        setIsMapMoved(false);
       } else {
         // If no theatres found, check if we have stored ones that are somewhat nearby
         const storedData = await AsyncStorage.getItem('theatres');
@@ -86,6 +101,13 @@ export default function MapScreen() {
           if (parsedData.data && parsedData.data.length > 0) {
             setTheatres(parsedData.data);
             console.log('Using cached theatre data');
+          } else {
+            // No stored data either, show a user-friendly message
+            Alert.alert(
+              "No Theaters Found",
+              "We couldn't find any movie theaters in this area. Try moving the map to a different location or search again later.",
+              [{ text: "OK" }]
+            );
           }
         }
       }
@@ -184,6 +206,22 @@ export default function MapScreen() {
     }
   }, [theatres, isLoading]);
 
+  // Toggle map type
+  const toggleMapType = () => {
+    setMapType(current => {
+      switch (current) {
+        case 'standard':
+          return 'satellite';
+        case 'satellite':
+          return 'hybrid';
+        case 'hybrid':
+          return 'standard';
+        default:
+          return 'standard';
+      }
+    });
+  };
+
   const handleMarkerPress = (theatre: Theatre) => {
     setSelectedTheatre(theatre);
   };
@@ -254,6 +292,32 @@ export default function MapScreen() {
       setIsLoading(false);
     }
   };
+  
+  const handleRegionChangeComplete = (newRegion: any) => {
+    setRegion(newRegion);
+    
+    // Calculate distance between new region and last searched region
+    if (lastSearchedRegion) {
+      const latDiff = Math.abs(newRegion.latitude - lastSearchedRegion.latitude);
+      const lngDiff = Math.abs(newRegion.longitude - lastSearchedRegion.longitude);
+      
+      // If the map has moved significantly (about 2km), set flag to show "Search this area" button
+      if (latDiff > 0.02 || lngDiff > 0.02) {
+        setIsMapMoved(true);
+      }
+    }
+  };
+  
+  const searchThisArea = async () => {
+    setIsLoading(true);
+    try {
+      await loadTheatresData(region.latitude, region.longitude);
+    } catch (error) {
+      console.error('Error searching this area:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const renderStars = (rating: number) => {
     return (
@@ -306,7 +370,8 @@ export default function MapScreen() {
         provider={PROVIDER_GOOGLE}
         showsUserLocation
         showsMyLocationButton
-        onRegionChangeComplete={setRegion}
+        onRegionChangeComplete={handleRegionChangeComplete}
+        mapType={mapType}
       >
         {theatres.map((theatre) => (
           <Marker
@@ -333,6 +398,24 @@ export default function MapScreen() {
           </Marker>
         ))}
       </MapView>
+      
+      {/* Only keep the map type toggle button */}
+      <TouchableOpacity 
+        style={styles.mapTypeButton}
+        onPress={toggleMapType}
+      >
+        <FontAwesome name="map" size={20} color="white" />
+      </TouchableOpacity>
+      
+      {/* "Search this area" button */}
+      {isMapMoved && (
+        <TouchableOpacity 
+          style={styles.searchAreaButton}
+          onPress={searchThisArea}
+        >
+          <Text style={styles.searchAreaText}>Search this area</Text>
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity 
         style={styles.refreshButton}
@@ -419,6 +502,15 @@ export default function MapScreen() {
                   </TouchableOpacity>
                 </View>
               </View>
+              
+              {/* Data Source Information */}
+              {selectedTheatre.searchTerm && (
+                <View style={styles.dataSourceContainer}>
+                  <Text style={styles.dataSourceText}>
+                    Data source: {selectedTheatre.searchTerm === 'google_places' ? 'Google Places API' : 'Mapbox API'}
+                  </Text>
+                </View>
+              )}
             </ScrollView>
           </View>
         </Modal>
@@ -499,6 +591,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
+  },
+  searchAreaButton: {
+    position: 'absolute',
+    top: 20,
+    alignSelf: 'center',
+    backgroundColor: '#E21221',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  searchAreaText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
   },
   modalContainer: {
     flex: 1,
@@ -624,5 +734,30 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 16,
-  }
+  },
+  dataSourceContainer: {
+    marginTop: 20,
+    marginBottom: 30,
+  },
+  dataSourceText: {
+    color: '#A0A0A0',
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  mapTypeButton: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    backgroundColor: '#1F1D2B',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
 }); 

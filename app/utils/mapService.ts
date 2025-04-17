@@ -3,6 +3,9 @@ import axios from 'axios';
 
 // Hardcoding the token directly to ensure it works
 const MAPBOX_API_KEY = "pk.eyJ1IjoiZG1hc2hzYWtlbiIsImEiOiJjbTlrc2I1emYwcm41MmpwcWxjaHphZW1oIn0.1a8e6NyXWkxslcNY9pgULw";
+// Google Places API Key - you'll need to obtain this from Google Cloud Console
+// This is a placeholder - replace with your actual key
+const GOOGLE_PLACES_API_KEY = "AIzaSyDOasqoont3lWrUxEsK018Kj6ZgQlCkW6M";
 
 interface MapboxPlace {
   id: string;
@@ -16,7 +19,7 @@ export const searchPlaces = async (query: string): Promise<any[]> => {
     
     const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
       query
-    )}.json?access_token=${MAPBOX_API_KEY}&limit=5&types=place,poi`;
+    )}.json?access_token=${MAPBOX_API_KEY}&limit=10&types=place,poi`;
     
     const response = await axios.get(endpoint);
     
@@ -66,7 +69,50 @@ export const getDirection = async (
   }
 };
 
-// Search for movie theatres nearby
+// Search for movie theatres using Google Places API (more accurate for businesses)
+export const findNearbyTheatresWithGooglePlaces = async (
+  latitude: number,
+  longitude: number,
+  radius: number = 5000
+): Promise<any[]> => {
+  try {
+    console.log(`Searching for theatres near: ${latitude}, ${longitude} using Google Places API`);
+    
+    // Using Google Places API for nearby search - more accurate for business POIs
+    const googleEndpoint = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=movie_theater&key=${GOOGLE_PLACES_API_KEY}`;
+    
+    const response = await axios.get(googleEndpoint);
+    console.log(`Google Places API Response status: ${response.status}`);
+    
+    if (response.data && response.data.results && response.data.results.length > 0) {
+      console.log(`Found ${response.data.results.length} theaters with Google Places API`);
+      
+      // Map the Google Places API response to our Theatre format
+      return response.data.results.map((place: any) => ({
+        id: place.place_id,
+        name: place.name,
+        address: place.vicinity,
+        searchTerm: 'google_places',
+        location: {
+          latitude: place.geometry.location.lat,
+          longitude: place.geometry.location.lng,
+        },
+        rating: place.rating || (Math.random() * 2) + 3, // Use Google rating or random between 3-5
+        photos: place.photos ? 
+          [`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_PLACES_API_KEY}`] : 
+          ['https://via.placeholder.com/150'],
+        reviews: [],
+      }));
+    }
+    
+    return [];
+  } catch (error) {
+    console.error('Error finding nearby theatres with Google Places:', error);
+    return [];
+  }
+};
+
+// Search for movie theatres nearby - combined approach
 export const findNearbyTheatres = async (
   latitude: number,
   longitude: number,
@@ -75,6 +121,16 @@ export const findNearbyTheatres = async (
   try {
     console.log(`Searching for theatres near: ${latitude}, ${longitude}`);
     
+    // Try Google Places API first (always use Google Places API if key is provided)
+    if (GOOGLE_PLACES_API_KEY) {
+      const googleResults = await findNearbyTheatresWithGooglePlaces(latitude, longitude, radius);
+      if (googleResults.length > 0) {
+        console.log(`Returning ${googleResults.length} results from Google Places API`);
+        return googleResults;
+      }
+    }
+    
+    // Fall back to Mapbox API if Google Places didn't return results
     // Use specific movie theater chain names and generic terms
     const searchTerms = [
       // Popular chains in Hong Kong
@@ -83,18 +139,25 @@ export const findNearbyTheatres = async (
       'Emperor Cinemas',
       'UA Cinemas',
       'Golden Harvest',
+      'Palace IFC',
+      'Cinema City',
       
       // Popular international chains
       'IMAX',
       'CGV',
       'AMC',
       'Cinemark',
+      'Cineplex',
+      'Regal Cinema',
+      'Odeon',
+      'Cineworld',
       
       // Generic terms in different languages
       'cinema',
       'movie theatre',
       'theater',
       'movie theater',
+      'multiplex',
       '電影院', // Chinese (traditional)
       '影院',   // Chinese (simplified)
       '戲院',   // Alternative Chinese term for cinema
@@ -105,11 +168,12 @@ export const findNearbyTheatres = async (
     // Store all results from different search terms
     let allResults: any[] = [];
     
-    // We'll collect results from all search terms
+    // Try to find theaters using specific keywords through Mapbox API
     for (const term of searchTerms) {
       try {
         console.log(`Trying search term: ${term}`);
-        const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(term)}.json?proximity=${longitude},${latitude}&access_token=${MAPBOX_API_KEY}&limit=5&types=poi`;
+        // Use maximum limit for Mapbox API to get more results
+        const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(term)}.json?proximity=${longitude},${latitude}&access_token=${MAPBOX_API_KEY}&limit=10&types=poi`;
         
         const response = await axios.get(endpoint);
         console.log(`Response status for "${term}": ${response.status}`);
@@ -147,17 +211,16 @@ export const findNearbyTheatres = async (
       )
     );
     
-    console.log(`Found ${uniqueResults.length} unique theatre locations`);
+    console.log(`Found ${uniqueResults.length} unique theatre locations with Mapbox API`);
     
     if (uniqueResults.length > 0) {
-      return uniqueResults;
+      return uniqueResults; // Return all real theaters found
     }
     
-    console.log("No results found with any search term");
+    console.log("No results found with any search term, using fallback data");
     
     // Hong Kong fallback cinemas if we're in Hong Kong area
     if (latitude > 22.1 && latitude < 22.5 && longitude > 113.8 && longitude < 114.4) {
-      console.log("Using Hong Kong fallback cinema data");
       return [
         {
           id: 'hk1',
@@ -203,49 +266,58 @@ export const findNearbyTheatres = async (
           rating: 4.0,
           photos: ['https://via.placeholder.com/150'],
           reviews: [],
+        },
+        {
+          id: 'hk6',
+          name: 'Broadway Circuit - MONGKOK',
+          address: '4/F, MOKO, 193 Prince Edward Road West, Mong Kok, Hong Kong',
+          location: { latitude: 22.3225, longitude: 114.1722 },
+          rating: 4.2,
+          photos: ['https://via.placeholder.com/150'],
+          reviews: [],
+        },
+        {
+          id: 'hk7',
+          name: 'MCL Cinema - Metro City',
+          address: 'Level 2, Metro City Phase I, Tseung Kwan O, Hong Kong',
+          location: { latitude: 22.3075, longitude: 114.2596 },
+          rating: 4.1,
+          photos: ['https://via.placeholder.com/150'],
+          reviews: [],
+        },
+        {
+          id: 'hk8',
+          name: 'Cinema City - Langham Place',
+          address: 'L8, Langham Place, 8 Argyle Street, Mong Kok, Hong Kong',
+          location: { latitude: 22.3181, longitude: 114.1692 },
+          rating: 4.3,
+          photos: ['https://via.placeholder.com/150'],
+          reviews: [],
+        },
+        {
+          id: 'hk9',
+          name: 'Palace IFC - IMAX Theatre',
+          address: 'Podium L1, IFC Mall, Central, Hong Kong',
+          location: { latitude: 22.2849, longitude: 114.1577 },
+          rating: 4.7,
+          photos: ['https://via.placeholder.com/150'],
+          reviews: [],
+        },
+        {
+          id: 'hk10',
+          name: 'Broadway Circuit - The ONE',
+          address: '6/F, The ONE, 100 Nathan Road, Tsim Sha Tsui, Hong Kong',
+          location: { latitude: 22.2996, longitude: 114.1724 },
+          rating: 4.2,
+          photos: ['https://via.placeholder.com/150'],
+          reviews: [],
         }
       ];
     }
     
-    // New York fallback data
-    return [
-      {
-        id: 'ny1',
-        name: 'AMC Empire 25',
-        address: '234 W 42nd St, New York, NY 10036',
-        location: { latitude: 40.7565, longitude: -73.9878 },
-        rating: 4.5,
-        photos: ['https://via.placeholder.com/150'],
-        reviews: [],
-      },
-      {
-        id: 'ny2',
-        name: 'Regal Union Square',
-        address: '850 Broadway, New York, NY 10003',
-        location: { latitude: 40.7353, longitude: -73.9906 },
-        rating: 4.2,
-        photos: ['https://via.placeholder.com/150'],
-        reviews: [],
-      },
-      {
-        id: 'ny3',
-        name: 'Cinemark Theatre',
-        address: '625 Broadway, New York, NY 10012',
-        location: { latitude: 40.7312, longitude: -73.9829 },
-        rating: 3.8,
-        photos: ['https://via.placeholder.com/150'],
-        reviews: [],
-      },
-      {
-        id: 'ny4',
-        name: 'IMAX AMC Lincoln Square',
-        address: '1998 Broadway, New York, NY 10023',
-        location: { latitude: 40.7751, longitude: -73.9815 },
-        rating: 4.7,
-        photos: ['https://via.placeholder.com/150'],
-        reviews: [],
-      }
-    ];
+    // Add default return - empty array
+    return [];
+    
   } catch (error) {
     console.error('Error finding nearby theatres:', error);
     return [];
