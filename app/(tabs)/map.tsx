@@ -258,21 +258,42 @@ export default function MapScreen() {
       // Call our enhanced API service with better caching
       const nearbyTheatres = await findNearbyTheatres(latitude, longitude);
       
+      console.log(`Got ${nearbyTheatres?.length || 0} theatres from API service`);
+      
       if (nearbyTheatres && nearbyTheatres.length > 0) {
-        console.log(`Found ${nearbyTheatres.length} theatres nearby`);
-        setTheatres(nearbyTheatres);
-        setFilteredTheatres(nearbyTheatres);
+        console.log(`Found ${nearbyTheatres.length} theatres nearby, displaying on map`);
+        
+        // Ensure we have valid data in the theatre objects
+        const validTheatres = nearbyTheatres.filter(theatre => 
+          theatre && 
+          theatre.location && 
+          typeof theatre.location.latitude === 'number' && 
+          typeof theatre.location.longitude === 'number'
+        );
+        
+        if (validTheatres.length !== nearbyTheatres.length) {
+          console.warn(`Filtered out ${nearbyTheatres.length - validTheatres.length} invalid theatre objects`);
+        }
+        
+        setTheatres(validTheatres);
+        setFilteredTheatres(validTheatres);
         setIsMapMoved(false);
         
         // If we have selected a theatre, update its data
         if (selectedTheatre) {
-          const updatedSelected = nearbyTheatres.find(t => t.id === selectedTheatre.id);
+          const updatedSelected = validTheatres.find(t => t.id === selectedTheatre.id);
           if (updatedSelected) {
             setSelectedTheatre(updatedSelected);
           }
         }
+        
+        // Fit map to show all markers
+        setTimeout(() => {
+          fitMapToMarkers(validTheatres);
+        }, 500); // Short delay to ensure markers are rendered
       } else {
         // Clearer message when no theaters found
+        console.warn("No theaters returned from API");
         Alert.alert(
           "No Theaters Found",
           "We couldn't find any movie theaters in this area. Try moving the map to a different location or search again later.",
@@ -395,6 +416,7 @@ export default function MapScreen() {
 
   // Enhanced marker press to show details in bottom sheet first
   const handleMarkerPress = (theatre: Theatre) => {
+    console.log(`Marker pressed for: ${theatre.name}`);
     setSelectedTheatre(theatre);
     
     // If bottom sheet is closed, open it to show summary
@@ -461,22 +483,41 @@ export default function MapScreen() {
     }
   };
 
-  // Render map markers for theatres
+  // Render markers on the map with robust error handling
   const renderMarkers = () => {
-    return filteredTheatres.map(theatre => (
-      <Marker
-        key={theatre.id}
-        coordinate={theatre.location}
-        title={theatre.name}
-        description={theatre.address}
-        pinColor={selectedTheatre?.id === theatre.id ? 'blue' : 'red'}
-        onPress={() => handleMarkerPress(theatre)}
-      >
-        <View style={styles.customMarker}>
-          <MaterialIcons name="movie" size={24} color="#FF5252" />
-        </View>
-      </Marker>
-    ));
+    if (!filteredTheatres || filteredTheatres.length === 0) {
+      return null;
+    }
+    
+    return filteredTheatres.map((theatre, index) => {
+      // Skip any invalid theatre data
+      if (!theatre || !theatre.location || typeof theatre.location.latitude !== 'number' || typeof theatre.location.longitude !== 'number') {
+        console.warn(`Skipping invalid theatre at index ${index}`, theatre);
+        return null;
+      }
+      
+      try {
+        return (
+          <Marker
+            key={theatre.id || `theatre-${index}`}
+            coordinate={{
+              latitude: theatre.location.latitude,
+              longitude: theatre.location.longitude
+            }}
+            title={theatre.name}
+            description={theatre.address}
+            onPress={() => handleMarkerPress(theatre)}
+          >
+            <View style={styles.markerContainer}>
+              <MaterialIcons name="local-movies" size={24} color="#E50914" />
+            </View>
+          </Marker>
+        );
+      } catch (error) {
+        console.error(`Error rendering marker for theatre ${theatre.name}:`, error);
+        return null;
+      }
+    });
   };
 
   // Render stars for rating
@@ -1725,5 +1766,12 @@ const styles = StyleSheet.create({
     zIndex: 10,
     backgroundColor: '#f0f0f0',
     borderRadius: 20,
+  },
+  markerContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 6,
+    borderWidth: 2,
+    borderColor: '#E50914',
   },
 }); 

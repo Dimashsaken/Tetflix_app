@@ -7,7 +7,7 @@ import * as Location from 'expo-location';
 const MAPBOX_API_KEY = "pk.eyJ1IjoiZG1hc2hzYWtlbiIsImEiOiJjbTlrc2I1emYwcm41MmpwcWxjaHphZW1oIn0.1a8e6NyXWkxslcNY9pgULw";
 // Google Places API Key - you'll need to obtain this from Google Cloud Console
 // This is a placeholder - replace with your actual key
-const GOOGLE_PLACES_API_KEY = "AIzaSyDOasqoont3lWrUxEsK018Kj6ZgQlCkW6M";
+const GOOGLE_PLACES_API_KEY = "AIzaSyATFpPHA-JslMWSknrsKMWdBc_IPY9ZJPk";
 
 // Cache configuration
 const CACHE_EXPIRY_TIME = 1000 * 60 * 60; // 1 hour in milliseconds
@@ -215,18 +215,39 @@ export const findNearbyTheatresWithGooglePlaces = async (
     // Try cached results first
     const cachedResults = await getCachedTheatres(latitude, longitude);
     if (cachedResults && cachedResults.length > 0) {
+      console.log(`Using ${cachedResults.length} cached theater results`);
       return cachedResults;
     }
     
     // Using Google Places API for nearby search - more accurate for business POIs
     const googleEndpoint = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=movie_theater&key=${GOOGLE_PLACES_API_KEY}`;
     
-    const response = await axios.get(googleEndpoint);
+    // Use timeout and detailed error for better diagnostics
+    console.log(`Making request to Google Places API: ${googleEndpoint}`);
+    const response = await axios.get(googleEndpoint, {
+      timeout: 10000, // 10 second timeout
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    
     console.log(`Google Places API Response status: ${response.status}`);
     
-    if (!response.data || !response.data.results) {
-      throw new Error(`Invalid response from Google Places API: ${JSON.stringify(response.data)}`);
+    // Enhanced error handling and logging
+    if (!response.data) {
+      throw new Error(`Empty response from Google Places API`);
     }
+    
+    if (response.data.status && response.data.status !== 'OK' && response.data.status !== 'ZERO_RESULTS') {
+      throw new Error(`Google Places API error: ${response.data.status} - ${response.data.error_message || 'No error message provided'}`);
+    }
+    
+    if (!response.data.results) {
+      throw new Error(`Missing results in Google Places API response: ${JSON.stringify(response.data)}`);
+    }
+    
+    console.log(`Raw Google Places results count: ${response.data.results.length}`);
     
     if (response.data.results.length === 0) {
       console.log('No theaters found with initial radius, trying a larger radius');
@@ -234,6 +255,7 @@ export const findNearbyTheatresWithGooglePlaces = async (
       if (radius < 30000) {
         return findNearbyTheatresWithGooglePlaces(latitude, longitude, radius * 2);
       }
+      console.log('No theaters found even with increased radius');
       return [];
     }
     
@@ -241,33 +263,41 @@ export const findNearbyTheatresWithGooglePlaces = async (
     
     // Map the Google Places API response to our Theatre format with enhanced information
     const theatres: Theatre[] = response.data.results.map((place: any) => {
-      // Calculate distance from current position to theater
-      const distance = calculateDistance(
-        latitude, 
-        longitude, 
-        place.geometry.location.lat, 
-        place.geometry.location.lng
-      ) * 1000; // Convert to meters
-      
-      return {
-        id: place.place_id,
-        name: place.name,
-        address: place.vicinity || 'Address not available',
-        searchTerm: 'google_places',
-        location: {
-          latitude: place.geometry.location.lat,
-          longitude: place.geometry.location.lng,
-        },
-        rating: place.rating || (Math.random() * 2) + 3, // Use Google rating or random between 3-5
-        photos: place.photos ? 
-          [`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_PLACES_API_KEY}`] : 
-          ['https://via.placeholder.com/150?text=No+Image'],
-        reviews: [],
-        distance: distance, // Add distance information
-        openingHours: place.opening_hours?.open_now ? 'Open now' : 'Closed',
-        placeDetails: place, // Keep the raw place data for additional information
-      };
-    });
+      try {
+        // Calculate distance from current position to theater
+        const distance = calculateDistance(
+          latitude, 
+          longitude, 
+          place.geometry.location.lat, 
+          place.geometry.location.lng
+        ) * 1000; // Convert to meters
+        
+        return {
+          id: place.place_id,
+          name: place.name,
+          address: place.vicinity || 'Address not available',
+          searchTerm: 'google_places',
+          location: {
+            latitude: place.geometry.location.lat,
+            longitude: place.geometry.location.lng,
+          },
+          rating: place.rating || (Math.random() * 2) + 3, // Use Google rating or random between 3-5
+          photos: place.photos ? 
+            [`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_PLACES_API_KEY}`] : 
+            ['https://via.placeholder.com/150?text=No+Image'],
+          reviews: [],
+          distance: distance, // Add distance information
+          openingHours: place.opening_hours?.open_now ? 'Open now' : 'Closed',
+          placeDetails: place, // Keep the raw place data for additional information
+        };
+      } catch (mapError) {
+        console.error(`Error mapping place data:`, mapError, place);
+        return null;
+      }
+    })
+    .filter((item: Theatre | null) => item !== null) as Theatre[]; // Remove any null entries from mapping errors
+    
+    console.log(`Successfully mapped ${theatres.length} theaters from Google Places API results`);
     
     // Sort theaters by distance
     theatres.sort((a, b) => (a.distance || 0) - (b.distance || 0));
@@ -278,6 +308,14 @@ export const findNearbyTheatresWithGooglePlaces = async (
     return theatres;
   } catch (error) {
     console.error('Error finding nearby theatres with Google Places:', error);
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error details:', {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        headers: error.response?.headers
+      });
+    }
     return [];
   }
 };
@@ -294,19 +332,36 @@ export const findNearbyTheatres = async (
     // Try cached results first
     const cachedResults = await getCachedTheatres(latitude, longitude);
     if (cachedResults && cachedResults.length > 0) {
+      console.log(`Using ${cachedResults.length} cached theaters`);
       return cachedResults;
     }
     
+    let allFoundTheatres: Theatre[] = [];
+    let apiErrors: string[] = [];
+    
     // Try Google Places API first (always use Google Places API if key is provided)
     if (GOOGLE_PLACES_API_KEY) {
-      const googleResults = await findNearbyTheatresWithGooglePlaces(latitude, longitude, radius);
-      if (googleResults.length > 0) {
-        console.log(`Returning ${googleResults.length} results from Google Places API`);
-        return googleResults;
+      try {
+        console.log('Attempting to find theaters using Google Places API...');
+        const googleResults = await findNearbyTheatresWithGooglePlaces(latitude, longitude, radius);
+        if (googleResults && googleResults.length > 0) {
+          console.log(`Returning ${googleResults.length} results from Google Places API`);
+          return googleResults;
+        } else {
+          console.log('No results found using Google Places API');
+        }
+      } catch (googleError) {
+        const errorMessage = googleError instanceof Error ? googleError.message : 'Unknown error';
+        console.error('Google Places API error:', errorMessage);
+        apiErrors.push(`Google Places API: ${errorMessage}`);
+        // Continue to Mapbox as fallback
       }
+    } else {
+      console.log('Google Places API key not provided, skipping');
     }
     
     // Fall back to Mapbox API if Google Places didn't return results
+    console.log('Falling back to Mapbox API for theater search');
     // Use specific movie theater chain names and generic terms
     const searchTerms = [
       // Popular chains in Hong Kong
@@ -343,6 +398,7 @@ export const findNearbyTheatres = async (
     
     // Store all results from different search terms
     let allResults: Theatre[] = [];
+    let mapboxErrors: string[] = [];
     
     // Try to find theaters using specific keywords through Mapbox API
     for (const term of searchTerms) {
@@ -351,7 +407,14 @@ export const findNearbyTheatres = async (
         // Use maximum limit for Mapbox API to get more results
         const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(term)}.json?proximity=${longitude},${latitude}&access_token=${MAPBOX_API_KEY}&limit=10&types=poi`;
         
-        const response = await axios.get(endpoint);
+        const response = await axios.get(endpoint, {
+          timeout: 10000, // 10 second timeout
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        
         console.log(`Response status for "${term}": ${response.status}`);
         
         if (response.data && Array.isArray(response.data.features) && response.data.features.length > 0) {
@@ -385,10 +448,14 @@ export const findNearbyTheatres = async (
           allResults = [...allResults, ...mappedResults];
         }
       } catch (innerError) {
-        console.error(`Error with search term "${term}":`, innerError);
+        const errorMessage = innerError instanceof Error ? innerError.message : 'Unknown error';
+        console.error(`Error with search term "${term}":`, errorMessage);
+        mapboxErrors.push(`Term "${term}": ${errorMessage}`);
         // Continue to the next term
       }
     }
+    
+    console.log(`Found total of ${allResults.length} raw results from all search terms`);
     
     // Remove duplicates based on location coordinates (improved algorithm)
     const uniqueResults: Theatre[] = [];
@@ -415,11 +482,15 @@ export const findNearbyTheatres = async (
       return uniqueResults;
     }
     
-    console.log("No results found with any search term, using fallback data");
+    console.log("No results found with any search term, checking if in Hong Kong for fallback data");
     
-    // Fallback cinemas - expanded with more realistic data
+    // Only use fallback data if all other methods failed and we had actual API errors
+    const hadApiErrors = apiErrors.length > 0 || mapboxErrors.length > 0;
+    
+    // Fallback cinemas - only if we're in Hong Kong area and had API errors
     // Check if we're in Hong Kong area (approximate bounding box)
-    if (latitude > 22.1 && latitude < 22.5 && longitude > 113.8 && longitude < 114.4) {
+    if (hadApiErrors && latitude > 22.1 && latitude < 22.5 && longitude > 113.8 && longitude < 114.4) {
+      console.log("Using Hong Kong fallback theater data due to API errors");
       const fallbackTheatres: Theatre[] = [
         {
           id: 'hk1',
@@ -495,6 +566,14 @@ export const findNearbyTheatres = async (
       await cacheTheatres(fallbackTheatres, latitude, longitude, radius);
       
       return fallbackTheatres;
+    }
+    
+    // Log all errors for diagnostics
+    if (apiErrors.length > 0 || mapboxErrors.length > 0) {
+      console.error('API errors encountered:', {
+        googlePlaces: apiErrors,
+        mapbox: mapboxErrors
+      });
     }
     
     // If not in Hong Kong, return an empty array
