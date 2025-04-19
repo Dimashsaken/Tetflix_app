@@ -337,9 +337,10 @@ export default function MapScreen() {
         return;
       }
 
-      // Get current position with high accuracy and timeout
+      // Get current position with high accuracy but suppress constant indicator updates
       const location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.High,
+        mayShowUserSettingsDialog: false // This helps prevent repeated permission dialogs
       });
       
       console.log(`Got location: ${location.coords.latitude}, ${location.coords.longitude}`);
@@ -366,6 +367,11 @@ export default function MapScreen() {
   // Initial location and theatres loading
   useEffect(() => {
     getCurrentLocation();
+    
+    // Return a cleanup function to prevent continuous location updates
+    return () => {
+      // No need for a cleanup since we're not using Location.watchPositionAsync
+    };
   }, []);
 
   // Search theaters by name - debounced
@@ -506,12 +512,9 @@ export default function MapScreen() {
             }}
             title={theatre.name}
             description={theatre.address}
+            pinColor={selectedTheatre?.id === theatre.id ? 'blue' : 'red'}
             onPress={() => handleMarkerPress(theatre)}
-          >
-            <View style={styles.markerContainer}>
-              <MaterialIcons name="local-movies" size={24} color="#E50914" />
-            </View>
-          </Marker>
+          />
         );
       } catch (error) {
         console.error(`Error rendering marker for theatre ${theatre.name}:`, error);
@@ -578,7 +581,7 @@ export default function MapScreen() {
               <View style={styles.infoRow}>
                 <View style={styles.infoItem}>
                   <FontAwesome name="star" size={20} color="#FFD700" />
-                  <Text style={styles.infoText}>{selectedTheatre.rating} ⭐</Text>
+                  <Text style={styles.infoText}>{selectedTheatre.rating.toFixed(1)} ⭐</Text>
                 </View>
                 <View style={styles.infoItem}>
                   <Ionicons name="location" size={20} color="#FF5252" />
@@ -686,7 +689,7 @@ export default function MapScreen() {
                           <Text style={styles.reviewAuthor}>{review.author}</Text>
                         </View>
                         <View style={styles.reviewRating}>
-                          <Text style={styles.reviewRatingText}>{review.rating}</Text>
+                          <Text style={styles.reviewRatingText}>{review.rating.toFixed(1)}</Text>
                           <FontAwesome name="star" size={14} color="#FFD700" />
                         </View>
                       </View>
@@ -732,7 +735,7 @@ export default function MapScreen() {
           <View style={styles.quickInfoRow}>
             <View style={styles.quickInfoItem}>
               <FontAwesome name="star" size={16} color="#FFD700" />
-              <Text style={styles.quickInfoText}>{selectedTheatre.rating || 'N/A'}</Text>
+              <Text style={styles.quickInfoText}>{(selectedTheatre.rating || 0).toFixed(1)}</Text>
             </View>
             
             <View style={styles.quickInfoItem}>
@@ -1029,7 +1032,7 @@ export default function MapScreen() {
         updatedTheatre.reviews = [newReview, ...updatedTheatre.reviews];
         // Update the rating (average of all reviews)
         const totalRating = updatedTheatre.reviews.reduce((sum, r) => sum + r.rating, 0);
-        updatedTheatre.rating = totalRating / updatedTheatre.reviews.length;
+        updatedTheatre.rating = parseFloat((totalRating / updatedTheatre.reviews.length).toFixed(1));
         // Update the theatre in the array
         updatedTheatres[theatreIndex] = updatedTheatre;
         // Update the state
@@ -1145,7 +1148,8 @@ export default function MapScreen() {
         initialRegion={region}
         region={region}
         mapType={mapType}
-        showsUserLocation
+        showsUserLocation={true}
+        followsUserLocation={false}
         showsMyLocationButton={false}
         showsCompass={false}
         showsScale={true}

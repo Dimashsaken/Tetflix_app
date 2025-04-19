@@ -323,7 +323,7 @@ export const findNearbyTheatresWithGooglePlaces = async (
         const reviews = placeDetails.reviews 
           ? placeDetails.reviews.map((review: any) => ({
               author: review.author_name,
-              rating: review.rating,
+              rating: parseFloat(review.rating.toFixed(1)),
               text: review.text,
               time: review.time
             }))
@@ -336,6 +336,8 @@ export const findNearbyTheatresWithGooglePlaces = async (
             : 'Closed'
           : 'Hours not available';
         
+        const rating = placeDetails.rating ? parseFloat(placeDetails.rating.toFixed(1)) : 0;
+        
         theatres.push({
           id: place.place_id,
           name: place.name,
@@ -345,7 +347,7 @@ export const findNearbyTheatresWithGooglePlaces = async (
             latitude: place.geometry.location.lat,
             longitude: place.geometry.location.lng,
           },
-          rating: place.rating || (Math.random() * 2) + 3, // Use Google rating or random between 3-5
+          rating,
           photos,
           reviews,
           distance,
@@ -373,7 +375,7 @@ export const findNearbyTheatresWithGooglePlaces = async (
             latitude: place.geometry.location.lat,
             longitude: place.geometry.location.lng,
           },
-          rating: place.rating || (Math.random() * 2) + 3,
+          rating: (Math.random() * 2) + 3,
           photos: place.photos ? 
             [`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_PLACES_API_KEY}`] : 
             ['https://via.placeholder.com/150?text=No+Image'],

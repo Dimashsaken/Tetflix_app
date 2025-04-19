@@ -31,11 +31,7 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
             description={theatre.address}
             pinColor={selectedTheatre?.id === theatre.id ? 'blue' : 'red'}
             onPress={() => onMarkerPress(theatre)}
-          >
-            <View style={styles.customMarker}>
-              <MaterialIcons name="movie" size={24} color="#FF5252" />
-            </View>
-          </Marker>
+          />
         ))}
       </>
     );
@@ -103,11 +99,7 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
               description={theatre.address}
               pinColor={selectedTheatre?.id === theatre.id ? 'blue' : 'red'}
               onPress={() => onMarkerPress(theatre)}
-            >
-              <View style={styles.customMarker}>
-                <MaterialIcons name="movie" size={24} color="#FF5252" />
-              </View>
-            </Marker>
+            />
           );
         }
         

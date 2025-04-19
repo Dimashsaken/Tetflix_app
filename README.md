@@ -1,86 +1,80 @@
 # Movie App
 
-A modern mobile application built with React Native and Expo that allows users to discover, search, and manage their favorite movies. The app provides a seamless experience for movie enthusiasts to explore movies, view detailed information, and maintain a personal watchlist.
+A modern mobile application built with React Native and Expo that allows users to discover, search, and manage their favorite movies. The app provides a seamless experience for movie enthusiasts to explore movies, view detailed information, find nearby theaters, and maintain a personal watchlist.
 
 ## About
-A movie app with features for finding movies, theaters, and managing your watchlist.
-
-## Feature: Movie Theater Locator
-
-We've enhanced the app with a new feature that helps users find movie theaters near their current location. This feature uses Google Places API for the most accurate results.
-
-### How It Works
-1. The app gets your current location
-2. It searches for nearby movie theaters using Google Places API
-3. Theaters are displayed as markers on the map with details like name, address and ratings
-4. You can tap on a marker to see more information and add reviews or photos
+Movie App is your solution for discovering and tracking movies. Browse popular films, search with filters, save favorites to your watchlist, and find movie theaters near you.
 
 ## Features
 
 ### 1. Movie Discovery
-- **Home Screen**: Browse through a curated list of movies with beautiful UI
-- **Categories**: Explore movies by different categories (Trending, Popular, Upcoming)
-- **Smooth Scrolling**: Horizontal and vertical scrolling with optimized performance
-- **Pull-to-Refresh**: Update content with a simple pull gesture
-- **Loading States**: Elegant loading animations and skeleton screens
+- **Home Screen**: Browse movies categorized by Popular, Top-Rated, and Trending
+- **Category Browsing**: Horizontal scrolling lists for each movie category
+- **Load More**: Automatically load additional movies as you scroll to the end of lists
+- **Loading States**: Loading indicators when fetching content
 
-### 2. Advanced Search
-- **Real-time Search**: Instant results as you type
-- **Search History**: Automatically saves your recent searches
-- **Filters**: Filter results by:
-  - Release Year
+### 2. Movie Search
+- **Text Search**: Search for movies by title
+- **Search History**: View and clear your recent searches
+- **Basic Filters**:
+  - By Genre
+  - By Release Year range
+  - By Minimum Rating
+- **Sort Options**: Sort results by:
+  - Popularity
+  - Release Date
   - Rating
-  - Genre
-  - Language
-- **Search Suggestions**: Intelligent suggestions based on your input
-- **Clear Search**: Easy way to clear search history
+  - Title
+- **View Toggle**: Switch between list and grid views
+- **Trending Suggestions**: View trending movies when search is empty
 
-### 3. Movie Details
-- **Comprehensive Information**:
-  - Title and Release Date
-  - Plot Summary
-  - Cast and Crew
-  - Ratings and Reviews
-  - Runtime
-  - Genres
-  - Production Companies
-- **Media Gallery**:
-  - Movie Poster
-  - Backdrop Images
-  - Trailers (if available)
-- **Related Movies**: Discover similar movies you might like
-- **Interactive Elements**:
-  - Add to Watchlist button
-  - Share functionality
-  - Rating system
+### 3. Movie Theater Locator
+- **Location-Based**: Find theaters near your current location
+- **Map View**: View theaters as markers on Google Maps
+- **Theater Search**: Filter theaters by name
+- **Distance Filter**: Set maximum distance to search for theaters
+- **Rating Filter**: Filter theaters by minimum rating
+- **Open Now Filter**: Option to show only currently open theaters
+- **Theater Details**:
+  - Name and address
+  - Distance from current location
+  - Rating
+- **User Actions**:
+  - Get directions to theater
+  - Call theater (if phone number available)
+  - Visit theater website (if available)
+- **Map Controls**:
+  - Change map type (standard, satellite, hybrid)
+  - Return to current location
+  - Search theaters in visible area
 
-### 4. Watchlist Management
-- **Personal Collection**: Save movies you want to watch later
-- **Easy Organization**:
-  - Add/Remove movies with a single tap
-  - Sort by different criteria
-  - Filter by watched/unwatched
-- **Offline Access**: Access your watchlist even without internet
-- **Sync Across Devices**: Watchlist syncs when you log in
+### 4. Movie Details
+- **Basic Information**:
+  - Title and release date
+  - Rating
+  - Overview/plot summary
+  - Poster image
+- **Watchlist Integration**: Add to or remove from watchlist
 
-### 5. User Experience
-- **Smooth Animations**: Fluid transitions between screens
-- **Responsive Design**: Works on all screen sizes
-- **Dark/Light Mode**: Choose your preferred theme
-- **Gesture Controls**: Intuitive swipe gestures
-- **Offline Support**: Basic functionality available offline
+### 5. Watchlist
+- **Save Movies**: Add movies to watch later
+- **Remove Movies**: Remove movies from watchlist with one tap
+- **Persistent Storage**: Watchlist saved to device storage
+- **Quick Access**: View basic details and access full movie information
 
 ## Technology Stack
 
 - **Framework**: React Native with Expo
-- **Navigation**: Expo Router with Bottom Tab Navigation
-- **State Management**: React Native's built-in state management
-- **Data Storage**: AsyncStorage for local data persistence
-- **UI Components**: Custom components with Expo's built-in libraries
-- **Icons**: @expo/vector-icons and Lucide icons
-- **Maps Integration**: react-native-maps for location-based features
-- **Animations**: react-native-reanimated for smooth animations
-- **Network Requests**: Axios for API calls
+- **Navigation**: Expo Router with Tab Navigation
+- **State Management**: React hooks (useState, useEffect)
+- **Data Storage**: AsyncStorage for local persistence
+- **UI Components**: Native React Native components
+- **Icons**: @expo/vector-icons and Lucide React Native
+- **Maps**: react-native-maps for theater locations
+- **Location**: expo-location for user positioning
+- **Animations**: react-native-reanimated
+- **Network**: Axios for API calls
+- **Media**: expo-image-picker for photo uploads
 
 ## Project Structure
 
@@ -90,13 +84,16 @@ project/
 │   ├── (tabs)/            # Tab-based navigation
 │   │   ├── index.tsx      # Home screen with movie discovery
 │   │   ├── search.tsx     # Search functionality with filters
+│   │   ├── map.tsx        # Theater locator feature
 │   │   └── watchlist.tsx  # Watchlist management
 │   ├── movie/             # Movie-related screens
-│   │   └── [id].tsx      # Individual movie details
+│   │   └── [id].tsx       # Individual movie details
+│   ├── components/        # Reusable UI components
+│   ├── utils/             # Utility functions
+│   ├── hooks/             # Custom React hooks
 │   └── _layout.tsx        # Root layout configuration
 ├── assets/                # Static assets (images, fonts)
-├── hooks/                 # Custom React hooks
-└── components/            # Reusable UI components
+└── hooks/                 # Custom React hooks
 ```
 
 ## Getting Started
@@ -122,52 +119,36 @@ project/
    - Use Expo Go on your mobile device
    - Or run on iOS/Android simulators
 
-## Development
+## API Integration
 
-### Key Dependencies
+The app uses:
+- **The Movie Database (TMDB)**: For movie data and search
+- **Google Places API**: For theater location data
+- **Expo Location**: For getting user's current location
 
-- expo: ~52.0.42
+## Key Dependencies
+
+- expo: ~52.0.46
 - react: 18.3.1
 - react-native: 0.76.9
 - @react-navigation/bottom-tabs: ^7.2.0
+- react-native-maps: ^1.18.0
 - axios: ^1.8.4
+- expo-location: ~18.0.10
 - react-native-reanimated: ^3.16.7
-
-### Code Organization
-
-The project follows a modular structure:
-- **Components**: Reusable UI elements
-- **Hooks**: Custom React hooks for shared logic
-- **Screens**: Main application screens
-- **Navigation**: Routing and navigation configuration
-- **Assets**: Static resources
-
-### Best Practices
-
-- TypeScript for type safety
-- Component-based architecture
-- Responsive design principles
-- Performance optimization
-- Clean code practices
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- @react-native-async-storage/async-storage: 1.23.1
+- expo-image-picker: ~16.0.6
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ## Support
 
-For support, please open an issue in the GitHub repository or contact the development team.
+For support, please open an issue in the GitHub repository.
 
 ## Acknowledgments
 
 - The Movie Database (TMDB) API for movie data
-- Expo team for the amazing framework
-- React Native community for continuous support 
+- Google Places API for theater data
+- Expo and React Native teams 
