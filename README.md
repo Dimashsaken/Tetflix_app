@@ -139,10 +139,6 @@ The app uses:
 - @react-native-async-storage/async-storage: 1.23.1
 - expo-image-picker: ~16.0.6
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Support
 
 For support, please open an issue in the GitHub repository.

@@ -2,6 +2,7 @@ import Constants from 'expo-constants';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
+import React from 'react';
 
 // Google Places API Key - you'll need to obtain this from Google Cloud Console
 const GOOGLE_PLACES_API_KEY = "AIzaSyATFpPHA-JslMWSknrsKMWdBc_IPY9ZJPk";
@@ -520,4 +521,9 @@ const getHongKongFallbackTheaters = (latitude: number, longitude: number): Theat
   fallbackTheatres.sort((a, b) => (a.distance || 0) - (b.distance || 0));
   
   return fallbackTheatres;
-}; 
+};
+
+// Default export to satisfy the route requirements
+export default function MapService() {
+  return null;
+} 

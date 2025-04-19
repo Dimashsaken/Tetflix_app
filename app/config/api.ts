@@ -1,4 +1,5 @@
 import Constants from 'expo-constants';
+import React from 'react';
 
 export const TMDB_API_KEY = Constants.expoConfig?.extra?.TMDB_API_KEY;
 export const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
@@ -14,4 +15,9 @@ export const endpoints = {
   movieCredits: (id: string | number) => `${TMDB_BASE_URL}/movie/${id}/credits`,
   movieRecommendations: (id: string | number) => `${TMDB_BASE_URL}/movie/${id}/recommendations`,
   movieVideos: (id: string | number) => `${TMDB_BASE_URL}/movie/${id}/videos`,
-}; 
+};
+
+// Default export to satisfy the route requirements
+export default function ApiConfig() {
+  return null;
+} 

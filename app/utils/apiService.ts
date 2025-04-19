@@ -1,6 +1,7 @@
 // API service for handling secure API requests
 import axios from 'axios';
 import Constants from 'expo-constants';
+import React from 'react';
 
 // Use environment variables (this is just a placeholder - in a real app, you would not include these at all)
 // In a production app, these would be handled by a backend service
@@ -62,4 +63,9 @@ export const searchPlaces = async (query: string) => {
     console.error('Error searching places:', error);
     throw error;
   }
-}; 
+};
+
+// Default export to satisfy the route requirements
+export default function ApiService() {
+  return null;
+} 
