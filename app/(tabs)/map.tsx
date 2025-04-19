@@ -64,10 +64,10 @@ interface FilterOptions {
   openNow: boolean;
 }
 
-// Define the default region
+// Define the default region - set to null initially
 const DEFAULT_REGION = {
-  latitude: 37.78825,
-  longitude: -122.4324,
+  latitude: 0,
+  longitude: 0,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
@@ -318,7 +318,7 @@ export default function MapScreen() {
   };
 
   // Get precise location with better error handling
-  const getCurrentLocation = async () => {
+  const getCurrentLocation = async (centerMap = true) => {
     try {
       setIsLoading(true);
       setLocationError(null);
@@ -342,7 +342,15 @@ export default function MapScreen() {
         longitudeDelta: 0.0421,
       };
       
+      // Always update region state for data loading purposes
       setRegion(newRegion);
+      
+      // Only animate to region if explicitly requested
+      if (centerMap && mapRef.current) {
+        mapRef.current.animateToRegion(newRegion, 500);
+      }
+      
+      // Always load theatres data based on current location
       loadTheatresData(newRegion.latitude, newRegion.longitude);
       setIsLoading(false);
     } catch (error) {
@@ -353,11 +361,11 @@ export default function MapScreen() {
 
   // Initial location and theatres loading
   useEffect(() => {
-    // Get user location on component mount
-    getCurrentLocation();
+    // Get user location on component mount - don't center automatically
+    getCurrentLocation(false);
     
-    // Load initial theatres data
-    loadTheatresData(DEFAULT_REGION.latitude, DEFAULT_REGION.longitude);
+    // Don't load default theatres data until we have user location
+    // loadTheatresData(DEFAULT_REGION.latitude, DEFAULT_REGION.longitude);
     
     return () => {
       // Clean up any subscriptions or listeners
@@ -415,10 +423,9 @@ export default function MapScreen() {
     console.log(`Marker pressed for: ${theatre.name}`);
     setSelectedTheatre(theatre);
     
-    // If bottom sheet is closed, open it to show summary
-    if (!isBottomSheetVisible) {
-      toggleBottomSheet();
-    }
+    // Force bottom sheet to open
+    setIsBottomSheetVisible(true);
+    bottomSheetHeight.value = withTiming(300, { duration: 300 });
     
     // Center map on the selected theater with animation
     if (mapRef.current) {
@@ -955,7 +962,19 @@ export default function MapScreen() {
     // Don't trigger if map is just initializing
     if (isLoading) return;
     
-    setRegion(newRegion);
+    // Only update the region state if user manually moved the map (for both iOS and Android)
+    // Check if the region change is significant enough to be a user interaction
+    const distanceChange = calculateDistance(
+      region.latitude,
+      region.longitude,
+      newRegion.latitude,
+      newRegion.longitude
+    );
+    
+    // Only update if movement is larger than typical GPS jitter
+    if (distanceChange > 0.02) { // 20 meters threshold
+      setRegion(newRegion);
+    }
     
     // Compare with last searched region to determine if we should show "Search this area" button
     if (lastSearchedRegion) {
@@ -975,7 +994,7 @@ export default function MapScreen() {
 
   // Refresh theatres based on current location
   const refreshTheatres = async () => {
-    await getCurrentLocation();
+    await getCurrentLocation(true);
   };
   
   // Search theatres in current map view
@@ -1208,10 +1227,10 @@ export default function MapScreen() {
         style={styles.map}
         provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
         initialRegion={region}
-        region={Platform.OS === 'ios' ? undefined : region}
+        region={undefined}
         mapType={mapType}
         showsUserLocation={true}
-        followsUserLocation={Platform.OS === 'ios'}
+        followsUserLocation={false}
         showsMyLocationButton={false}
         showsCompass={false}
         showsScale={true}
@@ -1274,7 +1293,7 @@ export default function MapScreen() {
       <View style={[styles.mapControls, { bottom: insets.bottom + 20 }]}>
         <TouchableOpacity 
           style={styles.controlButton}
-          onPress={getCurrentLocation}
+          onPress={() => getCurrentLocation(true)}
         >
           <MaterialIcons
             name="my-location"
