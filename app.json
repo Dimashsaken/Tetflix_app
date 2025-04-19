@@ -45,6 +45,9 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app uses your location to find nearby movie theatres.",
         "NSPhotoLibraryUsageDescription": "This app uses your photo library to allow you to add photos to theatre reviews."
+      },
+      "config": {
+        "googleMapsApiKey": "AIzaSyATFpPHA-JslMWSknrsKMWdBc_IPY9ZJPk"
       }
     },
     "android": {
@@ -57,7 +60,12 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE"
-      ]
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyATFpPHA-JslMWSknrsKMWdBc_IPY9ZJPk"
+        }
+      }
     }
   }
 }

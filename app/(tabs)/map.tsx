@@ -25,7 +25,12 @@ import MapView, {
   Region
 } from 'react-native-maps';
 import * as Location from 'expo-location';
-import { MaterialIcons, FontAwesome, Ionicons, FontAwesome5, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Entypo from '@expo/vector-icons/Entypo';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useRouter } from 'expo-router';
@@ -59,10 +64,10 @@ interface FilterOptions {
   openNow: boolean;
 }
 
-// Default region for Hong Kong
+// Define the default region
 const DEFAULT_REGION = {
-  latitude: 22.3193,
-  longitude: 114.1694,
+  latitude: 37.78825,
+  longitude: -122.4324,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
@@ -315,62 +320,47 @@ export default function MapScreen() {
   // Get precise location with better error handling
   const getCurrentLocation = async () => {
     try {
-      setLocationError(null);
       setIsLoading(true);
+      setLocationError(null);
       
-      // First check if location services are enabled
-      const enabled = await Location.hasServicesEnabledAsync();
-      if (!enabled) {
-        setLocationError('Location services are disabled. Please enable them in your device settings.');
-        setIsLoading(false);
-        setRegion(DEFAULT_REGION);
-        return;
-      }
+      let { status } = await Location.requestForegroundPermissionsAsync();
       
-      // Request permissions with improved error handling
-      const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        setLocationError('Location permission denied. Using default location.');
+        setLocationError('Permission to access location was denied');
         setIsLoading(false);
-        setRegion(DEFAULT_REGION);
-        await loadTheatresData(DEFAULT_REGION.latitude, DEFAULT_REGION.longitude);
         return;
       }
-
-      // Get current position with high accuracy but suppress constant indicator updates
-      const location = await Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.High,
-        mayShowUserSettingsDialog: false // This helps prevent repeated permission dialogs
+      
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
       });
       
-      console.log(`Got location: ${location.coords.latitude}, ${location.coords.longitude}`);
-      
-      const currentRegion = {
+      const newRegion = {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       };
       
-      setRegion(currentRegion);
-      
-      // Load theatres near user location
-      await loadTheatresData(location.coords.latitude, location.coords.longitude);
+      setRegion(newRegion);
+      loadTheatresData(newRegion.latitude, newRegion.longitude);
+      setIsLoading(false);
     } catch (error) {
-      console.error('Error getting location:', error);
-      setLocationError('Could not determine your location. Using default location.');
-      setRegion(DEFAULT_REGION);
-      await loadTheatresData(DEFAULT_REGION.latitude, DEFAULT_REGION.longitude);
+      setLocationError('Could not determine your location. Please check your location services.');
+      setIsLoading(false);
     }
   };
 
   // Initial location and theatres loading
   useEffect(() => {
+    // Get user location on component mount
     getCurrentLocation();
     
-    // Return a cleanup function to prevent continuous location updates
+    // Load initial theatres data
+    loadTheatresData(DEFAULT_REGION.latitude, DEFAULT_REGION.longitude);
+    
     return () => {
-      // No need for a cleanup since we're not using Location.watchPositionAsync
+      // Clean up any subscriptions or listeners
     };
   }, []);
 
@@ -560,7 +550,11 @@ export default function MapScreen() {
             style={styles.closeButton}
             onPress={() => setDetailsVisible(false)}
           >
-            <Ionicons name="close" size={28} color="#333" />
+            <Ionicons
+              name="close"
+              size={28}
+              color="#333"
+            />
           </TouchableOpacity>
           
           <ScrollView style={styles.detailsScroll}>
@@ -580,17 +574,29 @@ export default function MapScreen() {
             <View style={styles.detailsContent}>
               <View style={styles.infoRow}>
                 <View style={styles.infoItem}>
-                  <FontAwesome name="star" size={20} color="#FFD700" />
+                  <FontAwesome
+                    name="star"
+                    size={20}
+                    color="#FFD700"
+                  />
                   <Text style={styles.infoText}>{selectedTheatre.rating.toFixed(1)} ⭐</Text>
                 </View>
                 <View style={styles.infoItem}>
-                  <Ionicons name="location" size={20} color="#FF5252" />
+                  <Ionicons
+                    name="location"
+                    size={20}
+                    color="#FF5252"
+                  />
                   <Text style={styles.infoText}>
                     {selectedTheatre.distance ? `${(selectedTheatre.distance / 1000).toFixed(1)} km` : 'N/A'}
                   </Text>
                 </View>
                 <View style={styles.infoItem}>
-                  <Ionicons name="time-outline" size={20} color="#4CAF50" />
+                  <Ionicons
+                    name="time-outline"
+                    size={20}
+                    color="#4CAF50"
+                  />
                   <Text style={styles.infoText}>{selectedTheatre.openingHours || 'Hours N/A'}</Text>
                 </View>
               </View>
@@ -604,7 +610,11 @@ export default function MapScreen() {
                     style={[styles.actionButton, styles.directionButton]}
                     onPress={() => getDirectionsToTheatre(selectedTheatre)}
                   >
-                    <Ionicons name="navigate" size={20} color="#fff" />
+                    <Ionicons
+                      name="navigate"
+                      size={20}
+                      color="#fff"
+                    />
                     <Text style={styles.actionButtonText}>Directions</Text>
                   </TouchableOpacity>
                   
@@ -612,7 +622,11 @@ export default function MapScreen() {
                     style={[styles.actionButton, styles.callButton]}
                     onPress={() => selectedTheatre.phoneNumber && Linking.openURL(`tel:${selectedTheatre.phoneNumber}`)}
                   >
-                    <Ionicons name="call" size={20} color="#fff" />
+                    <Ionicons
+                      name="call"
+                      size={20}
+                      color="#fff"
+                    />
                     <Text style={styles.actionButtonText}>Call</Text>
                   </TouchableOpacity>
                   
@@ -620,7 +634,11 @@ export default function MapScreen() {
                     style={[styles.actionButton, styles.websiteButton]}
                     onPress={() => openWebsite(selectedTheatre.website)}
                   >
-                    <Ionicons name="globe-outline" size={20} color="#fff" />
+                    <Ionicons
+                      name="globe-outline"
+                      size={20}
+                      color="#fff"
+                    />
                     <Text style={styles.actionButtonText}>Website</Text>
                   </TouchableOpacity>
                 </View>
@@ -631,7 +649,7 @@ export default function MapScreen() {
                 {selectedTheatre.nowShowing && selectedTheatre.nowShowing.length > 0 ? (
                   <FlatList
                     data={selectedTheatre.nowShowing}
-                    keyExtractor={(item, index) => `movie-${index}`}
+                    keyExtractor={(item, index) => `detail-movie-${item.id || index}`}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     renderItem={({ item }) => (
@@ -685,12 +703,20 @@ export default function MapScreen() {
                     <View key={`review-${index}`} style={styles.reviewCard}>
                       <View style={styles.reviewHeader}>
                         <View style={styles.reviewUser}>
-                          <FontAwesome name="user-circle" size={24} color="#666" />
+                          <FontAwesome
+                            name="user-circle"
+                            size={24}
+                            color="#666"
+                          />
                           <Text style={styles.reviewAuthor}>{review.author}</Text>
                         </View>
                         <View style={styles.reviewRating}>
                           <Text style={styles.reviewRatingText}>{review.rating.toFixed(1)}</Text>
-                          <FontAwesome name="star" size={14} color="#FFD700" />
+                          <FontAwesome
+                            name="star"
+                            size={14}
+                            color="#FFD700"
+                          />
                         </View>
                       </View>
                       <Text style={styles.reviewText}>{review.text}</Text>
@@ -720,7 +746,11 @@ export default function MapScreen() {
             style={styles.closeBottomSheetButton}
             onPress={toggleBottomSheet}
           >
-            <Ionicons name="close" size={24} color="#333" />
+            <Ionicons
+              name="close"
+              size={24}
+              color="#333"
+            />
           </TouchableOpacity>
         </View>
         
@@ -734,17 +764,29 @@ export default function MapScreen() {
           
           <View style={styles.quickInfoRow}>
             <View style={styles.quickInfoItem}>
-              <FontAwesome name="star" size={16} color="#FFD700" />
+              <FontAwesome
+                name="star"
+                size={16}
+                color="#FFD700"
+              />
               <Text style={styles.quickInfoText}>{(selectedTheatre.rating || 0).toFixed(1)}</Text>
             </View>
             
             <View style={styles.quickInfoItem}>
-              <Ionicons name="time-outline" size={16} color="#4CAF50" />
+              <Ionicons
+                name="time-outline"
+                size={16}
+                color="#4CAF50"
+              />
               <Text style={styles.quickInfoText}>{selectedTheatre.openingHours || 'Hours N/A'}</Text>
             </View>
             
             <View style={styles.quickInfoItem}>
-              <MaterialIcons name="attach-money" size={16} color="#FFA000" />
+              <MaterialIcons
+                name="attach-money"
+                size={16}
+                color="#FFA000"
+              />
               <Text style={styles.quickInfoText}>{selectedTheatre.placeDetails?.price_level ?? 'Price N/A'}</Text>
             </View>
           </View>
@@ -754,7 +796,11 @@ export default function MapScreen() {
               style={styles.actionButtonSmall}
               onPress={() => getDirectionsToTheatre(selectedTheatre)}
             >
-              <Ionicons name="navigate" size={20} color="#2196F3" />
+              <Ionicons
+                name="navigate"
+                size={20}
+                color="#2196F3"
+              />
               <Text style={styles.actionButtonTextSmall}>Directions</Text>
             </TouchableOpacity>
             
@@ -762,7 +808,11 @@ export default function MapScreen() {
               style={styles.actionButtonSmall}
               onPress={() => selectedTheatre.phoneNumber && Linking.openURL(`tel:${selectedTheatre.phoneNumber}`)}
             >
-              <Ionicons name="call" size={20} color="#4CAF50" />
+              <Ionicons
+                name="call"
+                size={20}
+                color="#4CAF50"
+              />
               <Text style={styles.actionButtonTextSmall}>Call</Text>
             </TouchableOpacity>
             
@@ -770,7 +820,11 @@ export default function MapScreen() {
               style={styles.actionButtonSmall}
               onPress={handleShowDetails}
             >
-              <Ionicons name="information-circle" size={20} color="#FF9800" />
+              <Ionicons
+                name="information-circle"
+                size={20}
+                color="#FF9800"
+              />
               <Text style={styles.actionButtonTextSmall}>Details</Text>
             </TouchableOpacity>
             
@@ -778,7 +832,11 @@ export default function MapScreen() {
               style={styles.actionButtonSmall}
               onPress={() => openWebsite(selectedTheatre.website)}
             >
-              <Ionicons name="globe-outline" size={20} color="#9C27B0" />
+              <Ionicons
+                name="globe-outline"
+                size={20}
+                color="#9C27B0"
+              />
               <Text style={styles.actionButtonTextSmall}>Website</Text>
             </TouchableOpacity>
           </View>
@@ -789,7 +847,7 @@ export default function MapScreen() {
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {selectedTheatre.nowShowing.map((movie: { id: string; title: string; poster: string; showtime: string }, index: number) => (
                   <TouchableOpacity 
-                    key={`quick-movie-${index}`}
+                    key={`quick-movie-${movie.id || index}`}
                     style={styles.quickMovieItem}
                     onPress={() => router.push(`/movie/${movie.id}`)}
                   >
@@ -815,7 +873,11 @@ export default function MapScreen() {
         <View style={styles.filterHeader}>
           <Text style={styles.filterTitle}>Filter Theaters</Text>
           <TouchableOpacity onPress={toggleFilterSheet}>
-            <Ionicons name="close" size={24} color="#333" />
+            <Ionicons
+              name="close"
+              size={24}
+              color="#333"
+            />
           </TouchableOpacity>
         </View>
         
@@ -829,7 +891,7 @@ export default function MapScreen() {
               maximumValue={25000}
               step={1000}
               value={filterOptions.maxDistance}
-              onValueChange={(value) => setFilterOptions({...filterOptions, maxDistance: value})}
+              onValueChange={(value: number) => setFilterOptions({...filterOptions, maxDistance: value})}
               minimumTrackTintColor="#2196F3"
               maximumTrackTintColor="#ccc"
               thumbTintColor="#2196F3"
@@ -1144,12 +1206,12 @@ export default function MapScreen() {
       <MapView
         ref={mapRef}
         style={styles.map}
-        provider={PROVIDER_GOOGLE}
+        provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
         initialRegion={region}
-        region={region}
+        region={Platform.OS === 'ios' ? undefined : region}
         mapType={mapType}
         showsUserLocation={true}
-        followsUserLocation={false}
+        followsUserLocation={Platform.OS === 'ios'}
         showsMyLocationButton={false}
         showsCompass={false}
         showsScale={true}
@@ -1166,7 +1228,11 @@ export default function MapScreen() {
           isSearchBarFocused && styles.searchBarFocused
         ]}>
           <TouchableOpacity onPress={() => router.back()}>
-            <Ionicons name="arrow-back" size={22} color="#333" />
+            <Ionicons
+              name="arrow-back"
+              size={22}
+              color="#333"
+            />
           </TouchableOpacity>
           
           <TextInput
@@ -1188,10 +1254,18 @@ export default function MapScreen() {
                 setFilteredTheatres(theatres);
               }}
             >
-              <Ionicons name="close-circle" size={20} color="#999" />
+              <Ionicons
+                name="close-circle"
+                size={20}
+                color="#999"
+              />
             </TouchableOpacity>
           ) : (
-            <Ionicons name="search" size={20} color="#999" />
+            <Ionicons
+              name="search"
+              size={20}
+              color="#999"
+            />
           )}
         </View>
       </View>
@@ -1202,7 +1276,11 @@ export default function MapScreen() {
           style={styles.controlButton}
           onPress={getCurrentLocation}
         >
-          <MaterialIcons name="my-location" size={24} color="#333" />
+          <MaterialIcons
+            name="my-location"
+            size={24}
+            color="#333"
+          />
         </TouchableOpacity>
         
         <TouchableOpacity 
@@ -1216,7 +1294,11 @@ export default function MapScreen() {
           style={styles.controlButton}
           onPress={toggleFilterSheet}
         >
-          <Ionicons name="filter" size={24} color="#333" />
+          <Ionicons
+            name="filter"
+            size={24}
+            color="#333"
+          />
         </TouchableOpacity>
         
         {isMapMoved && (
@@ -1240,7 +1322,11 @@ export default function MapScreen() {
       {/* Location error message */}
       {locationError && (
         <View style={styles.errorContainer}>
-          <MaterialIcons name="error" size={24} color="#FF5252" />
+          <MaterialIcons
+            name="error"
+            size={24}
+            color="#FF5252"
+          />
           <Text style={styles.errorText}>{locationError}</Text>
         </View>
       )}
