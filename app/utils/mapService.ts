@@ -3,21 +3,12 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 
-// Hardcoding the token directly to ensure it works
-const MAPBOX_API_KEY = "pk.eyJ1IjoiZG1hc2hzYWtlbiIsImEiOiJjbTlrc2I1emYwcm41MmpwcWxjaHphZW1oIn0.1a8e6NyXWkxslcNY9pgULw";
 // Google Places API Key - you'll need to obtain this from Google Cloud Console
-// This is a placeholder - replace with your actual key
 const GOOGLE_PLACES_API_KEY = "AIzaSyATFpPHA-JslMWSknrsKMWdBc_IPY9ZJPk";
 
 // Cache configuration
 const CACHE_EXPIRY_TIME = 1000 * 60 * 60; // 1 hour in milliseconds
 const DEFAULT_CACHE_KEY = 'mapservice_theater_cache';
-
-interface MapboxPlace {
-  id: string;
-  place_name: string;
-  center: [number, number]; // longitude, latitude
-}
 
 // Enhanced Theatre interface
 export interface Theatre {
@@ -147,24 +138,23 @@ const deg2rad = (deg: number): number => {
   return deg * (Math.PI / 180);
 };
 
+// Search for places using Google Places API
 export const searchPlaces = async (query: string): Promise<any[]> => {
   try {
     if (!query) return [];
     
-    const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-      query
-    )}.json?access_token=${MAPBOX_API_KEY}&limit=10&types=place,poi`;
+    const endpoint = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${GOOGLE_PLACES_API_KEY}`;
     
     const response = await axios.get(endpoint);
     
-    if (response.data && Array.isArray(response.data.features)) {
-      return response.data.features.map((feature: any) => ({
-        id: feature.id,
-        name: feature.text,
-        placeName: feature.place_name,
+    if (response.data && Array.isArray(response.data.results)) {
+      return response.data.results.map((place: any) => ({
+        id: place.place_id,
+        name: place.name,
+        placeName: place.formatted_address,
         coordinates: {
-          latitude: feature.center[1],
-          longitude: feature.center[0],
+          latitude: place.geometry.location.lat,
+          longitude: place.geometry.location.lng,
         },
       }));
     }
@@ -176,23 +166,31 @@ export const searchPlaces = async (query: string): Promise<any[]> => {
   }
 };
 
+// Get directions using Google Directions API
 export const getDirection = async (
-  startLng: number,
   startLat: number,
-  endLng: number,
-  endLat: number
+  startLng: number,
+  endLat: number,
+  endLng: number
 ): Promise<{ coordinates: Array<[number, number]>; distance: number; duration: number }> => {
   try {
-    const endpoint = `https://api.mapbox.com/directions/v5/mapbox/driving/${startLng},${startLat};${endLng},${endLat}?alternatives=true&geometries=geojson&steps=true&access_token=${MAPBOX_API_KEY}`;
+    const endpoint = `https://maps.googleapis.com/maps/api/directions/json?origin=${startLat},${startLng}&destination=${endLat},${endLng}&mode=driving&key=${GOOGLE_PLACES_API_KEY}`;
     
     const response = await axios.get(endpoint);
     
     if (response.data && response.data.routes && response.data.routes.length > 0) {
       const route = response.data.routes[0];
+      const leg = route.legs[0];
+      
+      // Decode polyline to get coordinates
+      const coordinates = decodePolyline(route.overview_polyline.points).map(
+        point => [point.lng, point.lat] as [number, number]
+      );
+      
       return {
-        coordinates: route.geometry.coordinates,
-        distance: route.distance,
-        duration: route.duration,
+        coordinates,
+        distance: leg.distance.value, // in meters
+        duration: leg.duration.value, // in seconds
       };
     }
     
@@ -203,7 +201,42 @@ export const getDirection = async (
   }
 };
 
-// Enhanced version with more details and better error handling
+// Decode Google's polyline format
+const decodePolyline = (encoded: string) => {
+  const poly = [];
+  let index = 0, lat = 0, lng = 0;
+
+  while (index < encoded.length) {
+    let b, shift = 0, result = 0;
+    
+    do {
+      b = encoded.charCodeAt(index++) - 63;
+      result |= (b & 0x1f) << shift;
+      shift += 5;
+    } while (b >= 0x20);
+    
+    const dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+    lat += dlat;
+    
+    shift = 0;
+    result = 0;
+    
+    do {
+      b = encoded.charCodeAt(index++) - 63;
+      result |= (b & 0x1f) << shift;
+      shift += 5;
+    } while (b >= 0x20);
+    
+    const dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+    lng += dlng;
+    
+    poly.push({ lat: lat / 1e5, lng: lng / 1e5 });
+  }
+  
+  return poly;
+};
+
+// Enhanced Google Places API implementation for finding theaters
 export const findNearbyTheatresWithGooglePlaces = async (
   latitude: number,
   longitude: number,
@@ -261,9 +294,16 @@ export const findNearbyTheatresWithGooglePlaces = async (
     
     console.log(`Found ${response.data.results.length} theaters with Google Places API`);
     
-    // Map the Google Places API response to our Theatre format with enhanced information
-    const theatres: Theatre[] = response.data.results.map((place: any) => {
+    // Process results to get more details
+    const theatres: Theatre[] = [];
+    
+    for (const place of response.data.results) {
       try {
+        // Get detailed place information
+        const detailsEndpoint = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,formatted_address,formatted_phone_number,opening_hours,website,photo,review,geometry&key=${GOOGLE_PLACES_API_KEY}`;
+        const detailsResponse = await axios.get(detailsEndpoint);
+        const placeDetails = detailsResponse.data.result;
+        
         // Calculate distance from current position to theater
         const distance = calculateDistance(
           latitude, 
@@ -272,7 +312,59 @@ export const findNearbyTheatresWithGooglePlaces = async (
           place.geometry.location.lng
         ) * 1000; // Convert to meters
         
-        return {
+        // Format photos
+        const photos = placeDetails.photos ? 
+          placeDetails.photos.slice(0, 3).map((photo: any) => 
+            `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photo.photo_reference}&key=${GOOGLE_PLACES_API_KEY}`
+          ) : 
+          ['https://via.placeholder.com/150?text=No+Image'];
+        
+        // Format reviews
+        const reviews = placeDetails.reviews 
+          ? placeDetails.reviews.map((review: any) => ({
+              author: review.author_name,
+              rating: review.rating,
+              text: review.text,
+              time: review.time
+            }))
+          : [];
+          
+        // Format opening hours
+        const openingHours = placeDetails.opening_hours
+          ? placeDetails.opening_hours.open_now 
+            ? 'Open now' 
+            : 'Closed'
+          : 'Hours not available';
+        
+        theatres.push({
+          id: place.place_id,
+          name: place.name,
+          address: placeDetails.formatted_address || place.vicinity || 'Address not available',
+          searchTerm: 'google_places',
+          location: {
+            latitude: place.geometry.location.lat,
+            longitude: place.geometry.location.lng,
+          },
+          rating: place.rating || (Math.random() * 2) + 3, // Use Google rating or random between 3-5
+          photos,
+          reviews,
+          distance,
+          openingHours,
+          website: placeDetails.website,
+          phoneNumber: placeDetails.formatted_phone_number,
+          placeDetails: place, // Keep the raw place data for additional information
+        });
+      } catch (detailsError) {
+        console.error(`Error getting place details:`, detailsError);
+        // Continue with basic information if detailed info can't be retrieved
+        const distance = calculateDistance(
+          latitude, 
+          longitude, 
+          place.geometry.location.lat, 
+          place.geometry.location.lng
+        ) * 1000;
+        
+        theatres.push({
           id: place.place_id,
           name: place.name,
           address: place.vicinity || 'Address not available',
@@ -281,23 +373,17 @@ export const findNearbyTheatresWithGooglePlaces = async (
             latitude: place.geometry.location.lat,
             longitude: place.geometry.location.lng,
           },
-          rating: place.rating || (Math.random() * 2) + 3, // Use Google rating or random between 3-5
+          rating: place.rating || (Math.random() * 2) + 3,
           photos: place.photos ? 
             [`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${GOOGLE_PLACES_API_KEY}`] : 
             ['https://via.placeholder.com/150?text=No+Image'],
           reviews: [],
-          distance: distance, // Add distance information
+          distance,
           openingHours: place.opening_hours?.open_now ? 'Open now' : 'Closed',
-          placeDetails: place, // Keep the raw place data for additional information
-        };
-      } catch (mapError) {
-        console.error(`Error mapping place data:`, mapError, place);
-        return null;
+          placeDetails: place,
+        });
       }
-    })
-    .filter((item: Theatre | null) => item !== null) as Theatre[]; // Remove any null entries from mapping errors
-    
-    console.log(`Successfully mapped ${theatres.length} theaters from Google Places API results`);
+    }
     
     // Sort theaters by distance
     theatres.sort((a, b) => (a.distance || 0) - (b.distance || 0));
@@ -316,11 +402,18 @@ export const findNearbyTheatresWithGooglePlaces = async (
         headers: error.response?.headers
       });
     }
+    
+    // Return fallback data for Hong Kong if in that region
+    if (latitude > 22.1 && latitude < 22.5 && longitude > 113.8 && longitude < 114.4) {
+      console.log("Using Hong Kong fallback theater data");
+      return getHongKongFallbackTheaters(latitude, longitude);
+    }
+    
     return [];
   }
 };
 
-// Search for movie theatres nearby - combined approach with enhanced features
+// Main function to find nearby theaters - now only uses Google Places API
 export const findNearbyTheatres = async (
   latitude: number,
   longitude: number,
@@ -336,250 +429,93 @@ export const findNearbyTheatres = async (
       return cachedResults;
     }
     
-    let allFoundTheatres: Theatre[] = [];
-    let apiErrors: string[] = [];
-    
-    // Try Google Places API first (always use Google Places API if key is provided)
-    if (GOOGLE_PLACES_API_KEY) {
-      try {
-        console.log('Attempting to find theaters using Google Places API...');
-        const googleResults = await findNearbyTheatresWithGooglePlaces(latitude, longitude, radius);
-        if (googleResults && googleResults.length > 0) {
-          console.log(`Returning ${googleResults.length} results from Google Places API`);
-          return googleResults;
-        } else {
-          console.log('No results found using Google Places API');
-        }
-      } catch (googleError) {
-        const errorMessage = googleError instanceof Error ? googleError.message : 'Unknown error';
-        console.error('Google Places API error:', errorMessage);
-        apiErrors.push(`Google Places API: ${errorMessage}`);
-        // Continue to Mapbox as fallback
-      }
-    } else {
-      console.log('Google Places API key not provided, skipping');
-    }
-    
-    // Fall back to Mapbox API if Google Places didn't return results
-    console.log('Falling back to Mapbox API for theater search');
-    // Use specific movie theater chain names and generic terms
-    const searchTerms = [
-      // Popular chains in Hong Kong
-      'Broadway Circuit',
-      'MCL Cinema',
-      'Emperor Cinemas',
-      'UA Cinemas',
-      'Golden Harvest',
-      'Palace IFC',
-      'Cinema City',
-      
-      // Popular international chains
-      'IMAX',
-      'CGV',
-      'AMC',
-      'Cinemark',
-      'Cineplex',
-      'Regal Cinema',
-      'Odeon',
-      'Cineworld',
-      
-      // Generic terms in different languages
-      'cinema',
-      'movie theatre',
-      'theater',
-      'movie theater',
-      'multiplex',
-      '電影院', // Chinese (traditional)
-      '影院',   // Chinese (simplified)
-      '戲院',   // Alternative Chinese term for cinema
-      '영화관',  // Korean
-      '映画館'   // Japanese
-    ];
-    
-    // Store all results from different search terms
-    let allResults: Theatre[] = [];
-    let mapboxErrors: string[] = [];
-    
-    // Try to find theaters using specific keywords through Mapbox API
-    for (const term of searchTerms) {
-      try {
-        console.log(`Trying search term: ${term}`);
-        // Use maximum limit for Mapbox API to get more results
-        const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(term)}.json?proximity=${longitude},${latitude}&access_token=${MAPBOX_API_KEY}&limit=10&types=poi`;
-        
-        const response = await axios.get(endpoint, {
-          timeout: 10000, // 10 second timeout
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        console.log(`Response status for "${term}": ${response.status}`);
-        
-        if (response.data && Array.isArray(response.data.features) && response.data.features.length > 0) {
-          console.log(`Found ${response.data.features.length} results with term: ${term}`);
-          
-          const mappedResults = response.data.features.map((feature: any) => {
-            // Calculate distance from current position to theater
-            const distance = calculateDistance(
-              latitude, 
-              longitude, 
-              feature.center[1], 
-              feature.center[0]
-            ) * 1000; // Convert to meters
-            
-            return {
-              id: feature.id,
-              name: feature.text,
-              address: feature.place_name,
-              searchTerm: term, // Include the search term that found this result
-              location: {
-                latitude: feature.center[1],
-                longitude: feature.center[0],
-              },
-              rating: (Math.random() * 2) + 3, // Random rating between 3-5
-              photos: ['https://via.placeholder.com/150?text=No+Image'],
-              reviews: [],
-              distance: distance, // Add distance information
-            };
-          });
-          
-          allResults = [...allResults, ...mappedResults];
-        }
-      } catch (innerError) {
-        const errorMessage = innerError instanceof Error ? innerError.message : 'Unknown error';
-        console.error(`Error with search term "${term}":`, errorMessage);
-        mapboxErrors.push(`Term "${term}": ${errorMessage}`);
-        // Continue to the next term
-      }
-    }
-    
-    console.log(`Found total of ${allResults.length} raw results from all search terms`);
-    
-    // Remove duplicates based on location coordinates (improved algorithm)
-    const uniqueResults: Theatre[] = [];
-    const locationSet = new Set();
-    
-    for (const theatre of allResults) {
-      // Create a unique key based on coordinates rounded to 5 decimal places
-      const key = `${theatre.location.latitude.toFixed(5)},${theatre.location.longitude.toFixed(5)}`;
-      
-      if (!locationSet.has(key)) {
-        locationSet.add(key);
-        uniqueResults.push(theatre);
-      }
-    }
-    
-    console.log(`Found ${uniqueResults.length} unique theatre locations with Mapbox API`);
-    
-    // Sort theaters by distance
-    uniqueResults.sort((a, b) => (a.distance || 0) - (b.distance || 0));
-    
-    if (uniqueResults.length > 0) {
-      // Cache the results
-      await cacheTheatres(uniqueResults, latitude, longitude, radius);
-      return uniqueResults;
-    }
-    
-    console.log("No results found with any search term, checking if in Hong Kong for fallback data");
-    
-    // Only use fallback data if all other methods failed and we had actual API errors
-    const hadApiErrors = apiErrors.length > 0 || mapboxErrors.length > 0;
-    
-    // Fallback cinemas - only if we're in Hong Kong area and had API errors
-    // Check if we're in Hong Kong area (approximate bounding box)
-    if (hadApiErrors && latitude > 22.1 && latitude < 22.5 && longitude > 113.8 && longitude < 114.4) {
-      console.log("Using Hong Kong fallback theater data due to API errors");
-      const fallbackTheatres: Theatre[] = [
-        {
-          id: 'hk1',
-          name: 'Broadway Circuit - PALACE ifc',
-          address: 'Podium Level 1, IFC Mall, 8 Finance Street, Central, Hong Kong',
-          location: { latitude: 22.2851, longitude: 114.1582 },
-          rating: 4.5,
-          photos: ['https://via.placeholder.com/150?text=Broadway+Cinema'],
-          reviews: [],
-          distance: calculateDistance(latitude, longitude, 22.2851, 114.1582) * 1000,
-          openingHours: 'Open 10:00 AM - 11:00 PM',
-          website: 'https://www.broadway-circuit.com/',
-          phoneNumber: '+852 2388 6268',
-        },
-        {
-          id: 'hk2',
-          name: 'MCL Cinema - Telford',
-          address: 'Telford Plaza, 33 Wai Yip Street, Kowloon Bay, Hong Kong',
-          location: { latitude: 22.3235, longitude: 114.2132 },
-          rating: 4.1,
-          photos: ['https://via.placeholder.com/150?text=MCL+Cinema'],
-          reviews: [],
-          distance: calculateDistance(latitude, longitude, 22.3235, 114.2132) * 1000,
-          openingHours: 'Open 11:00 AM - 11:30 PM',
-          website: 'https://www.mclcinema.com/',
-          phoneNumber: '+852 2319 1222',
-        },
-        {
-          id: 'hk3',
-          name: 'Emperor Cinemas - Entertainment Building',
-          address: '2/F, Entertainment Building, 30 Queen\'s Road Central, Central, Hong Kong',
-          location: { latitude: 22.2821, longitude: 114.1552 },
-          rating: 4.3,
-          photos: ['https://via.placeholder.com/150?text=Emperor+Cinemas'],
-          reviews: [],
-          distance: calculateDistance(latitude, longitude, 22.2821, 114.1552) * 1000,
-          openingHours: 'Open 10:30 AM - 11:30 PM',
-          website: 'https://www.emperorcinemas.com/',
-          phoneNumber: '+852 2522 2996',
-        },
-        {
-          id: 'hk4',
-          name: 'UA Cinemas - Times Square',
-          address: '13/F, Times Square, 1 Matheson Street, Causeway Bay, Hong Kong',
-          location: { latitude: 22.2798, longitude: 114.1829 },
-          rating: 4.2,
-          photos: ['https://via.placeholder.com/150?text=UA+Cinemas'],
-          reviews: [],
-          distance: calculateDistance(latitude, longitude, 22.2798, 114.1829) * 1000,
-          openingHours: 'Open 10:00 AM - 12:00 AM',
-          website: 'https://www.uacinemas.com.hk/',
-          phoneNumber: '+852 2118 8339',
-        },
-        {
-          id: 'hk5',
-          name: 'PALACE cinemas - The ONE',
-          address: 'L6, The ONE, 100 Nathan Road, Tsim Sha Tsui, Hong Kong',
-          location: { latitude: 22.2997, longitude: 114.1723 },
-          rating: 4.4,
-          photos: ['https://via.placeholder.com/150?text=Palace+Cinemas'],
-          reviews: [],
-          distance: calculateDistance(latitude, longitude, 22.2997, 114.1723) * 1000,
-          openingHours: 'Open 11:00 AM - 11:00 PM',
-          website: 'https://www.palacecinemas.com.hk/',
-          phoneNumber: '+852 2388 8811',
-        }
-      ];
-      
-      // Sort by distance from user location
-      fallbackTheatres.sort((a, b) => (a.distance || 0) - (b.distance || 0));
-      
-      // Cache the fallback results too
-      await cacheTheatres(fallbackTheatres, latitude, longitude, radius);
-      
-      return fallbackTheatres;
-    }
-    
-    // Log all errors for diagnostics
-    if (apiErrors.length > 0 || mapboxErrors.length > 0) {
-      console.error('API errors encountered:', {
-        googlePlaces: apiErrors,
-        mapbox: mapboxErrors
-      });
-    }
-    
-    // If not in Hong Kong, return an empty array
-    return [];
+    // Use Google Places API exclusively now
+    return findNearbyTheatresWithGooglePlaces(latitude, longitude, radius);
   } catch (error) {
     console.error('Error in findNearbyTheatres:', error);
+    
+    // Return fallback data for Hong Kong if in that region
+    if (latitude > 22.1 && latitude < 22.5 && longitude > 113.8 && longitude < 114.4) {
+      console.log("Using Hong Kong fallback theater data");
+      return getHongKongFallbackTheaters(latitude, longitude);
+    }
+    
     return [];
   }
+};
+
+// Fallback theatres for Hong Kong area
+const getHongKongFallbackTheaters = (latitude: number, longitude: number): Theatre[] => {
+  const fallbackTheatres: Theatre[] = [
+    {
+      id: 'hk1',
+      name: 'Broadway Circuit - PALACE ifc',
+      address: 'Podium Level 1, IFC Mall, 8 Finance Street, Central, Hong Kong',
+      location: { latitude: 22.2851, longitude: 114.1582 },
+      rating: 4.5,
+      photos: ['https://via.placeholder.com/150?text=Broadway+Cinema'],
+      reviews: [],
+      distance: calculateDistance(latitude, longitude, 22.2851, 114.1582) * 1000,
+      openingHours: 'Open 10:00 AM - 11:00 PM',
+      website: 'https://www.broadway-circuit.com/',
+      phoneNumber: '+852 2388 6268',
+    },
+    {
+      id: 'hk2',
+      name: 'MCL Cinema - Telford',
+      address: 'Telford Plaza, 33 Wai Yip Street, Kowloon Bay, Hong Kong',
+      location: { latitude: 22.3235, longitude: 114.2132 },
+      rating: 4.1,
+      photos: ['https://via.placeholder.com/150?text=MCL+Cinema'],
+      reviews: [],
+      distance: calculateDistance(latitude, longitude, 22.3235, 114.2132) * 1000,
+      openingHours: 'Open 11:00 AM - 11:30 PM',
+      website: 'https://www.mclcinema.com/',
+      phoneNumber: '+852 2319 1222',
+    },
+    {
+      id: 'hk3',
+      name: 'Emperor Cinemas - Entertainment Building',
+      address: '2/F, Entertainment Building, 30 Queen\'s Road Central, Central, Hong Kong',
+      location: { latitude: 22.2821, longitude: 114.1552 },
+      rating: 4.3,
+      photos: ['https://via.placeholder.com/150?text=Emperor+Cinemas'],
+      reviews: [],
+      distance: calculateDistance(latitude, longitude, 22.2821, 114.1552) * 1000,
+      openingHours: 'Open 10:30 AM - 11:30 PM',
+      website: 'https://www.emperorcinemas.com/',
+      phoneNumber: '+852 2522 2996',
+    },
+    {
+      id: 'hk4',
+      name: 'UA Cinemas - Times Square',
+      address: '13/F, Times Square, 1 Matheson Street, Causeway Bay, Hong Kong',
+      location: { latitude: 22.2798, longitude: 114.1829 },
+      rating: 4.2,
+      photos: ['https://via.placeholder.com/150?text=UA+Cinemas'],
+      reviews: [],
+      distance: calculateDistance(latitude, longitude, 22.2798, 114.1829) * 1000,
+      openingHours: 'Open 10:00 AM - 12:00 AM',
+      website: 'https://www.uacinemas.com.hk/',
+      phoneNumber: '+852 2118 8339',
+    },
+    {
+      id: 'hk5',
+      name: 'PALACE cinemas - The ONE',
+      address: 'L6, The ONE, 100 Nathan Road, Tsim Sha Tsui, Hong Kong',
+      location: { latitude: 22.2997, longitude: 114.1723 },
+      rating: 4.4,
+      photos: ['https://via.placeholder.com/150?text=Palace+Cinemas'],
+      reviews: [],
+      distance: calculateDistance(latitude, longitude, 22.2997, 114.1723) * 1000,
+      openingHours: 'Open 11:00 AM - 11:00 PM',
+      website: 'https://www.palacecinemas.com.hk/',
+      phoneNumber: '+852 2388 8811',
+    }
+  ];
+  
+  // Sort by distance from user location
+  fallbackTheatres.sort((a, b) => (a.distance || 0) - (b.distance || 0));
+  
+  return fallbackTheatres;
 }; 

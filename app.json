@@ -35,8 +35,10 @@
     },
     "extra": {
       "TMDB_API_KEY": "3e3f0a46d6f2abc8e557d06b3fc21a77",
-      "RADAR_API_KEY": "prj_live_pk_c304ba4caedd5b31da09e9318381a32f0c74f518",
-      "mapboxApiKey": "pk.eyJ1IjoiZG1hc2hzYWtlbiIsImEiOiJjbTlrc2I1emYwcm41MmpwcWxjaHphZW1oIn0.1a8e6NyXWkxslcNY9pgULw"
+      "GOOGLE_PLACES_API_KEY": "AIzaSyATFpPHA-JslMWSknrsKMWdBc_IPY9ZJPk",
+      "router": {
+        "origin": false
+      }
     },
     "ios": {
       "supportsTablet": true,
