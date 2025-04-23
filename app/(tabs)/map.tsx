@@ -15,7 +15,8 @@ import {
   Pressable,
   FlatList,
   StatusBar,
-  Linking
+  Linking,
+  BackHandler
 } from 'react-native';
 import MapView, { 
   Marker, 
@@ -440,11 +441,40 @@ export default function MapScreen() {
 
   // Show full details modal
   const handleShowDetails = () => {
-    setDetailsVisible(true);
+    // Make sure we have a selected theatre
+    if (!selectedTheatre) {
+      console.warn("No theatre selected when attempting to show details");
+      return;
+    }
     
-    // If we have the bottom sheet open, close it
+    console.log(`Showing details for theatre: ${selectedTheatre.name}`);
+    
+    // First close the bottom sheet if it's open, then show details
     if (isBottomSheetVisible) {
-      toggleBottomSheet();
+      // Different handling for iOS vs Android
+      if (Platform.OS === 'ios') {
+        // On iOS, we can show the modal immediately and it will properly display over the bottom sheet
+        setDetailsVisible(true);
+        // Then close the bottom sheet
+        setTimeout(() => {
+          bottomSheetHeight.value = withTiming(0, { duration: 300 });
+          setTimeout(() => setIsBottomSheetVisible(false), 300);
+        }, 100);
+      } else {
+        // On Android, close bottom sheet first, then show modal after a delay
+        bottomSheetHeight.value = withTiming(0, { duration: 300 });
+        setTimeout(() => {
+          setIsBottomSheetVisible(false);
+          // Add delay before showing modal to prevent UI conflicts
+          setTimeout(() => {
+            console.log("Opening details modal after bottom sheet closed");
+            setDetailsVisible(true);
+          }, 300);
+        }, 300);
+      }
+    } else {
+      // If bottom sheet is not open, show details immediately
+      setDetailsVisible(true);
     }
   };
 
@@ -543,19 +573,34 @@ export default function MapScreen() {
 
   // Render theater detail information
   const renderTheatreDetails = () => {
-    if (!selectedTheatre) return null;
+    if (!selectedTheatre || !detailsVisible) return null;
     
     return (
       <Modal
-        visible={detailsVisible}
+        visible={true}
         animationType="slide"
-        presentationStyle="pageSheet"
-        onRequestClose={() => setDetailsVisible(false)}
+        transparent={false}
+        presentationStyle={Platform.OS === 'ios' ? "pageSheet" : undefined}
+        statusBarTranslucent={Platform.OS === 'android'}
+        hardwareAccelerated={Platform.OS === 'android'}
+        onRequestClose={() => {
+          console.log("Closing details modal");
+          setDetailsVisible(false);
+        }}
       >
-        <View style={[styles.detailsContainer, { paddingTop: insets.top }]}>
+        <View style={[
+          styles.detailsContainer, 
+          { paddingTop: Platform.OS === 'ios' ? 0 : insets.top }
+        ]}>
           <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => setDetailsVisible(false)}
+            style={[
+              styles.closeButton,
+              Platform.OS === 'ios' && styles.iosCloseButton
+            ]}
+            onPress={() => {
+              console.log("Closing details modal");
+              setDetailsVisible(false);
+            }}
           >
             <Ionicons
               name="close"
@@ -824,8 +869,11 @@ export default function MapScreen() {
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.actionButtonSmall}
+              style={[styles.actionButtonSmall, styles.detailsButton]}
               onPress={handleShowDetails}
+              activeOpacity={0.6}
+              pressRetentionOffset={{ top: 10, left: 10, bottom: 10, right: 10 }}
+              hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
             >
               <Ionicons
                 name="information-circle"
@@ -1217,6 +1265,27 @@ export default function MapScreen() {
     [theatres]
   );
 
+  // Effect to handle back button on Android
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      const backAction = () => {
+        if (detailsVisible) {
+          console.log("Android back button pressed while details modal is open");
+          setDetailsVisible(false);
+          return true; // Prevent default back button behavior
+        }
+        return false; // Allow default back button behavior
+      };
+
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction
+      );
+
+      return () => backHandler.remove();
+    }
+  }, [detailsVisible]);
+
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ headerShown: false }} />
@@ -1351,9 +1420,9 @@ export default function MapScreen() {
       )}
       
       {/* Bottom sheets */}
-      {renderBottomSheet()}
-      {renderFilterPanel()}
-      {renderTheatreDetails()}
+      {isBottomSheetVisible && renderBottomSheet()}
+      {showFilters && renderFilterPanel()}
+      {selectedTheatre && renderTheatreDetails()}
     </View>
   );
 }
@@ -1882,5 +1951,13 @@ const styles = StyleSheet.create({
     padding: 6,
     borderWidth: 2,
     borderColor: '#E50914',
+  },
+  detailsButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  iosCloseButton: {
+    padding: 8,
+    borderRadius: 20,
   },
 }); 
