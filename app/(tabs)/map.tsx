@@ -530,6 +530,8 @@ export default function MapScreen() {
       }
       
       try {
+        const isSelected = selectedTheatre?.id === theatre.id;
+        
         return (
           <Marker
             key={theatre.id || `theatre-${index}`}
@@ -537,11 +539,27 @@ export default function MapScreen() {
               latitude: theatre.location.latitude,
               longitude: theatre.location.longitude
             }}
-            title={theatre.name}
-            description={theatre.address}
-            pinColor={selectedTheatre?.id === theatre.id ? 'blue' : 'red'}
+            anchor={{x: 0.5, y: 0.5}}
             onPress={() => handleMarkerPress(theatre)}
-          />
+          >
+            <View style={styles.customMarkerContainer}>
+              <View 
+                style={[
+                  styles.customMarker,
+                  isSelected && styles.selectedMarker
+                ]}
+              >
+                <Image 
+                  source={{ uri: theatre.photos?.[0] || 'https://via.placeholder.com/60x60?text=Theatre' }} 
+                  style={styles.markerImage}
+                />
+                <Text style={styles.markerText} numberOfLines={1}>
+                  {theatre.name}
+                </Text>
+              </View>
+              <View style={styles.markerTriangle} />
+            </View>
+          </Marker>
         );
       } catch (error) {
         console.error(`Error rendering marker for theatre ${theatre.name}:`, error);
@@ -1435,12 +1453,60 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
-  customMarker: {
+  markerOld: {
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 6,
     borderWidth: 2,
     borderColor: '#FF5252',
+  },
+  // Simpler custom marker styles
+  customMarkerContainer: {
+    width: 140,
+    alignItems: 'center',
+  },
+  customMarker: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 8,
+    borderWidth: 1.5,
+    borderColor: '#2196F3',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  selectedMarker: {
+    borderColor: '#E50914',
+    backgroundColor: '#FFFFFF',
+  },
+  markerImage: {
+    width: 30,
+    height: 30,
+    borderRadius: 4,
+    marginRight: 5,
+  },
+  markerText: {
+    flex: 1,
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  markerTriangle: {
+    width: 0,
+    height: 0,
+    backgroundColor: 'transparent',
+    borderStyle: 'solid',
+    borderLeftWidth: 8,
+    borderRightWidth: 8,
+    borderTopWidth: 8,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderTopColor: '#2196F3',
+    transform: [{ rotate: '180deg' }],
   },
   searchBarContainer: {
     position: 'absolute',
@@ -1945,19 +2011,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     borderRadius: 20,
   },
-  markerContainer: {
-    backgroundColor: 'white',
+  iosCloseButton: {
+    padding: 8,
     borderRadius: 20,
-    padding: 6,
-    borderWidth: 2,
-    borderColor: '#E50914',
   },
   detailsButton: {
     paddingVertical: 10,
     paddingHorizontal: 12,
-  },
-  iosCloseButton: {
-    padding: 8,
-    borderRadius: 20,
   },
 }); 
