@@ -112,7 +112,7 @@ project/
    npm install
 
    # Start the development server
-   npm run dev
+   npx expo start
    ```
 
 3. **Running the App**
@@ -135,7 +135,7 @@ The app uses:
 - react-native-maps: ^1.18.0
 - axios: ^1.8.4
 - expo-location: ~18.0.10
-- react-native-reanimated: ^3.16.7
+- react-native-reanimated: ^3.16.1
 - @react-native-async-storage/async-storage: 1.23.1
 - expo-image-picker: ~16.0.6
 
