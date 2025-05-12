@@ -9,7 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "sdkVersion": "53.0.0",
-    
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#13111C"
+    },
   
     "web": {
       "bundler": "metro",
@@ -18,6 +22,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-splash-screen",
       [
         "expo-location",
         {
@@ -54,7 +59,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
-        "backgroundColor": "#1F1D2B"
+        "backgroundColor": "#13111C"
       },
       "permissions": [
         "android.permission.ACCESS_COARSE_LOCATION",
