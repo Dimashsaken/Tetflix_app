@@ -88,6 +88,7 @@ export default function MapScreen() {
   const [mapType, setMapType] = useState<'standard' | 'satellite' | 'hybrid'>('standard');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchBarFocused, setIsSearchBarFocused] = useState(false);
+  const [rotation, setRotation] = useState(0);
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({ 
     maxDistance: 10000, // 10km in meters
     minRating: 0,
@@ -1319,9 +1320,10 @@ export default function MapScreen() {
         showsUserLocation={true}
         followsUserLocation={false}
         showsMyLocationButton={false}
-        showsCompass={false}
+        showsCompass={true}
         showsScale={true}
         loadingEnabled
+        rotateEnabled={true}
         onRegionChangeComplete={handleRegionChangeComplete}
       >
         {renderMarkers()}
@@ -1470,7 +1472,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 8,
-    padding: 8,
+    padding: 2,
     borderWidth: 1.5,
     borderColor: '#2196F3',
     elevation: 5,
@@ -1486,7 +1488,7 @@ const styles = StyleSheet.create({
   markerImage: {
     width: 30,
     height: 30,
-    borderRadius: 4,
+    borderRadius: 15,  // Half of width/height to make it circular
     marginRight: 5,
   },
   markerText: {
