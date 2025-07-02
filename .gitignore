@@ -35,3 +35,5 @@ yarn-error.*
 
 # cursor rules
 .cursor/rules/
+.cursorrules
+memory-bank/
