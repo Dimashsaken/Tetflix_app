@@ -1,150 +1,188 @@
-# Movie App
+# Tetflix - Netflix-Inspired Movie Discovery App
 
-A modern mobile application built with React Native and Expo that allows users to discover, search, and manage their favorite movies. The app provides a seamless experience for movie enthusiasts to explore movies, view detailed information, find nearby theaters, and maintain a personal watchlist.
+A React Native + Expo movie discovery app with AWS Amplify backend, Cognito authentication, and Redux state management.
 
-## About
-Movie App is your solution for discovering and tracking movies. Browse popular films, search with filters, save favorites to your watchlist, and find movie theaters near you.
+## 🎬 Features
 
-## Features
+- **Movie Discovery**: Browse trending, popular, and upcoming movies
+- **Search**: Find movies by title, genre, or cast
+- **Watchlist**: Save movies to your personal watchlist (synced to cloud)
+- **User Authentication**: Secure signup/signin with AWS Cognito
+- **Offline Support**: View cached data when offline
+- **Cross-Device Sync**: Access your data from any device
 
-### 1. Movie Discovery
-- **Home Screen**: Browse movies categorized by Popular, Top-Rated, and Trending
-- **Category Browsing**: Horizontal scrolling lists for each movie category
-- **Load More**: Automatically load additional movies as you scroll to the end of lists
-- **Loading States**: Loading indicators when fetching content
+## 🚀 Quick Start
 
-### 2. Movie Search
-- **Text Search**: Search for movies by title
-- **Search History**: View and clear your recent searches
-- **Basic Filters**:
-  - By Genre
-  - By Release Year range
-  - By Minimum Rating
-- **Sort Options**: Sort results by:
-  - Popularity
-  - Release Date
-  - Rating
-  - Title
-- **View Toggle**: Switch between list and grid views
-- **Trending Suggestions**: View trending movies when search is empty
+### Prerequisites
 
-### 3. Movie Theater Locator
-- **Location-Based**: Find theaters near your current location
-- **Map View**: View theaters as markers on Google Maps
-- **Theater Search**: Filter theaters by name
-- **Distance Filter**: Set maximum distance to search for theaters
-- **Rating Filter**: Filter theaters by minimum rating
-- **Open Now Filter**: Option to show only currently open theaters
-- **Theater Details**:
-  - Name and address
-  - Distance from current location
-  - Rating
-- **User Actions**:
-  - Get directions to theater
-  - Call theater (if phone number available)
-  - Visit theater website (if available)
-- **Map Controls**:
-  - Change map type (standard, satellite, hybrid)
-  - Return to current location
-  - Search theaters in visible area
+- Node.js (v16 or later)
+- npm or yarn
+- Expo CLI
+- AWS Account (for Cognito setup)
 
-### 4. Movie Details
-- **Basic Information**:
-  - Title and release date
-  - Rating
-  - Overview/plot summary
-  - Poster image
-- **Watchlist Integration**: Add to or remove from watchlist
+### Installation
 
-### 5. Watchlist
-- **Save Movies**: Add movies to watch later
-- **Remove Movies**: Remove movies from watchlist with one tap
-- **Persistent Storage**: Watchlist saved to device storage
-- **Quick Access**: View basic details and access full movie information
-
-## Technology Stack
-
-- **Framework**: React Native with Expo
-- **Navigation**: Expo Router with Tab Navigation
-- **State Management**: React hooks (useState, useEffect)
-- **Data Storage**: AsyncStorage for local persistence
-- **UI Components**: Native React Native components
-- **Icons**: @expo/vector-icons and Lucide React Native
-- **Maps**: react-native-maps for theater locations
-- **Location**: expo-location for user positioning
-- **Animations**: react-native-reanimated
-- **Network**: Axios for API calls
-- **Media**: expo-image-picker for photo uploads
-
-## Project Structure
-
-```
-project/
-├── app/                    # Main application code
-│   ├── (tabs)/            # Tab-based navigation
-│   │   ├── index.tsx      # Home screen with movie discovery
-│   │   ├── search.tsx     # Search functionality with filters
-│   │   ├── map.tsx        # Theater locator feature
-│   │   └── watchlist.tsx  # Watchlist management
-│   ├── movie/             # Movie-related screens
-│   │   └── [id].tsx       # Individual movie details
-│   ├── components/        # Reusable UI components
-│   ├── utils/             # Utility functions
-│   ├── hooks/             # Custom React hooks
-│   └── _layout.tsx        # Root layout configuration
-├── assets/                # Static assets (images, fonts)
-└── hooks/                 # Custom React hooks
-```
-
-## Getting Started
-
-1. **Prerequisites**
-   - Node.js (v18 or higher)
-   - npm or yarn
-   - Expo CLI
-
-2. **Installation**
+1. **Clone the repository**
    ```bash
-   # Clone the repository
-   git clone [repository-url]
-
-   # Install dependencies
-   npm install
-
-   # Start the development server
-   npx expo start
+   git clone <repository-url>
+   cd Tetflix_app
    ```
 
-3. **Running the App**
-   - Use Expo Go on your mobile device
-   - Or run on iOS/Android simulators
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-## API Integration
+3. **Environment Setup**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   # AWS Cognito Configuration
+   EXPO_PUBLIC_AWS_CLIENT_ID=your_cognito_client_id
+   EXPO_PUBLIC_AWS_USER_POOL_ID=your_cognito_user_pool_id
+   EXPO_PUBLIC_AWS_REGION=us-east-1
+   
+   # TMDB API (for movie data)
+   EXPO_PUBLIC_TMDB_API_KEY=3e3f0a46d6f2abc8e557d06b3fc21a77
+   ```
 
-The app uses:
-- **The Movie Database (TMDB)**: For movie data and search
-- **Google Places API**: For theater location data
-- **Expo Location**: For getting user's current location
+   **To get your AWS Cognito credentials:**
+   - Go to AWS Console → Cognito
+   - Find your User Pool ID in the User Pool settings
+   - Find your Client ID in the App clients tab
 
-## Key Dependencies
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-- expo: ~52.0.46
-- react: 18.3.1
-- react-native: 0.76.9
-- @react-navigation/bottom-tabs: ^7.2.0
-- react-native-maps: ^1.18.0
-- axios: ^1.8.4
-- expo-location: ~18.0.10
-- react-native-reanimated: ^3.16.1
-- @react-native-async-storage/async-storage: 1.23.1
-- expo-image-picker: ~16.0.6
+5. **Run on device/simulator**
+   ```bash
+   # iOS
+   npm run ios
+   
+   # Android
+   npm run android
+   ```
 
-## Support
+## 🏗️ Architecture
 
-For support, please open an issue in the GitHub repository.
+### Current Implementation
+- **Frontend**: React Native + Expo
+- **Authentication**: AWS Cognito (email/password)
+- **State Management**: React Context (migrating to Redux)
+- **Navigation**: Expo Router
+- **Styling**: Netflix-inspired dark theme
 
-## Acknowledgments
+### Planned Migration
+- **Backend**: AWS Amplify + Lambda functions
+- **Database**: DynamoDB for user data
+- **API Layer**: GraphQL with AppSync
+- **State Management**: Redux Toolkit + RTK Query
+- **Caching**: Multi-level caching strategy
 
-- The Movie Database (TMDB) API for movie data
-- Google Places API for theater data
-- Expo and React Native teams 
+## 📱 App Structure
+
+```
+app/
+├── components/
+│   ├── auth/           # Authentication components
+│   │   ├── AuthProvider.tsx
+│   │   ├── SignInScreen.tsx
+│   │   ├── SignUpScreen.tsx
+│   │   └── AuthNavigator.tsx
+│   └── movie/          # Movie-related components
+├── config/
+│   └── amplify.ts      # AWS Amplify configuration
+├── services/
+│   └── authService.ts  # Authentication service
+├── (tabs)/             # Main app screens
+│   ├── index.tsx       # Home/Browse
+│   ├── search.tsx      # Search movies
+│   ├── watchlist.tsx   # User's watchlist
+│   └── map.tsx         # Movie theaters
+└── _layout.tsx         # Root layout with auth
+```
+
+## 🔐 Authentication Flow
+
+1. **Sign Up**: Email + password with email verification
+2. **Sign In**: Email + password authentication
+3. **Verification**: Email confirmation code required
+4. **Persistence**: Session maintained across app restarts
+5. **Sign Out**: Clear session and return to auth screens
+
+## 🛠️ Development
+
+### Adding New Features
+
+1. **Check the Memory Bank**: Review `memory-bank/` for architectural decisions
+2. **Follow Patterns**: Use established components and services
+3. **Update Documentation**: Keep memory bank updated
+
+### Environment Variables
+
+The app uses environment variables for configuration:
+- `EXPO_PUBLIC_AWS_CLIENT_ID`: Cognito app client ID
+- `EXPO_PUBLIC_AWS_USER_POOL_ID`: Cognito user pool ID  
+- `EXPO_PUBLIC_AWS_REGION`: AWS region
+- `EXPO_PUBLIC_TMDB_API_KEY`: The Movie Database API key
+
+### Testing
+
+```bash
+# Run type checking
+npm run type-check
+
+# Run linting
+npm run lint
+```
+
+## 🔧 Configuration
+
+### AWS Cognito Setup
+
+1. Create a User Pool in AWS Cognito
+2. Configure sign-in options (email)
+3. Create an app client (public client, no secret)
+4. Note the User Pool ID and Client ID
+5. Add these to your `.env` file
+
+### TMDB API Setup
+
+1. Create account at [The Movie Database](https://www.themoviedb.org/)
+2. Get API key from account settings
+3. Add to `.env` file (or use the provided demo key)
+
+## 📋 Project Status
+
+- ✅ Core movie discovery functionality
+- ✅ AWS Cognito authentication
+- ✅ Basic user registration/login
+- ✅ Email verification flow
+- 🚧 Redux state management migration
+- 🚧 AWS Amplify backend integration
+- 📅 Planned: DynamoDB user data storage
+- 📅 Planned: Offline sync capabilities
+
+## 🚨 Security Notes
+
+- API keys are properly secured using environment variables
+- User authentication handled by AWS Cognito
+- No sensitive data stored locally
+- Session management with secure token storage
+
+## 🤝 Contributing
+
+1. Review the memory bank documentation
+2. Follow existing code patterns
+3. Add tests for new features
+4. Update documentation as needed
+
+## 📄 License
+
+This project is for educational/demo purposes.
+
+---
+
+**Tetflix** - Bringing the Netflix experience to movie discovery with modern React Native architecture.
