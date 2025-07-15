@@ -1,0 +1,541 @@
+type UserProfile @aws_cognito_user_pools @aws_iam {
+  userId: ID!
+  email: AWSEmail
+  displayName: String
+  preferredGenres: [String]
+  language: String
+  region: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  id: ID!
+  owner: String
+}
+
+type WatchlistItem @aws_cognito_user_pools @aws_iam {
+  userId: ID!
+  movieId: String!
+  movieTitle: String!
+  moviePoster: String
+  movieYear: String
+  movieGenres: [String]
+  addedAt: AWSDateTime
+  notes: String
+  id: ID!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+}
+
+type MovieCache @aws_cognito_user_pools @aws_iam {
+  movieId: String!
+  movieData: AWSJSON
+  cacheType: String!
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+  id: ID!
+  updatedAt: AWSDateTime!
+}
+
+type PopularMoviesCache @aws_cognito_user_pools @aws_iam {
+  cacheKey: String!
+  movies: AWSJSON
+  page: Int
+  totalPages: Int
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+  id: ID!
+  updatedAt: AWSDateTime!
+}
+
+input AmplifyAIConversationTurnErrorInput {
+  errorType: String!
+  message: String!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUserProfileConnection @aws_iam @aws_cognito_user_pools {
+  items: [UserProfile]!
+  nextToken: String
+}
+
+input ModelUserProfileFilterInput {
+  userId: ModelIDInput
+  email: ModelStringInput
+  displayName: ModelStringInput
+  preferredGenres: ModelStringInput
+  language: ModelStringInput
+  region: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  id: ModelIDInput
+  and: [ModelUserProfileFilterInput]
+  or: [ModelUserProfileFilterInput]
+  not: ModelUserProfileFilterInput
+  owner: ModelStringInput
+}
+
+type Query {
+  getUserProfile(id: ID!): UserProfile @aws_iam @aws_cognito_user_pools
+  listUserProfiles(filter: ModelUserProfileFilterInput, limit: Int, nextToken: String): ModelUserProfileConnection @aws_iam @aws_cognito_user_pools
+  getWatchlistItem(id: ID!): WatchlistItem @aws_iam @aws_cognito_user_pools
+  listWatchlistItems(filter: ModelWatchlistItemFilterInput, limit: Int, nextToken: String): ModelWatchlistItemConnection @aws_iam @aws_cognito_user_pools
+  getMovieCache(id: ID!): MovieCache @aws_iam @aws_cognito_user_pools
+  listMovieCaches(filter: ModelMovieCacheFilterInput, limit: Int, nextToken: String): ModelMovieCacheConnection @aws_iam @aws_cognito_user_pools
+  getPopularMoviesCache(id: ID!): PopularMoviesCache @aws_iam @aws_cognito_user_pools
+  listPopularMoviesCaches(filter: ModelPopularMoviesCacheFilterInput, limit: Int, nextToken: String): ModelPopularMoviesCacheConnection @aws_iam @aws_cognito_user_pools
+}
+
+input ModelUserProfileConditionInput {
+  userId: ModelIDInput
+  email: ModelStringInput
+  displayName: ModelStringInput
+  preferredGenres: ModelStringInput
+  language: ModelStringInput
+  region: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelUserProfileConditionInput]
+  or: [ModelUserProfileConditionInput]
+  not: ModelUserProfileConditionInput
+  owner: ModelStringInput
+}
+
+input CreateUserProfileInput {
+  userId: ID!
+  email: AWSEmail
+  displayName: String
+  preferredGenres: [String]
+  language: String
+  region: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  id: ID
+}
+
+input UpdateUserProfileInput {
+  userId: ID
+  email: AWSEmail
+  displayName: String
+  preferredGenres: [String]
+  language: String
+  region: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  id: ID!
+}
+
+input DeleteUserProfileInput {
+  id: ID!
+}
+
+type Mutation {
+  createUserProfile(input: CreateUserProfileInput!, condition: ModelUserProfileConditionInput): UserProfile @aws_cognito_user_pools @aws_iam
+  updateUserProfile(input: UpdateUserProfileInput!, condition: ModelUserProfileConditionInput): UserProfile @aws_cognito_user_pools @aws_iam
+  deleteUserProfile(input: DeleteUserProfileInput!, condition: ModelUserProfileConditionInput): UserProfile @aws_cognito_user_pools @aws_iam
+  createWatchlistItem(input: CreateWatchlistItemInput!, condition: ModelWatchlistItemConditionInput): WatchlistItem @aws_iam @aws_cognito_user_pools
+  updateWatchlistItem(input: UpdateWatchlistItemInput!, condition: ModelWatchlistItemConditionInput): WatchlistItem @aws_iam @aws_cognito_user_pools
+  deleteWatchlistItem(input: DeleteWatchlistItemInput!, condition: ModelWatchlistItemConditionInput): WatchlistItem @aws_iam @aws_cognito_user_pools
+  createMovieCache(input: CreateMovieCacheInput!, condition: ModelMovieCacheConditionInput): MovieCache @aws_iam @aws_cognito_user_pools
+  updateMovieCache(input: UpdateMovieCacheInput!, condition: ModelMovieCacheConditionInput): MovieCache @aws_iam @aws_cognito_user_pools
+  deleteMovieCache(input: DeleteMovieCacheInput!, condition: ModelMovieCacheConditionInput): MovieCache @aws_iam @aws_cognito_user_pools
+  createPopularMoviesCache(input: CreatePopularMoviesCacheInput!, condition: ModelPopularMoviesCacheConditionInput): PopularMoviesCache @aws_iam @aws_cognito_user_pools
+  updatePopularMoviesCache(input: UpdatePopularMoviesCacheInput!, condition: ModelPopularMoviesCacheConditionInput): PopularMoviesCache @aws_iam @aws_cognito_user_pools
+  deletePopularMoviesCache(input: DeletePopularMoviesCacheInput!, condition: ModelPopularMoviesCacheConditionInput): PopularMoviesCache @aws_iam @aws_cognito_user_pools
+}
+
+input ModelSubscriptionUserProfileFilterInput {
+  userId: ModelSubscriptionIDInput
+  email: ModelSubscriptionStringInput
+  displayName: ModelSubscriptionStringInput
+  preferredGenres: ModelSubscriptionStringInput
+  language: ModelSubscriptionStringInput
+  region: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  and: [ModelSubscriptionUserProfileFilterInput]
+  or: [ModelSubscriptionUserProfileFilterInput]
+  owner: ModelStringInput
+}
+
+type Subscription {
+  onCreateUserProfile(filter: ModelSubscriptionUserProfileFilterInput, owner: String): UserProfile @aws_subscribe(mutations: ["createUserProfile"]) @aws_iam @aws_cognito_user_pools
+  onUpdateUserProfile(filter: ModelSubscriptionUserProfileFilterInput, owner: String): UserProfile @aws_subscribe(mutations: ["updateUserProfile"]) @aws_iam @aws_cognito_user_pools
+  onDeleteUserProfile(filter: ModelSubscriptionUserProfileFilterInput, owner: String): UserProfile @aws_subscribe(mutations: ["deleteUserProfile"]) @aws_iam @aws_cognito_user_pools
+  onCreateWatchlistItem(filter: ModelSubscriptionWatchlistItemFilterInput, owner: String): WatchlistItem @aws_subscribe(mutations: ["createWatchlistItem"]) @aws_iam @aws_cognito_user_pools
+  onUpdateWatchlistItem(filter: ModelSubscriptionWatchlistItemFilterInput, owner: String): WatchlistItem @aws_subscribe(mutations: ["updateWatchlistItem"]) @aws_iam @aws_cognito_user_pools
+  onDeleteWatchlistItem(filter: ModelSubscriptionWatchlistItemFilterInput, owner: String): WatchlistItem @aws_subscribe(mutations: ["deleteWatchlistItem"]) @aws_iam @aws_cognito_user_pools
+  onCreateMovieCache(filter: ModelSubscriptionMovieCacheFilterInput): MovieCache @aws_subscribe(mutations: ["createMovieCache"]) @aws_iam @aws_cognito_user_pools
+  onUpdateMovieCache(filter: ModelSubscriptionMovieCacheFilterInput): MovieCache @aws_subscribe(mutations: ["updateMovieCache"]) @aws_iam @aws_cognito_user_pools
+  onDeleteMovieCache(filter: ModelSubscriptionMovieCacheFilterInput): MovieCache @aws_subscribe(mutations: ["deleteMovieCache"]) @aws_iam @aws_cognito_user_pools
+  onCreatePopularMoviesCache(filter: ModelSubscriptionPopularMoviesCacheFilterInput): PopularMoviesCache @aws_subscribe(mutations: ["createPopularMoviesCache"]) @aws_iam @aws_cognito_user_pools
+  onUpdatePopularMoviesCache(filter: ModelSubscriptionPopularMoviesCacheFilterInput): PopularMoviesCache @aws_subscribe(mutations: ["updatePopularMoviesCache"]) @aws_iam @aws_cognito_user_pools
+  onDeletePopularMoviesCache(filter: ModelSubscriptionPopularMoviesCacheFilterInput): PopularMoviesCache @aws_subscribe(mutations: ["deletePopularMoviesCache"]) @aws_iam @aws_cognito_user_pools
+}
+
+type ModelWatchlistItemConnection @aws_iam @aws_cognito_user_pools {
+  items: [WatchlistItem]!
+  nextToken: String
+}
+
+input ModelWatchlistItemFilterInput {
+  userId: ModelIDInput
+  movieId: ModelStringInput
+  movieTitle: ModelStringInput
+  moviePoster: ModelStringInput
+  movieYear: ModelStringInput
+  movieGenres: ModelStringInput
+  addedAt: ModelStringInput
+  notes: ModelStringInput
+  id: ModelIDInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelWatchlistItemFilterInput]
+  or: [ModelWatchlistItemFilterInput]
+  not: ModelWatchlistItemFilterInput
+  owner: ModelStringInput
+}
+
+input ModelWatchlistItemConditionInput {
+  userId: ModelIDInput
+  movieId: ModelStringInput
+  movieTitle: ModelStringInput
+  moviePoster: ModelStringInput
+  movieYear: ModelStringInput
+  movieGenres: ModelStringInput
+  addedAt: ModelStringInput
+  notes: ModelStringInput
+  and: [ModelWatchlistItemConditionInput]
+  or: [ModelWatchlistItemConditionInput]
+  not: ModelWatchlistItemConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  owner: ModelStringInput
+}
+
+input CreateWatchlistItemInput {
+  userId: ID!
+  movieId: String!
+  movieTitle: String!
+  moviePoster: String
+  movieYear: String
+  movieGenres: [String]
+  addedAt: AWSDateTime
+  notes: String
+  id: ID
+}
+
+input UpdateWatchlistItemInput {
+  userId: ID
+  movieId: String
+  movieTitle: String
+  moviePoster: String
+  movieYear: String
+  movieGenres: [String]
+  addedAt: AWSDateTime
+  notes: String
+  id: ID!
+}
+
+input DeleteWatchlistItemInput {
+  id: ID!
+}
+
+input ModelSubscriptionWatchlistItemFilterInput {
+  userId: ModelSubscriptionIDInput
+  movieId: ModelSubscriptionStringInput
+  movieTitle: ModelSubscriptionStringInput
+  moviePoster: ModelSubscriptionStringInput
+  movieYear: ModelSubscriptionStringInput
+  movieGenres: ModelSubscriptionStringInput
+  addedAt: ModelSubscriptionStringInput
+  notes: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionWatchlistItemFilterInput]
+  or: [ModelSubscriptionWatchlistItemFilterInput]
+  owner: ModelStringInput
+}
+
+type ModelMovieCacheConnection @aws_iam @aws_cognito_user_pools {
+  items: [MovieCache]!
+  nextToken: String
+}
+
+input ModelMovieCacheFilterInput {
+  movieId: ModelStringInput
+  movieData: ModelStringInput
+  cacheType: ModelStringInput
+  expiresAt: ModelStringInput
+  createdAt: ModelStringInput
+  id: ModelIDInput
+  updatedAt: ModelStringInput
+  and: [ModelMovieCacheFilterInput]
+  or: [ModelMovieCacheFilterInput]
+  not: ModelMovieCacheFilterInput
+}
+
+input ModelMovieCacheConditionInput {
+  movieId: ModelStringInput
+  movieData: ModelStringInput
+  cacheType: ModelStringInput
+  expiresAt: ModelStringInput
+  createdAt: ModelStringInput
+  and: [ModelMovieCacheConditionInput]
+  or: [ModelMovieCacheConditionInput]
+  not: ModelMovieCacheConditionInput
+  updatedAt: ModelStringInput
+}
+
+input CreateMovieCacheInput {
+  movieId: String!
+  movieData: AWSJSON
+  cacheType: String!
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+  id: ID
+}
+
+input UpdateMovieCacheInput {
+  movieId: String
+  movieData: AWSJSON
+  cacheType: String
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+  id: ID!
+}
+
+input DeleteMovieCacheInput {
+  id: ID!
+}
+
+input ModelSubscriptionMovieCacheFilterInput {
+  movieId: ModelSubscriptionStringInput
+  movieData: ModelSubscriptionStringInput
+  cacheType: ModelSubscriptionStringInput
+  expiresAt: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionMovieCacheFilterInput]
+  or: [ModelSubscriptionMovieCacheFilterInput]
+}
+
+type ModelPopularMoviesCacheConnection @aws_iam @aws_cognito_user_pools {
+  items: [PopularMoviesCache]!
+  nextToken: String
+}
+
+input ModelPopularMoviesCacheFilterInput {
+  cacheKey: ModelStringInput
+  movies: ModelStringInput
+  page: ModelIntInput
+  totalPages: ModelIntInput
+  expiresAt: ModelStringInput
+  createdAt: ModelStringInput
+  id: ModelIDInput
+  updatedAt: ModelStringInput
+  and: [ModelPopularMoviesCacheFilterInput]
+  or: [ModelPopularMoviesCacheFilterInput]
+  not: ModelPopularMoviesCacheFilterInput
+}
+
+input ModelPopularMoviesCacheConditionInput {
+  cacheKey: ModelStringInput
+  movies: ModelStringInput
+  page: ModelIntInput
+  totalPages: ModelIntInput
+  expiresAt: ModelStringInput
+  createdAt: ModelStringInput
+  and: [ModelPopularMoviesCacheConditionInput]
+  or: [ModelPopularMoviesCacheConditionInput]
+  not: ModelPopularMoviesCacheConditionInput
+  updatedAt: ModelStringInput
+}
+
+input CreatePopularMoviesCacheInput {
+  cacheKey: String!
+  movies: AWSJSON
+  page: Int
+  totalPages: Int
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+  id: ID
+}
+
+input UpdatePopularMoviesCacheInput {
+  cacheKey: String
+  movies: AWSJSON
+  page: Int
+  totalPages: Int
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+  id: ID!
+}
+
+input DeletePopularMoviesCacheInput {
+  id: ID!
+}
+
+input ModelSubscriptionPopularMoviesCacheFilterInput {
+  cacheKey: ModelSubscriptionStringInput
+  movies: ModelSubscriptionStringInput
+  page: ModelSubscriptionIntInput
+  totalPages: ModelSubscriptionIntInput
+  expiresAt: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionPopularMoviesCacheFilterInput]
+  or: [ModelSubscriptionPopularMoviesCacheFilterInput]
+}

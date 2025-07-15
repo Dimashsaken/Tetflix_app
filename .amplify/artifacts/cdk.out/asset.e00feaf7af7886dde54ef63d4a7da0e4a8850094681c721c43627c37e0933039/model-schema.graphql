@@ -1,0 +1,46 @@
+type UserProfile @model @auth(rules: [{allow: owner, ownerField: "owner"},
+  {allow: public, provider: iam, operations: [read]}])
+{
+  userId: ID!
+  email: AWSEmail
+  displayName: String
+  preferredGenres: [String]
+  language: String @default(value: "en")
+  region: String @default(value: "US")
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type WatchlistItem @model @auth(rules: [{allow: owner, ownerField: "owner"},
+  {allow: public, provider: iam, operations: [create, read, update, delete]}])
+{
+  userId: ID!
+  movieId: String!
+  movieTitle: String!
+  moviePoster: String
+  movieYear: String
+  movieGenres: [String]
+  addedAt: AWSDateTime
+  notes: String
+}
+
+type MovieCache @model @auth(rules: [{allow: public, provider: iam},
+  {allow: private}])
+{
+  movieId: String!
+  movieData: AWSJSON
+  cacheType: String!
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+}
+
+type PopularMoviesCache @model @auth(rules: [{allow: public, provider: iam},
+  {allow: private}])
+{
+  cacheKey: String!
+  movies: AWSJSON
+  page: Int @default(value: "1")
+  totalPages: Int
+  expiresAt: AWSDateTime
+  createdAt: AWSDateTime
+}

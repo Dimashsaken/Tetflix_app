@@ -23,14 +23,27 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+<<<<<<< HEAD
   const [isAmplifyConfigured, setIsAmplifyConfigured] = useState(false);
 
   const checkAmplifyConfig = () => {
+=======
+  const [profileError, setProfileError] = useState<string | null>(null);
+
+  const refreshProfile = async () => {
+    if (!isAmplifyConfigured) {
+      setProfile(null);
+      setProfileError(null);
+      return;
+    }
+
+>>>>>>> 79c0fdc (feat: Implement movie management with Redux slices for movies, search, UI, and watchlist)
     try {
       // Check if required environment variables are present
       const userPoolId = process.env.EXPO_PUBLIC_AWS_USER_POOL_ID;
       const clientId = process.env.EXPO_PUBLIC_AWS_CLIENT_ID;
       
+<<<<<<< HEAD
       const configured = !!(userPoolId && clientId);
       setIsAmplifyConfigured(configured);
       
@@ -43,12 +56,51 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log('Amplify configuration check failed - running in guest mode');
       setIsAmplifyConfigured(false);
       return false;
+=======
+      if (profileResult.success && profileResult.profile) {
+        setProfile(profileResult.profile);
+        setProfileError(null);
+      } else {
+        setProfile(null);
+        setProfileError(profileResult.error || 'Could not fetch profile.');
+      }
+    } catch (error: any) {
+      setProfile(null);
+      setProfileError(error?.message || 'Could not fetch profile.');
+    }
+  };
+
+  const ensureUserProfile = async (email?: string) => {
+    if (!isAmplifyConfigured) {
+      setProfileError(null);
+      return;
+    }
+
+    try {
+      const profileResult = await UserProfileService.ensureUserProfile(email);
+      
+      if (profileResult.success && profileResult.profile) {
+        setProfile(profileResult.profile);
+        setProfileError(null);
+      } else {
+        setProfile(null);
+        setProfileError(profileResult.error || 'Could not create profile.');
+      }
+    } catch (error: any) {
+      setProfile(null);
+      setProfileError(error?.message || 'Could not create profile.');
+>>>>>>> 79c0fdc (feat: Implement movie management with Redux slices for movies, search, UI, and watchlist)
     }
   };
 
   const refreshUser = async () => {
     if (!isAmplifyConfigured) {
       setUser(null);
+<<<<<<< HEAD
+=======
+      setProfile(null);
+      setProfileError(null);
+>>>>>>> 79c0fdc (feat: Implement movie management with Redux slices for movies, search, UI, and watchlist)
       return;
     }
 
@@ -61,9 +113,32 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       const currentUser = await Promise.race([userPromise, timeoutPromise]) as AuthUser | null;
       setUser(currentUser);
+<<<<<<< HEAD
     } catch (error) {
       console.log('Auth check failed, continuing in guest mode:', error);
       setUser(null);
+=======
+      if (currentUser) {
+        await ensureUserProfile(currentUser.email);
+      } else {
+        setProfile(null);
+        setProfileError(null);
+      }
+    } catch (error: any) {
+      setUser(null);
+      setProfile(null);
+      setProfileError(error?.message || 'Could not refresh user.');
+    }
+  };
+
+  const retryProfileSetup = async () => {
+    setIsLoading(true);
+    setProfileError(null);
+    try {
+      await refreshUser();
+    } finally {
+      setIsLoading(false);
+>>>>>>> 79c0fdc (feat: Implement movie management with Redux slices for movies, search, UI, and watchlist)
     }
   };
 
@@ -157,6 +232,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     signOut,
     refreshUser,
   };
+
+  if (profileError && user) {
+    // Show error UI if profile setup failed
+    return (
+      <div style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#13111C' }}>
+        <p style={{ color: '#fff', fontSize: 18, marginBottom: 12 }}>Profile Setup Error</p>
+        <p style={{ color: '#fff', marginBottom: 16 }}>{profileError}</p>
+        <button onClick={retryProfileSetup} style={{ backgroundColor: '#E50914', color: '#fff', padding: 10, borderRadius: 6, border: 'none', fontSize: 16 }}>Retry</button>
+      </div>
+    );
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

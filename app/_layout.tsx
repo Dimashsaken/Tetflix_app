@@ -8,6 +8,7 @@ import SplashTransition from './components/SplashTransition';
 import AppInitializer from './components/AppInitializer';
 import AuthProvider, { useAuth } from './components/auth/AuthProvider';
 import AuthNavigator from './components/auth/AuthNavigator';
+import ReduxProvider from '../store/ReduxProvider';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync().catch(() => {
@@ -92,10 +93,12 @@ const AppContent: React.FC = () => {
 
 export default function RootLayout() {
   return (
-    <AppInitializer>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
-    </AppInitializer>
+    <ReduxProvider>
+      <AppInitializer>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </AppInitializer>
+    </ReduxProvider>
   );
 }

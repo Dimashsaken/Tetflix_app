@@ -1,0 +1,2171 @@
+{
+ "Parameters": {
+  "DynamoDBModelTableReadIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of read IOPS the table should support."
+  },
+  "DynamoDBModelTableWriteIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of write IOPS the table should support."
+  },
+  "DynamoDBBillingMode": {
+   "Type": "String",
+   "Default": "PAY_PER_REQUEST",
+   "AllowedValues": [
+    "PAY_PER_REQUEST",
+    "PROVISIONED"
+   ],
+   "Description": "Configure @model types to create DynamoDB tables with PAY_PER_REQUEST or PROVISIONED billing modes."
+  },
+  "DynamoDBEnablePointInTimeRecovery": {
+   "Type": "String",
+   "Default": "false",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Whether to enable Point in Time Recovery on the table."
+  },
+  "DynamoDBEnableServerSideEncryption": {
+   "Type": "String",
+   "Default": "true",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Enable server side encryption powered by KMS."
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": {
+   "Type": "String"
+  }
+ },
+ "Conditions": {
+  "HasEnvironmentParameter": {
+   "Fn::Not": [
+    {
+     "Fn::Equals": [
+      "NONE",
+      "NONE"
+     ]
+    }
+   ]
+  },
+  "ShouldUsePayPerRequestBilling": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBBillingMode"
+    },
+    "PAY_PER_REQUEST"
+   ]
+  },
+  "ShouldUsePointInTimeRecovery": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBEnablePointInTimeRecovery"
+    },
+    "true"
+   ]
+  },
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Resources": {
+  "WatchlistItemTable": {
+   "Type": "Custom::AmplifyDynamoDBTable",
+   "Properties": {
+    "ServiceToken": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC"
+    },
+    "tableName": {
+     "Fn::Join": [
+      "",
+      [
+       "WatchlistItem-",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "attributeDefinitions": [
+     {
+      "attributeName": "id",
+      "attributeType": "S"
+     }
+    ],
+    "keySchema": [
+     {
+      "attributeName": "id",
+      "keyType": "HASH"
+     }
+    ],
+    "provisionedThroughput": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      {
+       "Ref": "AWS::NoValue"
+      },
+      {
+       "ReadCapacityUnits": {
+        "Ref": "DynamoDBModelTableReadIOPS"
+       },
+       "WriteCapacityUnits": {
+        "Ref": "DynamoDBModelTableWriteIOPS"
+       }
+      }
+     ]
+    },
+    "sseSpecification": {
+     "sseEnabled": false
+    },
+    "streamSpecification": {
+     "streamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "deletionProtectionEnabled": false,
+    "allowDestructiveGraphqlSchemaUpdates": true,
+    "replaceTableUponGsiUpdate": true,
+    "pointInTimeRecoverySpecification": {
+     "Fn::If": [
+      "ShouldUsePointInTimeRecovery",
+      {
+       "PointInTimeRecoveryEnabled": true
+      },
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    },
+    "billingMode": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      "PAY_PER_REQUEST",
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemTable/Default/Default"
+   }
+  },
+  "WatchlistItemIAMRole165115D7": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "appsync.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:ConditionCheckItem",
+          "dynamodb:DescribeTable",
+          "dynamodb:GetRecords",
+          "dynamodb:GetShardIterator"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "WatchlistItem-",
+                {
+                 "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          },
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}/*",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "WatchlistItem-",
+                {
+                 "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "DynamoDBAccess"
+     }
+    ],
+    "RoleName": {
+     "Fn::Join": [
+      "",
+      [
+       "WatchlistItemIAMRole1429e4-",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "amplify:friendly-name",
+      "Value": "amplifyData"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemIAMRole/Resource"
+   }
+  },
+  "WatchlistItemDataSource": {
+   "Type": "AWS::AppSync::DataSource",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DynamoDBConfig": {
+     "AwsRegion": {
+      "Ref": "AWS::Region"
+     },
+     "TableName": {
+      "Fn::Select": [
+       1,
+       {
+        "Fn::Split": [
+         "/",
+         {
+          "Fn::Select": [
+           5,
+           {
+            "Fn::Split": [
+             ":",
+             {
+              "Fn::GetAtt": [
+               "WatchlistItemTable",
+               "TableArn"
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "Name": "WatchlistItemTable",
+    "ServiceRoleArn": {
+     "Fn::GetAtt": [
+      "WatchlistItemIAMRole165115D7",
+      "Arn"
+     ]
+    },
+    "Type": "AMAZON_DYNAMODB"
+   },
+   "DependsOn": [
+    "WatchlistItemIAMRole165115D7"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemDataSource/Resource"
+   }
+  },
+  "QuerygetWatchlistItemauth0FunctionQuerygetWatchlistItemauth0FunctionAppSyncFunction5AF322E6": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetWatchlistItemauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d4c9568a3429933e84cd2531964c9b194c3584f6816ca12c688ce53553d54922.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerygetWatchlistItemauth0Function/QuerygetWatchlistItemauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerygetWatchlistItempostAuth0FunctionQuerygetWatchlistItempostAuth0FunctionAppSyncFunction3F5DF92B": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetWatchlistItempostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerygetWatchlistItempostAuth0Function/QuerygetWatchlistItempostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryGetWatchlistItemDataResolverFnQueryGetWatchlistItemDataResolverFnAppSyncFunction760DFFA2": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WatchlistItemDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryGetWatchlistItemDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/08f4d557693d96c1a4efba0f9dc91330e4b19772fd5477c156468843e3d9cb5e.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4c6a2d29f01c6091bd1d9afe16e5849d456c96f17c3b215938c8067399532719.vtl"
+    }
+   },
+   "DependsOn": [
+    "WatchlistItemDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QueryGetWatchlistItemDataResolverFn/QueryGetWatchlistItemDataResolverFn.AppSyncFunction"
+   }
+  },
+  "GetWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "getWatchlistItem",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerygetWatchlistItemauth0FunctionQuerygetWatchlistItemauth0FunctionAppSyncFunction5AF322E6",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerygetWatchlistItempostAuth0FunctionQuerygetWatchlistItempostAuth0FunctionAppSyncFunction3F5DF92B",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryGetWatchlistItemDataResolverFnQueryGetWatchlistItemDataResolverFnAppSyncFunction760DFFA2",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getWatchlistItem\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "WatchlistItemTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/queryGetWatchlistItemResolver"
+   }
+  },
+  "QuerylistWatchlistItemsauth0FunctionQuerylistWatchlistItemsauth0FunctionAppSyncFunction91B20520": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistWatchlistItemsauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/d4c9568a3429933e84cd2531964c9b194c3584f6816ca12c688ce53553d54922.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerylistWatchlistItemsauth0Function/QuerylistWatchlistItemsauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerylistWatchlistItemspostAuth0FunctionQuerylistWatchlistItemspostAuth0FunctionAppSyncFunction0997D88D": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistWatchlistItemspostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerylistWatchlistItemspostAuth0Function/QuerylistWatchlistItemspostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryListWatchlistItemsDataResolverFnQueryListWatchlistItemsDataResolverFnAppSyncFunction176F0EAE": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WatchlistItemDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryListWatchlistItemsDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9fcbe070ecd3023c5bf5b966fa9584757db9762eef123bad0820bd87591b2174.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cc01911d0269d4080ea57505dc445dfc315ef7ad85d3d9d4ea1357858bff451d.vtl"
+    }
+   },
+   "DependsOn": [
+    "WatchlistItemDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QueryListWatchlistItemsDataResolverFn/QueryListWatchlistItemsDataResolverFn.AppSyncFunction"
+   }
+  },
+  "ListWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "listWatchlistItems",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerylistWatchlistItemsauth0FunctionQuerylistWatchlistItemsauth0FunctionAppSyncFunction91B20520",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerylistWatchlistItemspostAuth0FunctionQuerylistWatchlistItemspostAuth0FunctionAppSyncFunction0997D88D",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryListWatchlistItemsDataResolverFnQueryListWatchlistItemsDataResolverFnAppSyncFunction176F0EAE",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listWatchlistItems\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "WatchlistItemTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/queryListWatchlistItemsResolver"
+   }
+  },
+  "MutationcreateWatchlistIteminit0FunctionMutationcreateWatchlistIteminit0FunctionAppSyncFunction1B962416": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateWatchlistIteminit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a183ddccbd956316c38ef97177b8f088ef0826f62023323f5ae6053d348ccffc.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationcreateWatchlistIteminit0Function/MutationcreateWatchlistIteminit0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateWatchlistItemauth0FunctionMutationcreateWatchlistItemauth0FunctionAppSyncFunctionE98B046D": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateWatchlistItemauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/33237f2495132dec1f934498dfa523f76c45b0b585854217d3f3f3af4432687f.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationcreateWatchlistItemauth0Function/MutationcreateWatchlistItemauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateWatchlistItempostAuth0FunctionMutationcreateWatchlistItempostAuth0FunctionAppSyncFunction98097E0A": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateWatchlistItempostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationcreateWatchlistItempostAuth0Function/MutationcreateWatchlistItempostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationCreateWatchlistItemDataResolverFnMutationCreateWatchlistItemDataResolverFnAppSyncFunctionE6C58FE0": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WatchlistItemDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationCreateWatchlistItemDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0382be48476f99fea5e5bf266da36643b36ff0e3bfc3eb8bab1d7bc9ee00288d.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "WatchlistItemDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationCreateWatchlistItemDataResolverFn/MutationCreateWatchlistItemDataResolverFn.AppSyncFunction"
+   }
+  },
+  "CreateWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "createWatchlistItem",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationcreateWatchlistIteminit0FunctionMutationcreateWatchlistIteminit0FunctionAppSyncFunction1B962416",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateWatchlistItemauth0FunctionMutationcreateWatchlistItemauth0FunctionAppSyncFunctionE98B046D",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateWatchlistItempostAuth0FunctionMutationcreateWatchlistItempostAuth0FunctionAppSyncFunction98097E0A",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationCreateWatchlistItemDataResolverFnMutationCreateWatchlistItemDataResolverFnAppSyncFunctionE6C58FE0",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createWatchlistItem\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "WatchlistItemTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/mutationCreateWatchlistItemResolver"
+   }
+  },
+  "MutationupdateWatchlistIteminit0FunctionMutationupdateWatchlistIteminit0FunctionAppSyncFunctionD7830316": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateWatchlistIteminit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/06db846fd14e6fc371f22b12b5545ba8e2dbfeda85d8c8d586c71c282166657b.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationupdateWatchlistIteminit0Function/MutationupdateWatchlistIteminit0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateWatchlistItemauth0FunctionMutationupdateWatchlistItemauth0FunctionAppSyncFunction8366ECAD": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WatchlistItemDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateWatchlistItemauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/2512674a859f5a61e25663b79a7a7a0777985afe8e45682a80b1f56d6ea507d1.vtl"
+    }
+   },
+   "DependsOn": [
+    "WatchlistItemDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationupdateWatchlistItemauth0Function/MutationupdateWatchlistItemauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateWatchlistItempostAuth0FunctionMutationupdateWatchlistItempostAuth0FunctionAppSyncFunction58AD5B17": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateWatchlistItempostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationupdateWatchlistItempostAuth0Function/MutationupdateWatchlistItempostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationUpdateWatchlistItemDataResolverFnMutationUpdateWatchlistItemDataResolverFnAppSyncFunction60D5AEA8": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WatchlistItemDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationUpdateWatchlistItemDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/474bf0776ec2164a13191d1a0a9e057154931e4918fea5086f49850d02a5371b.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "WatchlistItemDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationUpdateWatchlistItemDataResolverFn/MutationUpdateWatchlistItemDataResolverFn.AppSyncFunction"
+   }
+  },
+  "UpdateWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "updateWatchlistItem",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationupdateWatchlistIteminit0FunctionMutationupdateWatchlistIteminit0FunctionAppSyncFunctionD7830316",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateWatchlistItemauth0FunctionMutationupdateWatchlistItemauth0FunctionAppSyncFunction8366ECAD",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateWatchlistItempostAuth0FunctionMutationupdateWatchlistItempostAuth0FunctionAppSyncFunction58AD5B17",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationUpdateWatchlistItemDataResolverFnMutationUpdateWatchlistItemDataResolverFnAppSyncFunction60D5AEA8",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateWatchlistItem\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "WatchlistItemTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/mutationUpdateWatchlistItemResolver"
+   }
+  },
+  "MutationdeleteWatchlistItemauth0FunctionMutationdeleteWatchlistItemauth0FunctionAppSyncFunction94CD4EF5": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WatchlistItemDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteWatchlistItemauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cb0a6980021253a99916c33846f58f1c8783c0bfe1736581c68da875383a4140.vtl"
+    }
+   },
+   "DependsOn": [
+    "WatchlistItemDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationdeleteWatchlistItemauth0Function/MutationdeleteWatchlistItemauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationdeleteWatchlistItempostAuth0FunctionMutationdeleteWatchlistItempostAuth0FunctionAppSyncFunction1088DB58": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteWatchlistItempostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationdeleteWatchlistItempostAuth0Function/MutationdeleteWatchlistItempostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationDeleteWatchlistItemDataResolverFnMutationDeleteWatchlistItemDataResolverFnAppSyncFunction8B5F4335": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "WatchlistItemDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationDeleteWatchlistItemDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4f7907d1209a2c9953a0c053df402c634e359546d70c7cc5c2e8e21ea734880f.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "WatchlistItemDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationDeleteWatchlistItemDataResolverFn/MutationDeleteWatchlistItemDataResolverFn.AppSyncFunction"
+   }
+  },
+  "DeleteWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "deleteWatchlistItem",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteWatchlistItemauth0FunctionMutationdeleteWatchlistItemauth0FunctionAppSyncFunction94CD4EF5",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteWatchlistItempostAuth0FunctionMutationdeleteWatchlistItempostAuth0FunctionAppSyncFunction1088DB58",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationDeleteWatchlistItemDataResolverFnMutationDeleteWatchlistItemDataResolverFnAppSyncFunction8B5F4335",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteWatchlistItem\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "WatchlistItemTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/mutationDeleteWatchlistItemResolver"
+   }
+  },
+  "SubscriptiononCreateWatchlistItemauth0FunctionSubscriptiononCreateWatchlistItemauth0FunctionAppSyncFunction5A432857": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateWatchlistItemauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/52eb8ad3c3eb4b378d1155dab729c054b454bb775bb1a71ac1177acf01430a5c.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononCreateWatchlistItemauth0Function/SubscriptiononCreateWatchlistItemauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateWatchlistItempostAuth0FunctionSubscriptiononCreateWatchlistItempostAuth0FunctionAppSyncFunction0ACB950F": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateWatchlistItempostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononCreateWatchlistItempostAuth0Function/SubscriptiononCreateWatchlistItempostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnCreateWatchlistItemDataResolverFnSubscriptionOnCreateWatchlistItemDataResolverFnAppSyncFunction2FB30291": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnCreateWatchlistItemDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptionOnCreateWatchlistItemDataResolverFn/SubscriptionOnCreateWatchlistItemDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "onCreateWatchlistItem",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateWatchlistItemauth0FunctionSubscriptiononCreateWatchlistItemauth0FunctionAppSyncFunction5A432857",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateWatchlistItempostAuth0FunctionSubscriptiononCreateWatchlistItempostAuth0FunctionAppSyncFunction0ACB950F",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnCreateWatchlistItemDataResolverFnSubscriptionOnCreateWatchlistItemDataResolverFnAppSyncFunction2FB30291",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateWatchlistItem\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/subscriptionOnCreateWatchlistItemResolver"
+   }
+  },
+  "SubscriptiononUpdateWatchlistItemauth0FunctionSubscriptiononUpdateWatchlistItemauth0FunctionAppSyncFunctionC4C6365C": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateWatchlistItemauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/52eb8ad3c3eb4b378d1155dab729c054b454bb775bb1a71ac1177acf01430a5c.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononUpdateWatchlistItemauth0Function/SubscriptiononUpdateWatchlistItemauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateWatchlistItempostAuth0FunctionSubscriptiononUpdateWatchlistItempostAuth0FunctionAppSyncFunctionA0780296": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateWatchlistItempostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononUpdateWatchlistItempostAuth0Function/SubscriptiononUpdateWatchlistItempostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnUpdateWatchlistItemDataResolverFnSubscriptionOnUpdateWatchlistItemDataResolverFnAppSyncFunctionAF51CB12": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnUpdateWatchlistItemDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptionOnUpdateWatchlistItemDataResolverFn/SubscriptionOnUpdateWatchlistItemDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "onUpdateWatchlistItem",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateWatchlistItemauth0FunctionSubscriptiononUpdateWatchlistItemauth0FunctionAppSyncFunctionC4C6365C",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateWatchlistItempostAuth0FunctionSubscriptiononUpdateWatchlistItempostAuth0FunctionAppSyncFunctionA0780296",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnUpdateWatchlistItemDataResolverFnSubscriptionOnUpdateWatchlistItemDataResolverFnAppSyncFunctionAF51CB12",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateWatchlistItem\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/subscriptionOnUpdateWatchlistItemResolver"
+   }
+  },
+  "SubscriptiononDeleteWatchlistItemauth0FunctionSubscriptiononDeleteWatchlistItemauth0FunctionAppSyncFunctionD153020F": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteWatchlistItemauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/52eb8ad3c3eb4b378d1155dab729c054b454bb775bb1a71ac1177acf01430a5c.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononDeleteWatchlistItemauth0Function/SubscriptiononDeleteWatchlistItemauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteWatchlistItempostAuth0FunctionSubscriptiononDeleteWatchlistItempostAuth0FunctionAppSyncFunction89E91E69": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteWatchlistItempostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononDeleteWatchlistItempostAuth0Function/SubscriptiononDeleteWatchlistItempostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnDeleteWatchlistItemDataResolverFnSubscriptionOnDeleteWatchlistItemDataResolverFnAppSyncFunctionA8D842E8": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnDeleteWatchlistItemDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptionOnDeleteWatchlistItemDataResolverFn/SubscriptionOnDeleteWatchlistItemDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteWatchlistItemResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "onDeleteWatchlistItem",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteWatchlistItemauth0FunctionSubscriptiononDeleteWatchlistItemauth0FunctionAppSyncFunctionD153020F",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteWatchlistItempostAuth0FunctionSubscriptiononDeleteWatchlistItempostAuth0FunctionAppSyncFunction89E91E69",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnDeleteWatchlistItemDataResolverFnSubscriptionOnDeleteWatchlistItemDataResolverFnAppSyncFunctionA8D842E8",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteWatchlistItem\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/subscriptionOnDeleteWatchlistItemResolver"
+   }
+  },
+  "WatchlistItemOwnerDataResolverFnWatchlistItemOwnerDataResolverFnAppSyncFunction6C940B40": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "WatchlistItemOwnerDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/041534e5fd916595f752318f161512d7c7f83b9f2cf32d0f0be381c12253ff68.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/064303962e481067b44300212516363b99aaee539b6bafaf756fdd83ff0b60f0.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemOwnerDataResolverFn/WatchlistItemOwnerDataResolverFn.AppSyncFunction"
+   }
+  },
+  "WatchlistItemownerResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "owner",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "WatchlistItemOwnerDataResolverFnWatchlistItemOwnerDataResolverFnAppSyncFunction6C940B40",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"WatchlistItem\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"owner\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "WatchlistItem"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/watchlistItemOwnerResolver"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WOwW6DMAyGn6X34Am4bMcVtGM3we6VSQxKCQmKnVYV4t0n6NRpp9+f/Mn+C8hf3yA/4I0zbcbM2Q6WE7GQaQX1qKref2HEiYTiBlXwxooNXjXEIUVNqkosYfrD3j9nvPF5MXePUzAdfGPn6IhMyuIESxPcww6OVoXzzHevYal3ve5qFGyfJ//TR/J6K1EF39shRdwb/X52V4qr4vKMzCQM71soLuGY9EiyFVg39zPJnETt61ZwsH5YlQ+G4MIv16KAvIT8cGFrs5i82ImgeeQPJixaxzYBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "GetAttWatchlistItemTableStreamArn": {
+   "Description": "Your DynamoDB table StreamArn.",
+   "Value": {
+    "Fn::GetAtt": [
+     "WatchlistItemTable",
+     "TableStreamArn"
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "GetAtt:WatchlistItemTable:StreamArn"
+      ]
+     ]
+    }
+   }
+  },
+  "GetAttWatchlistItemTableName": {
+   "Description": "Your DynamoDB table name.",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "WatchlistItem-",
+      {
+       "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+      },
+      "-NONE"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "GetAtt:WatchlistItemTable:Name"
+      ]
+     ]
+    }
+   }
+  }
+ }
+}

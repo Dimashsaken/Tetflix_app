@@ -1,0 +1,2805 @@
+{
+  "version": "41.0.0",
+  "artifacts": {
+    "amplify-boltexpostarter-User-sandbox-da7331f134.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "amplify-boltexpostarter-User-sandbox-da7331f134.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "amplify-boltexpostarter-User-sandbox-da7331f134": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "amplify-boltexpostarter-User-sandbox-da7331f134.template.json",
+        "terminationProtection": false,
+        "tags": {
+          "amplify:deployment-type": "sandbox",
+          "created-by": "amplify"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1d2fb0baa98c523a3a42aa62bd1da94bf0a522ff6dc5ff0aa0f817b737408f3c.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "amplify-boltexpostarter-User-sandbox-da7331f134.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "amplify-boltexpostarter-User-sandbox-da7331f134.assets"
+      ],
+      "metadata": {
+        "/amplify-boltexpostarter-User-sandbox-da7331f134": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "amplify:deployment-type",
+                "Value": "sandbox"
+              },
+              {
+                "Key": "created-by",
+                "Value": "amplify"
+              }
+            ]
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/deploymentType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentType"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "region"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyAuth/UserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPool4BA7F805"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyAuth/UserPoolAppClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPoolAppClient2626C6F8"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyAuth/IdentityPool": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPool3FDE84CC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyAuth/authenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthauthenticatedUserRoleD8DA3689"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyAuth/unauthenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthunauthenticatedUserRole2B524D9E"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyAuth/IdentityPoolRoleAttachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPoolRoleAttachment045F17C8"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthUserPool7115F3C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthUserPool7115F3C9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthUserPoolAppClientCF08E4E3Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthUserPoolAppClientCF08E4E3Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth/amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/auth.NestedStack/auth.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "auth179371D7"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/userPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/webClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "webClientId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/identityPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "identityPoolId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/authRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "authRegion"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/allowUnauthenticatedIdentities": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "allowUnauthenticatedIdentities"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/signupAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "signupAttributes"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/usernameAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "usernameAttributes"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/verificationMechanisms": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "verificationMechanisms"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/passwordPolicyMinLength": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyMinLength"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/passwordPolicyRequirements": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyRequirements"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/mfaConfiguration": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaConfiguration"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/mfaTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaTypes"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/socialProviders": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "socialProviders"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/oauthCognitoDomain": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthCognitoDomain"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/oauthScope": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthScope"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/oauthRedirectSignIn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignIn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/oauthRedirectSignOut": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignOut"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/oauthResponseType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthResponseType"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/oauthClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthClientId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/groups": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "groups"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/GraphQLAPI/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPI42A6FA33"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/GraphQLAPI/TransformerSchema": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPITransformerSchemaFF50A789"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/GraphQLAPI/DefaultApiKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPIDefaultApiKey1C8ED374"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/GraphQLAPI/NONE_DS": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/GraphQLAPI/NONE_DS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPINONEDS684BF699"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/AmplifyManagedTableIsCompleteRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableIsCompleteRoleF825222C"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableOnEventRoleB4E71DEA"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableOnEventRoleDefaultPolicyF6DABCB6"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TableManagerCustomProviderframeworkonEvent1DFC2ECC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TableManagerCustomProviderframeworkisComplete2E51021B"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachineRole470BE899"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachineRoleDefaultPolicy89F3836A"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachine060600BC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager/amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent79BA37DCArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent79BA37DCArn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyTableManager.NestedStack/AmplifyTableManager.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource86290833"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/UserProfileTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/UserProfileTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserProfileTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/CustomTableUserProfileTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/GetAttUserProfileTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttUserProfileTableStreamArn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/GetAttUserProfileTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttUserProfileTableName"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/UserProfileIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfileIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/UserProfileIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserProfileIAMRoleA4E2934B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfileIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/UserProfileDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfileTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/UserProfileDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserProfileDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfileTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/QuerygetUserProfileauth0Function/QuerygetUserProfileauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetUserProfileauth0FunctionQuerygetUserProfileauth0FunctionAppSyncFunctionDAD22839"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetUserProfileauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/QuerygetUserProfilepostAuth0Function/QuerygetUserProfilepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetUserProfilepostAuth0FunctionQuerygetUserProfilepostAuth0FunctionAppSyncFunction92890504"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetUserProfilepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/QueryGetUserProfileDataResolverFn/QueryGetUserProfileDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetUserProfileDataResolverFnQueryGetUserProfileDataResolverFnAppSyncFunction8EB8BD57"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetUserProfileDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/queryGetUserProfileResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getUserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/QuerylistUserProfilesauth0Function/QuerylistUserProfilesauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistUserProfilesauth0FunctionQuerylistUserProfilesauth0FunctionAppSyncFunction468B41DC"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistUserProfilesauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/QuerylistUserProfilespostAuth0Function/QuerylistUserProfilespostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistUserProfilespostAuth0FunctionQuerylistUserProfilespostAuth0FunctionAppSyncFunction01122A7A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistUserProfilespostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/QueryListUserProfilesDataResolverFn/QueryListUserProfilesDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListUserProfilesDataResolverFnQueryListUserProfilesDataResolverFnAppSyncFunctionA05E8B7A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListUserProfilesDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/queryListUserProfilesResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listUserProfiles"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationcreateUserProfileinit0Function/MutationcreateUserProfileinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateUserProfileinit0FunctionMutationcreateUserProfileinit0FunctionAppSyncFunction7EFE9ED4"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateUserProfileinit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationcreateUserProfileinit1Function/MutationcreateUserProfileinit1Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateUserProfileinit1FunctionMutationcreateUserProfileinit1FunctionAppSyncFunction9B1EF9A1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateUserProfileinit1Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationcreateUserProfileauth0Function/MutationcreateUserProfileauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateUserProfileauth0FunctionMutationcreateUserProfileauth0FunctionAppSyncFunctionCF3841B8"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateUserProfileauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationcreateUserProfilepostAuth0Function/MutationcreateUserProfilepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateUserProfilepostAuth0FunctionMutationcreateUserProfilepostAuth0FunctionAppSyncFunctionF0C8FEFF"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateUserProfilepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationCreateUserProfileDataResolverFn/MutationCreateUserProfileDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateUserProfileDataResolverFnMutationCreateUserProfileDataResolverFnAppSyncFunction120FE646"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateUserProfileDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/mutationCreateUserProfileResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createUserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationupdateUserProfileinit0Function/MutationupdateUserProfileinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateUserProfileinit0FunctionMutationupdateUserProfileinit0FunctionAppSyncFunction9A840BAA"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateUserProfileinit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationupdateUserProfileauth0Function/MutationupdateUserProfileauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateUserProfileauth0FunctionMutationupdateUserProfileauth0FunctionAppSyncFunction7E8F945B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateUserProfileauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationupdateUserProfilepostAuth0Function/MutationupdateUserProfilepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateUserProfilepostAuth0FunctionMutationupdateUserProfilepostAuth0FunctionAppSyncFunction206AFA76"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateUserProfilepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationUpdateUserProfileDataResolverFn/MutationUpdateUserProfileDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateUserProfileDataResolverFnMutationUpdateUserProfileDataResolverFnAppSyncFunction1707D92F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateUserProfileDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/mutationUpdateUserProfileResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateUserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationdeleteUserProfileauth0Function/MutationdeleteUserProfileauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteUserProfileauth0FunctionMutationdeleteUserProfileauth0FunctionAppSyncFunction4A3AC4FD"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteUserProfileauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationdeleteUserProfilepostAuth0Function/MutationdeleteUserProfilepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteUserProfilepostAuth0FunctionMutationdeleteUserProfilepostAuth0FunctionAppSyncFunctionEE3F21F4"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteUserProfilepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/MutationDeleteUserProfileDataResolverFn/MutationDeleteUserProfileDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteUserProfileDataResolverFnMutationDeleteUserProfileDataResolverFnAppSyncFunction4835094F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteUserProfileDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/mutationDeleteUserProfileResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteUserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptiononCreateUserProfileauth0Function/SubscriptiononCreateUserProfileauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateUserProfileauth0FunctionSubscriptiononCreateUserProfileauth0FunctionAppSyncFunctionD90BBD82"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateUserProfileauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptiononCreateUserProfilepostAuth0Function/SubscriptiononCreateUserProfilepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateUserProfilepostAuth0FunctionSubscriptiononCreateUserProfilepostAuth0FunctionAppSyncFunctionD659A080"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateUserProfilepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptionOnCreateUserProfileDataResolverFn/SubscriptionOnCreateUserProfileDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateUserProfileDataResolverFnSubscriptionOnCreateUserProfileDataResolverFnAppSyncFunction08AFEB08"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateUserProfileDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/subscriptionOnCreateUserProfileResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateUserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptiononUpdateUserProfileauth0Function/SubscriptiononUpdateUserProfileauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateUserProfileauth0FunctionSubscriptiononUpdateUserProfileauth0FunctionAppSyncFunction48B7E90B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateUserProfileauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptiononUpdateUserProfilepostAuth0Function/SubscriptiononUpdateUserProfilepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateUserProfilepostAuth0FunctionSubscriptiononUpdateUserProfilepostAuth0FunctionAppSyncFunction446153A7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateUserProfilepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptionOnUpdateUserProfileDataResolverFn/SubscriptionOnUpdateUserProfileDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateUserProfileDataResolverFnSubscriptionOnUpdateUserProfileDataResolverFnAppSyncFunctionBCF119CA"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateUserProfileDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/subscriptionOnUpdateUserProfileResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateUserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptiononDeleteUserProfileauth0Function/SubscriptiononDeleteUserProfileauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteUserProfileauth0FunctionSubscriptiononDeleteUserProfileauth0FunctionAppSyncFunction4558BD0E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteUserProfileauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptiononDeleteUserProfilepostAuth0Function/SubscriptiononDeleteUserProfilepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteUserProfilepostAuth0FunctionSubscriptiononDeleteUserProfilepostAuth0FunctionAppSyncFunction3E69A1F9"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteUserProfilepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/SubscriptionOnDeleteUserProfileDataResolverFn/SubscriptionOnDeleteUserProfileDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteUserProfileDataResolverFnSubscriptionOnDeleteUserProfileDataResolverFnAppSyncFunction6EDD6652"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteUserProfileDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/subscriptionOnDeleteUserProfileResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteUserProfileResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteUserProfile"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/UserProfileOwnerDataResolverFn/UserProfileOwnerDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserProfileOwnerDataResolverFnUserProfileOwnerDataResolverFnAppSyncFunction23A35218"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfileOwnerDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/userProfileOwnerResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserProfileownerResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "UserProfile.owner"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38Outputs.amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent79BA37DCArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UserProfile.NestedStack/UserProfile.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataUserProfileNestedStackUserProfileNestedStackResource1B3713C5"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WatchlistItemTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/CustomTableWatchlistItemTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/GetAttWatchlistItemTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttWatchlistItemTableStreamArn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/GetAttWatchlistItemTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttWatchlistItemTableName"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItemIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WatchlistItemIAMRole165115D7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItemIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItemTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WatchlistItemDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItemTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerygetWatchlistItemauth0Function/QuerygetWatchlistItemauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetWatchlistItemauth0FunctionQuerygetWatchlistItemauth0FunctionAppSyncFunction5AF322E6"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetWatchlistItemauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerygetWatchlistItempostAuth0Function/QuerygetWatchlistItempostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetWatchlistItempostAuth0FunctionQuerygetWatchlistItempostAuth0FunctionAppSyncFunction3F5DF92B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetWatchlistItempostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QueryGetWatchlistItemDataResolverFn/QueryGetWatchlistItemDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetWatchlistItemDataResolverFnQueryGetWatchlistItemDataResolverFnAppSyncFunction760DFFA2"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetWatchlistItemDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/queryGetWatchlistItemResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getWatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerylistWatchlistItemsauth0Function/QuerylistWatchlistItemsauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistWatchlistItemsauth0FunctionQuerylistWatchlistItemsauth0FunctionAppSyncFunction91B20520"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistWatchlistItemsauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QuerylistWatchlistItemspostAuth0Function/QuerylistWatchlistItemspostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistWatchlistItemspostAuth0FunctionQuerylistWatchlistItemspostAuth0FunctionAppSyncFunction0997D88D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistWatchlistItemspostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/QueryListWatchlistItemsDataResolverFn/QueryListWatchlistItemsDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListWatchlistItemsDataResolverFnQueryListWatchlistItemsDataResolverFnAppSyncFunction176F0EAE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListWatchlistItemsDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/queryListWatchlistItemsResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listWatchlistItems"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationcreateWatchlistIteminit0Function/MutationcreateWatchlistIteminit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateWatchlistIteminit0FunctionMutationcreateWatchlistIteminit0FunctionAppSyncFunction1B962416"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateWatchlistIteminit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationcreateWatchlistItemauth0Function/MutationcreateWatchlistItemauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateWatchlistItemauth0FunctionMutationcreateWatchlistItemauth0FunctionAppSyncFunctionE98B046D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateWatchlistItemauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationcreateWatchlistItempostAuth0Function/MutationcreateWatchlistItempostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateWatchlistItempostAuth0FunctionMutationcreateWatchlistItempostAuth0FunctionAppSyncFunction98097E0A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateWatchlistItempostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationCreateWatchlistItemDataResolverFn/MutationCreateWatchlistItemDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateWatchlistItemDataResolverFnMutationCreateWatchlistItemDataResolverFnAppSyncFunctionE6C58FE0"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateWatchlistItemDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/mutationCreateWatchlistItemResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createWatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationupdateWatchlistIteminit0Function/MutationupdateWatchlistIteminit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateWatchlistIteminit0FunctionMutationupdateWatchlistIteminit0FunctionAppSyncFunctionD7830316"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateWatchlistIteminit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationupdateWatchlistItemauth0Function/MutationupdateWatchlistItemauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateWatchlistItemauth0FunctionMutationupdateWatchlistItemauth0FunctionAppSyncFunction8366ECAD"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateWatchlistItemauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationupdateWatchlistItempostAuth0Function/MutationupdateWatchlistItempostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateWatchlistItempostAuth0FunctionMutationupdateWatchlistItempostAuth0FunctionAppSyncFunction58AD5B17"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateWatchlistItempostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationUpdateWatchlistItemDataResolverFn/MutationUpdateWatchlistItemDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateWatchlistItemDataResolverFnMutationUpdateWatchlistItemDataResolverFnAppSyncFunction60D5AEA8"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateWatchlistItemDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/mutationUpdateWatchlistItemResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateWatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationdeleteWatchlistItemauth0Function/MutationdeleteWatchlistItemauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteWatchlistItemauth0FunctionMutationdeleteWatchlistItemauth0FunctionAppSyncFunction94CD4EF5"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteWatchlistItemauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationdeleteWatchlistItempostAuth0Function/MutationdeleteWatchlistItempostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteWatchlistItempostAuth0FunctionMutationdeleteWatchlistItempostAuth0FunctionAppSyncFunction1088DB58"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteWatchlistItempostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/MutationDeleteWatchlistItemDataResolverFn/MutationDeleteWatchlistItemDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteWatchlistItemDataResolverFnMutationDeleteWatchlistItemDataResolverFnAppSyncFunction8B5F4335"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteWatchlistItemDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/mutationDeleteWatchlistItemResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteWatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononCreateWatchlistItemauth0Function/SubscriptiononCreateWatchlistItemauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateWatchlistItemauth0FunctionSubscriptiononCreateWatchlistItemauth0FunctionAppSyncFunction5A432857"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateWatchlistItemauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononCreateWatchlistItempostAuth0Function/SubscriptiononCreateWatchlistItempostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateWatchlistItempostAuth0FunctionSubscriptiononCreateWatchlistItempostAuth0FunctionAppSyncFunction0ACB950F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateWatchlistItempostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptionOnCreateWatchlistItemDataResolverFn/SubscriptionOnCreateWatchlistItemDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateWatchlistItemDataResolverFnSubscriptionOnCreateWatchlistItemDataResolverFnAppSyncFunction2FB30291"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateWatchlistItemDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/subscriptionOnCreateWatchlistItemResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateWatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononUpdateWatchlistItemauth0Function/SubscriptiononUpdateWatchlistItemauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateWatchlistItemauth0FunctionSubscriptiononUpdateWatchlistItemauth0FunctionAppSyncFunctionC4C6365C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateWatchlistItemauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononUpdateWatchlistItempostAuth0Function/SubscriptiononUpdateWatchlistItempostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateWatchlistItempostAuth0FunctionSubscriptiononUpdateWatchlistItempostAuth0FunctionAppSyncFunctionA0780296"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateWatchlistItempostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptionOnUpdateWatchlistItemDataResolverFn/SubscriptionOnUpdateWatchlistItemDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateWatchlistItemDataResolverFnSubscriptionOnUpdateWatchlistItemDataResolverFnAppSyncFunctionAF51CB12"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateWatchlistItemDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/subscriptionOnUpdateWatchlistItemResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateWatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononDeleteWatchlistItemauth0Function/SubscriptiononDeleteWatchlistItemauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteWatchlistItemauth0FunctionSubscriptiononDeleteWatchlistItemauth0FunctionAppSyncFunctionD153020F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteWatchlistItemauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptiononDeleteWatchlistItempostAuth0Function/SubscriptiononDeleteWatchlistItempostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteWatchlistItempostAuth0FunctionSubscriptiononDeleteWatchlistItempostAuth0FunctionAppSyncFunction89E91E69"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteWatchlistItempostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/SubscriptionOnDeleteWatchlistItemDataResolverFn/SubscriptionOnDeleteWatchlistItemDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteWatchlistItemDataResolverFnSubscriptionOnDeleteWatchlistItemDataResolverFnAppSyncFunctionA8D842E8"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteWatchlistItemDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/subscriptionOnDeleteWatchlistItemResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteWatchlistItemResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteWatchlistItem"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/WatchlistItemOwnerDataResolverFn/WatchlistItemOwnerDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WatchlistItemOwnerDataResolverFnWatchlistItemOwnerDataResolverFnAppSyncFunction6C940B40"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItemOwnerDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/watchlistItemOwnerResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WatchlistItemownerResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "WatchlistItem.owner"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38Outputs.amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent79BA37DCArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/WatchlistItem.NestedStack/WatchlistItem.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataWatchlistItemNestedStackWatchlistItemNestedStackResource90212F99"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MovieCacheTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/CustomTableMovieCacheTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/GetAttMovieCacheTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttMovieCacheTableStreamArn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/GetAttMovieCacheTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttMovieCacheTableName"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MovieCacheIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MovieCacheIAMRole2EA96F87"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MovieCacheIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MovieCacheTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MovieCacheDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MovieCacheTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerygetMovieCacheauth0Function/QuerygetMovieCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetMovieCacheauth0FunctionQuerygetMovieCacheauth0FunctionAppSyncFunctionE38E2E31"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetMovieCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerygetMovieCachepostAuth0Function/QuerygetMovieCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetMovieCachepostAuth0FunctionQuerygetMovieCachepostAuth0FunctionAppSyncFunctionF0280E31"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetMovieCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QueryGetMovieCacheDataResolverFn/QueryGetMovieCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetMovieCacheDataResolverFnQueryGetMovieCacheDataResolverFnAppSyncFunctionC5239E8D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetMovieCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/queryGetMovieCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getMovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerylistMovieCachesauth0Function/QuerylistMovieCachesauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistMovieCachesauth0FunctionQuerylistMovieCachesauth0FunctionAppSyncFunctionDAD2871D"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistMovieCachesauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerylistMovieCachespostAuth0Function/QuerylistMovieCachespostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistMovieCachespostAuth0FunctionQuerylistMovieCachespostAuth0FunctionAppSyncFunctionD14D7947"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistMovieCachespostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QueryListMovieCachesDataResolverFn/QueryListMovieCachesDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListMovieCachesDataResolverFnQueryListMovieCachesDataResolverFnAppSyncFunctionE84D3140"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListMovieCachesDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/queryListMovieCachesResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listMovieCaches"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationcreateMovieCacheinit0Function/MutationcreateMovieCacheinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateMovieCacheinit0FunctionMutationcreateMovieCacheinit0FunctionAppSyncFunctionA79D3298"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateMovieCacheinit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationcreateMovieCacheauth0Function/MutationcreateMovieCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateMovieCacheauth0FunctionMutationcreateMovieCacheauth0FunctionAppSyncFunctionC04755D5"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateMovieCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationcreateMovieCachepostAuth0Function/MutationcreateMovieCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateMovieCachepostAuth0FunctionMutationcreateMovieCachepostAuth0FunctionAppSyncFunctionA197EC91"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateMovieCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationCreateMovieCacheDataResolverFn/MutationCreateMovieCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateMovieCacheDataResolverFnMutationCreateMovieCacheDataResolverFnAppSyncFunction309974BD"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateMovieCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/mutationCreateMovieCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createMovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationupdateMovieCacheinit0Function/MutationupdateMovieCacheinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateMovieCacheinit0FunctionMutationupdateMovieCacheinit0FunctionAppSyncFunction4F759AE2"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateMovieCacheinit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationupdateMovieCacheauth0Function/MutationupdateMovieCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateMovieCacheauth0FunctionMutationupdateMovieCacheauth0FunctionAppSyncFunctionC3F5C394"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateMovieCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationupdateMovieCachepostAuth0Function/MutationupdateMovieCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateMovieCachepostAuth0FunctionMutationupdateMovieCachepostAuth0FunctionAppSyncFunction8783E7AE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateMovieCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationUpdateMovieCacheDataResolverFn/MutationUpdateMovieCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateMovieCacheDataResolverFnMutationUpdateMovieCacheDataResolverFnAppSyncFunction187B4785"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateMovieCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/mutationUpdateMovieCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateMovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationdeleteMovieCacheauth0Function/MutationdeleteMovieCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteMovieCacheauth0FunctionMutationdeleteMovieCacheauth0FunctionAppSyncFunction89A322E8"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteMovieCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationdeleteMovieCachepostAuth0Function/MutationdeleteMovieCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteMovieCachepostAuth0FunctionMutationdeleteMovieCachepostAuth0FunctionAppSyncFunction9355F2AF"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteMovieCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationDeleteMovieCacheDataResolverFn/MutationDeleteMovieCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteMovieCacheDataResolverFnMutationDeleteMovieCacheDataResolverFnAppSyncFunctionEE6CF032"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteMovieCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/mutationDeleteMovieCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteMovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononCreateMovieCacheauth0Function/SubscriptiononCreateMovieCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateMovieCacheauth0FunctionSubscriptiononCreateMovieCacheauth0FunctionAppSyncFunction534D780C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateMovieCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononCreateMovieCachepostAuth0Function/SubscriptiononCreateMovieCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateMovieCachepostAuth0FunctionSubscriptiononCreateMovieCachepostAuth0FunctionAppSyncFunctionF679A3C2"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateMovieCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptionOnCreateMovieCacheDataResolverFn/SubscriptionOnCreateMovieCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateMovieCacheDataResolverFnSubscriptionOnCreateMovieCacheDataResolverFnAppSyncFunction2B3DDDE5"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateMovieCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/subscriptionOnCreateMovieCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateMovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononUpdateMovieCacheauth0Function/SubscriptiononUpdateMovieCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateMovieCacheauth0FunctionSubscriptiononUpdateMovieCacheauth0FunctionAppSyncFunction8CFBEE39"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateMovieCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononUpdateMovieCachepostAuth0Function/SubscriptiononUpdateMovieCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateMovieCachepostAuth0FunctionSubscriptiononUpdateMovieCachepostAuth0FunctionAppSyncFunction4065F004"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateMovieCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptionOnUpdateMovieCacheDataResolverFn/SubscriptionOnUpdateMovieCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateMovieCacheDataResolverFnSubscriptionOnUpdateMovieCacheDataResolverFnAppSyncFunction7D237511"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateMovieCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/subscriptionOnUpdateMovieCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateMovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononDeleteMovieCacheauth0Function/SubscriptiononDeleteMovieCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteMovieCacheauth0FunctionSubscriptiononDeleteMovieCacheauth0FunctionAppSyncFunction9306E6AC"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteMovieCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononDeleteMovieCachepostAuth0Function/SubscriptiononDeleteMovieCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteMovieCachepostAuth0FunctionSubscriptiononDeleteMovieCachepostAuth0FunctionAppSyncFunction938AEBEA"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteMovieCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptionOnDeleteMovieCacheDataResolverFn/SubscriptionOnDeleteMovieCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteMovieCacheDataResolverFnSubscriptionOnDeleteMovieCacheDataResolverFnAppSyncFunction9820354B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteMovieCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/subscriptionOnDeleteMovieCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteMovieCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteMovieCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38Outputs.amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent79BA37DCArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache.NestedStack/MovieCache.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataMovieCacheNestedStackMovieCacheNestedStackResource49D1BD1C"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/PopularMoviesCacheTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "PopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/PopularMoviesCacheTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PopularMoviesCacheTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "PopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/CustomTablePopularMoviesCacheTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "PopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/GetAttPopularMoviesCacheTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttPopularMoviesCacheTableStreamArn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/GetAttPopularMoviesCacheTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttPopularMoviesCacheTableName"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/PopularMoviesCacheIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "PopularMoviesCacheIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/PopularMoviesCacheIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PopularMoviesCacheIAMRoleBA3FCA31"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "PopularMoviesCacheIAMRole"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/PopularMoviesCacheDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "PopularMoviesCacheTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/PopularMoviesCacheDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PopularMoviesCacheDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "PopularMoviesCacheTable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/QuerygetPopularMoviesCacheauth0Function/QuerygetPopularMoviesCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetPopularMoviesCacheauth0FunctionQuerygetPopularMoviesCacheauth0FunctionAppSyncFunction2792B354"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetPopularMoviesCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/QuerygetPopularMoviesCachepostAuth0Function/QuerygetPopularMoviesCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetPopularMoviesCachepostAuth0FunctionQuerygetPopularMoviesCachepostAuth0FunctionAppSyncFunctionA68EBF94"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetPopularMoviesCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/QueryGetPopularMoviesCacheDataResolverFn/QueryGetPopularMoviesCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetPopularMoviesCacheDataResolverFnQueryGetPopularMoviesCacheDataResolverFnAppSyncFunctionF309F398"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetPopularMoviesCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/queryGetPopularMoviesCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetPopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getPopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/QuerylistPopularMoviesCachesauth0Function/QuerylistPopularMoviesCachesauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistPopularMoviesCachesauth0FunctionQuerylistPopularMoviesCachesauth0FunctionAppSyncFunctionD10AFEBE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistPopularMoviesCachesauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/QuerylistPopularMoviesCachespostAuth0Function/QuerylistPopularMoviesCachespostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistPopularMoviesCachespostAuth0FunctionQuerylistPopularMoviesCachespostAuth0FunctionAppSyncFunction709971FF"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistPopularMoviesCachespostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/QueryListPopularMoviesCachesDataResolverFn/QueryListPopularMoviesCachesDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListPopularMoviesCachesDataResolverFnQueryListPopularMoviesCachesDataResolverFnAppSyncFunction97884AC5"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListPopularMoviesCachesDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/queryListPopularMoviesCachesResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListPopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listPopularMoviesCaches"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationcreatePopularMoviesCacheinit0Function/MutationcreatePopularMoviesCacheinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreatePopularMoviesCacheinit0FunctionMutationcreatePopularMoviesCacheinit0FunctionAppSyncFunction4451D49B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreatePopularMoviesCacheinit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationcreatePopularMoviesCacheinit1Function/MutationcreatePopularMoviesCacheinit1Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreatePopularMoviesCacheinit1FunctionMutationcreatePopularMoviesCacheinit1FunctionAppSyncFunction7D3BD4BE"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreatePopularMoviesCacheinit1Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationcreatePopularMoviesCacheauth0Function/MutationcreatePopularMoviesCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreatePopularMoviesCacheauth0FunctionMutationcreatePopularMoviesCacheauth0FunctionAppSyncFunctionE1A4624A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreatePopularMoviesCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationcreatePopularMoviesCachepostAuth0Function/MutationcreatePopularMoviesCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreatePopularMoviesCachepostAuth0FunctionMutationcreatePopularMoviesCachepostAuth0FunctionAppSyncFunctionF86B75D6"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreatePopularMoviesCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationCreatePopularMoviesCacheDataResolverFn/MutationCreatePopularMoviesCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreatePopularMoviesCacheDataResolverFnMutationCreatePopularMoviesCacheDataResolverFnAppSyncFunction1F291879"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreatePopularMoviesCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/mutationCreatePopularMoviesCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreatePopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createPopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationupdatePopularMoviesCacheinit0Function/MutationupdatePopularMoviesCacheinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdatePopularMoviesCacheinit0FunctionMutationupdatePopularMoviesCacheinit0FunctionAppSyncFunctionF52616A7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdatePopularMoviesCacheinit0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationupdatePopularMoviesCacheauth0Function/MutationupdatePopularMoviesCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdatePopularMoviesCacheauth0FunctionMutationupdatePopularMoviesCacheauth0FunctionAppSyncFunction2C41CF20"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdatePopularMoviesCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationupdatePopularMoviesCachepostAuth0Function/MutationupdatePopularMoviesCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdatePopularMoviesCachepostAuth0FunctionMutationupdatePopularMoviesCachepostAuth0FunctionAppSyncFunction09013646"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdatePopularMoviesCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationUpdatePopularMoviesCacheDataResolverFn/MutationUpdatePopularMoviesCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdatePopularMoviesCacheDataResolverFnMutationUpdatePopularMoviesCacheDataResolverFnAppSyncFunction043D9636"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdatePopularMoviesCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/mutationUpdatePopularMoviesCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdatePopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updatePopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationdeletePopularMoviesCacheauth0Function/MutationdeletePopularMoviesCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeletePopularMoviesCacheauth0FunctionMutationdeletePopularMoviesCacheauth0FunctionAppSyncFunction3C3F5B3F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeletePopularMoviesCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationdeletePopularMoviesCachepostAuth0Function/MutationdeletePopularMoviesCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeletePopularMoviesCachepostAuth0FunctionMutationdeletePopularMoviesCachepostAuth0FunctionAppSyncFunction7AB68D7A"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeletePopularMoviesCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/MutationDeletePopularMoviesCacheDataResolverFn/MutationDeletePopularMoviesCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeletePopularMoviesCacheDataResolverFnMutationDeletePopularMoviesCacheDataResolverFnAppSyncFunctionE124C962"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeletePopularMoviesCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/mutationDeletePopularMoviesCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeletePopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deletePopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptiononCreatePopularMoviesCacheauth0Function/SubscriptiononCreatePopularMoviesCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreatePopularMoviesCacheauth0FunctionSubscriptiononCreatePopularMoviesCacheauth0FunctionAppSyncFunction26CCD137"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreatePopularMoviesCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptiononCreatePopularMoviesCachepostAuth0Function/SubscriptiononCreatePopularMoviesCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreatePopularMoviesCachepostAuth0FunctionSubscriptiononCreatePopularMoviesCachepostAuth0FunctionAppSyncFunction34F6E1FA"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreatePopularMoviesCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptionOnCreatePopularMoviesCacheDataResolverFn/SubscriptionOnCreatePopularMoviesCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreatePopularMoviesCacheDataResolverFnSubscriptionOnCreatePopularMoviesCacheDataResolverFnAppSyncFunctionFB0AC4B3"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreatePopularMoviesCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/subscriptionOnCreatePopularMoviesCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreatePopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreatePopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptiononUpdatePopularMoviesCacheauth0Function/SubscriptiononUpdatePopularMoviesCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdatePopularMoviesCacheauth0FunctionSubscriptiononUpdatePopularMoviesCacheauth0FunctionAppSyncFunction569E38C1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdatePopularMoviesCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptiononUpdatePopularMoviesCachepostAuth0Function/SubscriptiononUpdatePopularMoviesCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdatePopularMoviesCachepostAuth0FunctionSubscriptiononUpdatePopularMoviesCachepostAuth0FunctionAppSyncFunction6DC96E13"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdatePopularMoviesCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptionOnUpdatePopularMoviesCacheDataResolverFn/SubscriptionOnUpdatePopularMoviesCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdatePopularMoviesCacheDataResolverFnSubscriptionOnUpdatePopularMoviesCacheDataResolverFnAppSyncFunctionC3CCD8F6"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdatePopularMoviesCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/subscriptionOnUpdatePopularMoviesCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdatePopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdatePopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptiononDeletePopularMoviesCacheauth0Function/SubscriptiononDeletePopularMoviesCacheauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeletePopularMoviesCacheauth0FunctionSubscriptiononDeletePopularMoviesCacheauth0FunctionAppSyncFunctionBBB97708"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeletePopularMoviesCacheauth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptiononDeletePopularMoviesCachepostAuth0Function/SubscriptiononDeletePopularMoviesCachepostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeletePopularMoviesCachepostAuth0FunctionSubscriptiononDeletePopularMoviesCachepostAuth0FunctionAppSyncFunction84D2F225"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeletePopularMoviesCachepostAuth0Function"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/SubscriptionOnDeletePopularMoviesCacheDataResolverFn/SubscriptionOnDeletePopularMoviesCacheDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeletePopularMoviesCacheDataResolverFnSubscriptionOnDeletePopularMoviesCacheDataResolverFnAppSyncFunction2C3ABC92"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeletePopularMoviesCacheDataResolverFn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/subscriptionOnDeletePopularMoviesCacheResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeletePopularMoviesCacheResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeletePopularMoviesCache"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38Outputs.amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent79BA37DCArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/PopularMoviesCache.NestedStack/PopularMoviesCache.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataPopularMoviesCacheNestedStackPopularMoviesCacheNestedStackResource03354EA6"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AuthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAuthRolePolicy01567A5654"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/UnauthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataUnauthRolePolicy01355B9DCF"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucket9CCB4ACA"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketPolicyF1C1C548"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketAutoDeleteObjectsCustomResource437F26F5"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentAwsCliLayerE322F905"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/CustomResource-1536MiB/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB21775929"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-singleton",
+            "data": true
+          },
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleA41FC8C2"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleDefaultPolicyFF1C635B"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBC5D8AB21"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/modelIntrospectionSchemaBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketF566B665"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/modelIntrospectionSchemaBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketPolicy4DAB0D15"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/modelIntrospectionSchemaBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketAutoDeleteObjectsCustomResourceFE57309F"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/modelIntrospectionSchemaBucketDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketDeploymentAwsCliLayer13C432F7"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/modelIntrospectionSchemaBucketDeployment/CustomResource-1536MiB/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "modelIntrospectionSchemaBucketDeploymentCustomResource1536MiB104B97EC"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/AMPLIFY_DATA_GRAPHQL_ENDPOINTParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAGRAPHQLENDPOINTParameter1C2CBB16"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_BUCKET_NAMEParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMABUCKETNAMEParameter47BF4F44"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_KEYParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMAKEYParameterB6AEAE8A"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/AMPLIFY_DATA_DEFAULT_NAMEParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATADEFAULTNAMEParameterE7C23CC4"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthUserPool7115F3C9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthUserPool7115F3C9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/reference-to-amplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185Outputs.amplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4GraphQLUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4GraphQLUrl"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB01F2AE55DestinationBucketArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB01F2AE55DestinationBucketArn"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPIDefaultApiKeyE1151374ApiKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPIDefaultApiKeyE1151374ApiKey"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/data.NestedStack/data.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "data7552DF31"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/awsAppsyncApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiId"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/awsAppsyncApiEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiEndpoint"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/awsAppsyncAuthenticationType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAuthenticationType"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/awsAppsyncRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncRegion"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/amplifyApiModelSchemaS3Uri": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyApiModelSchemaS3Uri"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/awsAppsyncApiKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiKey"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/awsAppsyncAdditionalAuthenticationTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAdditionalAuthenticationTypes"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/amplify-boltexpostarter-User-sandbox-da7331f134/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "amplify-boltexpostarter-User-sandbox-da7331f134"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  },
+  "minimumCliVersion": "2.1005.0"
+}

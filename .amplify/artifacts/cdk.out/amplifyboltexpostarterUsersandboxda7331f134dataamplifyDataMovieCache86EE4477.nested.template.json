@@ -1,0 +1,2080 @@
+{
+ "Parameters": {
+  "DynamoDBModelTableReadIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of read IOPS the table should support."
+  },
+  "DynamoDBModelTableWriteIOPS": {
+   "Type": "Number",
+   "Default": 5,
+   "Description": "The number of write IOPS the table should support."
+  },
+  "DynamoDBBillingMode": {
+   "Type": "String",
+   "Default": "PAY_PER_REQUEST",
+   "AllowedValues": [
+    "PAY_PER_REQUEST",
+    "PROVISIONED"
+   ],
+   "Description": "Configure @model types to create DynamoDB tables with PAY_PER_REQUEST or PROVISIONED billing modes."
+  },
+  "DynamoDBEnablePointInTimeRecovery": {
+   "Type": "String",
+   "Default": "false",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Whether to enable Point in Time Recovery on the table."
+  },
+  "DynamoDBEnableServerSideEncryption": {
+   "Type": "String",
+   "Default": "true",
+   "AllowedValues": [
+    "true",
+    "false"
+   ],
+   "Description": "Enable server side encryption powered by KMS."
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref": {
+   "Type": "String"
+  },
+  "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef": {
+   "Type": "String"
+  }
+ },
+ "Conditions": {
+  "HasEnvironmentParameter": {
+   "Fn::Not": [
+    {
+     "Fn::Equals": [
+      "NONE",
+      "NONE"
+     ]
+    }
+   ]
+  },
+  "ShouldUsePayPerRequestBilling": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBBillingMode"
+    },
+    "PAY_PER_REQUEST"
+   ]
+  },
+  "ShouldUsePointInTimeRecovery": {
+   "Fn::Equals": [
+    {
+     "Ref": "DynamoDBEnablePointInTimeRecovery"
+    },
+    "true"
+   ]
+  },
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Resources": {
+  "MovieCacheTable": {
+   "Type": "Custom::AmplifyDynamoDBTable",
+   "Properties": {
+    "ServiceToken": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4D925A38OutputsamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataAmplifyTableManagerTableManage2920BBDC"
+    },
+    "tableName": {
+     "Fn::Join": [
+      "",
+      [
+       "MovieCache-",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "attributeDefinitions": [
+     {
+      "attributeName": "id",
+      "attributeType": "S"
+     }
+    ],
+    "keySchema": [
+     {
+      "attributeName": "id",
+      "keyType": "HASH"
+     }
+    ],
+    "provisionedThroughput": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      {
+       "Ref": "AWS::NoValue"
+      },
+      {
+       "ReadCapacityUnits": {
+        "Ref": "DynamoDBModelTableReadIOPS"
+       },
+       "WriteCapacityUnits": {
+        "Ref": "DynamoDBModelTableWriteIOPS"
+       }
+      }
+     ]
+    },
+    "sseSpecification": {
+     "sseEnabled": false
+    },
+    "streamSpecification": {
+     "streamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "deletionProtectionEnabled": false,
+    "allowDestructiveGraphqlSchemaUpdates": true,
+    "replaceTableUponGsiUpdate": true,
+    "pointInTimeRecoverySpecification": {
+     "Fn::If": [
+      "ShouldUsePointInTimeRecovery",
+      {
+       "PointInTimeRecoveryEnabled": true
+      },
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    },
+    "billingMode": {
+     "Fn::If": [
+      "ShouldUsePayPerRequestBilling",
+      "PAY_PER_REQUEST",
+      {
+       "Ref": "AWS::NoValue"
+      }
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheTable/Default/Default"
+   }
+  },
+  "MovieCacheIAMRole2EA96F87": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "appsync.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Policies": [
+     {
+      "PolicyDocument": {
+       "Statement": [
+        {
+         "Action": [
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:GetItem",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:ConditionCheckItem",
+          "dynamodb:DescribeTable",
+          "dynamodb:GetRecords",
+          "dynamodb:GetShardIterator"
+         ],
+         "Effect": "Allow",
+         "Resource": [
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "MovieCache-",
+                {
+                 "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          },
+          {
+           "Fn::Sub": [
+            "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${tablename}/*",
+            {
+             "tablename": {
+              "Fn::Join": [
+               "",
+               [
+                "MovieCache-",
+                {
+                 "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+                },
+                "-NONE"
+               ]
+              ]
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ],
+       "Version": "2012-10-17"
+      },
+      "PolicyName": "DynamoDBAccess"
+     }
+    ],
+    "RoleName": {
+     "Fn::Join": [
+      "",
+      [
+       "MovieCacheIAMRoleed3fd0-",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "-NONE"
+      ]
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "amplify:friendly-name",
+      "Value": "amplifyData"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheIAMRole/Resource"
+   }
+  },
+  "MovieCacheDataSource": {
+   "Type": "AWS::AppSync::DataSource",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DynamoDBConfig": {
+     "AwsRegion": {
+      "Ref": "AWS::Region"
+     },
+     "TableName": {
+      "Fn::Select": [
+       1,
+       {
+        "Fn::Split": [
+         "/",
+         {
+          "Fn::Select": [
+           5,
+           {
+            "Fn::Split": [
+             ":",
+             {
+              "Fn::GetAtt": [
+               "MovieCacheTable",
+               "TableArn"
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "Name": "MovieCacheTable",
+    "ServiceRoleArn": {
+     "Fn::GetAtt": [
+      "MovieCacheIAMRole2EA96F87",
+      "Arn"
+     ]
+    },
+    "Type": "AMAZON_DYNAMODB"
+   },
+   "DependsOn": [
+    "MovieCacheIAMRole2EA96F87"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MovieCacheDataSource/Resource"
+   }
+  },
+  "QuerygetMovieCacheauth0FunctionQuerygetMovieCacheauth0FunctionAppSyncFunctionE38E2E31": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetMovieCacheauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/62baca1d1fe8e93eb394d958513556ffc536c35fde7d8fba84f4af8dd76705da.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerygetMovieCacheauth0Function/QuerygetMovieCacheauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerygetMovieCachepostAuth0FunctionQuerygetMovieCachepostAuth0FunctionAppSyncFunctionF0280E31": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerygetMovieCachepostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerygetMovieCachepostAuth0Function/QuerygetMovieCachepostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryGetMovieCacheDataResolverFnQueryGetMovieCacheDataResolverFnAppSyncFunctionC5239E8D": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "MovieCacheDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryGetMovieCacheDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/08f4d557693d96c1a4efba0f9dc91330e4b19772fd5477c156468843e3d9cb5e.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4c6a2d29f01c6091bd1d9afe16e5849d456c96f17c3b215938c8067399532719.vtl"
+    }
+   },
+   "DependsOn": [
+    "MovieCacheDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QueryGetMovieCacheDataResolverFn/QueryGetMovieCacheDataResolverFn.AppSyncFunction"
+   }
+  },
+  "GetMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "getMovieCache",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerygetMovieCacheauth0FunctionQuerygetMovieCacheauth0FunctionAppSyncFunctionE38E2E31",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerygetMovieCachepostAuth0FunctionQuerygetMovieCachepostAuth0FunctionAppSyncFunctionF0280E31",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryGetMovieCacheDataResolverFnQueryGetMovieCacheDataResolverFnAppSyncFunctionC5239E8D",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"getMovieCache\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "MovieCacheTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/queryGetMovieCacheResolver"
+   }
+  },
+  "QuerylistMovieCachesauth0FunctionQuerylistMovieCachesauth0FunctionAppSyncFunctionDAD2871D": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistMovieCachesauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/62baca1d1fe8e93eb394d958513556ffc536c35fde7d8fba84f4af8dd76705da.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerylistMovieCachesauth0Function/QuerylistMovieCachesauth0Function.AppSyncFunction"
+   }
+  },
+  "QuerylistMovieCachespostAuth0FunctionQuerylistMovieCachespostAuth0FunctionAppSyncFunctionD14D7947": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QuerylistMovieCachespostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QuerylistMovieCachespostAuth0Function/QuerylistMovieCachespostAuth0Function.AppSyncFunction"
+   }
+  },
+  "QueryListMovieCachesDataResolverFnQueryListMovieCachesDataResolverFnAppSyncFunctionE84D3140": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "MovieCacheDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "QueryListMovieCachesDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9fcbe070ecd3023c5bf5b966fa9584757db9762eef123bad0820bd87591b2174.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/cc01911d0269d4080ea57505dc445dfc315ef7ad85d3d9d4ea1357858bff451d.vtl"
+    }
+   },
+   "DependsOn": [
+    "MovieCacheDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/QueryListMovieCachesDataResolverFn/QueryListMovieCachesDataResolverFn.AppSyncFunction"
+   }
+  },
+  "ListMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "listMovieCaches",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "QuerylistMovieCachesauth0FunctionQuerylistMovieCachesauth0FunctionAppSyncFunctionDAD2871D",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QuerylistMovieCachespostAuth0FunctionQuerylistMovieCachespostAuth0FunctionAppSyncFunctionD14D7947",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "QueryListMovieCachesDataResolverFnQueryListMovieCachesDataResolverFnAppSyncFunctionE84D3140",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Query\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"listMovieCaches\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "MovieCacheTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Query"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/queryListMovieCachesResolver"
+   }
+  },
+  "MutationcreateMovieCacheinit0FunctionMutationcreateMovieCacheinit0FunctionAppSyncFunctionA79D3298": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateMovieCacheinit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a183ddccbd956316c38ef97177b8f088ef0826f62023323f5ae6053d348ccffc.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationcreateMovieCacheinit0Function/MutationcreateMovieCacheinit0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateMovieCacheauth0FunctionMutationcreateMovieCacheauth0FunctionAppSyncFunctionC04755D5": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateMovieCacheauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/3ee3a02f864713a73ccda800c8c848f744cf72e01d80fc2c40cf98c37a95af04.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationcreateMovieCacheauth0Function/MutationcreateMovieCacheauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationcreateMovieCachepostAuth0FunctionMutationcreateMovieCachepostAuth0FunctionAppSyncFunctionA197EC91": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationcreateMovieCachepostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationcreateMovieCachepostAuth0Function/MutationcreateMovieCachepostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationCreateMovieCacheDataResolverFnMutationCreateMovieCacheDataResolverFnAppSyncFunction309974BD": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "MovieCacheDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationCreateMovieCacheDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/754b6906eca320a678fa66f1b6cbe410af588751a02285419f509fc7a7d61878.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "MovieCacheDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationCreateMovieCacheDataResolverFn/MutationCreateMovieCacheDataResolverFn.AppSyncFunction"
+   }
+  },
+  "CreateMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "createMovieCache",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationcreateMovieCacheinit0FunctionMutationcreateMovieCacheinit0FunctionAppSyncFunctionA79D3298",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateMovieCacheauth0FunctionMutationcreateMovieCacheauth0FunctionAppSyncFunctionC04755D5",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationcreateMovieCachepostAuth0FunctionMutationcreateMovieCachepostAuth0FunctionAppSyncFunctionA197EC91",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationCreateMovieCacheDataResolverFnMutationCreateMovieCacheDataResolverFnAppSyncFunction309974BD",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"createMovieCache\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "MovieCacheTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/mutationCreateMovieCacheResolver"
+   }
+  },
+  "MutationupdateMovieCacheinit0FunctionMutationupdateMovieCacheinit0FunctionAppSyncFunction4F759AE2": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateMovieCacheinit0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/06db846fd14e6fc371f22b12b5545ba8e2dbfeda85d8c8d586c71c282166657b.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationupdateMovieCacheinit0Function/MutationupdateMovieCacheinit0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateMovieCacheauth0FunctionMutationupdateMovieCacheauth0FunctionAppSyncFunctionC3F5C394": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "MovieCacheDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateMovieCacheauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/9cd4d3b98984e36f2f771f04590ff3a578c0c57d3e24e2a7b14968ee4591900c.vtl"
+    }
+   },
+   "DependsOn": [
+    "MovieCacheDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationupdateMovieCacheauth0Function/MutationupdateMovieCacheauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationupdateMovieCachepostAuth0FunctionMutationupdateMovieCachepostAuth0FunctionAppSyncFunction8783E7AE": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationupdateMovieCachepostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationupdateMovieCachepostAuth0Function/MutationupdateMovieCachepostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationUpdateMovieCacheDataResolverFnMutationUpdateMovieCacheDataResolverFnAppSyncFunction187B4785": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "MovieCacheDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationUpdateMovieCacheDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/474bf0776ec2164a13191d1a0a9e057154931e4918fea5086f49850d02a5371b.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "MovieCacheDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationUpdateMovieCacheDataResolverFn/MutationUpdateMovieCacheDataResolverFn.AppSyncFunction"
+   }
+  },
+  "UpdateMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "updateMovieCache",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationupdateMovieCacheinit0FunctionMutationupdateMovieCacheinit0FunctionAppSyncFunction4F759AE2",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateMovieCacheauth0FunctionMutationupdateMovieCacheauth0FunctionAppSyncFunctionC3F5C394",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationupdateMovieCachepostAuth0FunctionMutationupdateMovieCachepostAuth0FunctionAppSyncFunction8783E7AE",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationUpdateMovieCacheDataResolverFnMutationUpdateMovieCacheDataResolverFnAppSyncFunction187B4785",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"updateMovieCache\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "MovieCacheTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/mutationUpdateMovieCacheResolver"
+   }
+  },
+  "MutationdeleteMovieCacheauth0FunctionMutationdeleteMovieCacheauth0FunctionAppSyncFunction89A322E8": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "MovieCacheDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteMovieCacheauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1f5fed297da9c32ae3af922bf3a38ccf23b956078887d16891ec06c20c64722c.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/a40e9aa65651d8fddc46a26559d35b55c152d8ec383c9b16845e73b84f54a528.vtl"
+    }
+   },
+   "DependsOn": [
+    "MovieCacheDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationdeleteMovieCacheauth0Function/MutationdeleteMovieCacheauth0Function.AppSyncFunction"
+   }
+  },
+  "MutationdeleteMovieCachepostAuth0FunctionMutationdeleteMovieCachepostAuth0FunctionAppSyncFunction9355F2AF": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationdeleteMovieCachepostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationdeleteMovieCachepostAuth0Function/MutationdeleteMovieCachepostAuth0Function.AppSyncFunction"
+   }
+  },
+  "MutationDeleteMovieCacheDataResolverFnMutationDeleteMovieCacheDataResolverFnAppSyncFunctionEE6CF032": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Fn::GetAtt": [
+      "MovieCacheDataSource",
+      "Name"
+     ]
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "MutationDeleteMovieCacheDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/4f7907d1209a2c9953a0c053df402c634e359546d70c7cc5c2e8e21ea734880f.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/f4a52b72209a9dfa197b5e7367a5c378c5bb86de6e29ddd9e48b49a3fe54b249.vtl"
+    }
+   },
+   "DependsOn": [
+    "MovieCacheDataSource"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/MutationDeleteMovieCacheDataResolverFn/MutationDeleteMovieCacheDataResolverFn.AppSyncFunction"
+   }
+  },
+  "DeleteMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "deleteMovieCache",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteMovieCacheauth0FunctionMutationdeleteMovieCacheauth0FunctionAppSyncFunction89A322E8",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationdeleteMovieCachepostAuth0FunctionMutationdeleteMovieCachepostAuth0FunctionAppSyncFunction9355F2AF",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "MutationDeleteMovieCacheDataResolverFnMutationDeleteMovieCacheDataResolverFnAppSyncFunctionEE6CF032",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Mutation\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"deleteMovieCache\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"AMAZON_DYNAMODB\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n$util.qr($ctx.stash.put(\"tableName\", \"",
+       {
+        "Fn::Select": [
+         1,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::Select": [
+             5,
+             {
+              "Fn::Split": [
+               ":",
+               {
+                "Fn::GetAtt": [
+                 "MovieCacheTable",
+                 "TableArn"
+                ]
+               }
+              ]
+             }
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Mutation"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/mutationDeleteMovieCacheResolver"
+   }
+  },
+  "SubscriptiononCreateMovieCacheauth0FunctionSubscriptiononCreateMovieCacheauth0FunctionAppSyncFunction534D780C": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateMovieCacheauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/616d9084d37a5192e6c798ff5243c52f88c11adb3c7a2424c4a4948cbfa78618.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononCreateMovieCacheauth0Function/SubscriptiononCreateMovieCacheauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateMovieCachepostAuth0FunctionSubscriptiononCreateMovieCachepostAuth0FunctionAppSyncFunctionF679A3C2": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononCreateMovieCachepostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononCreateMovieCachepostAuth0Function/SubscriptiononCreateMovieCachepostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnCreateMovieCacheDataResolverFnSubscriptionOnCreateMovieCacheDataResolverFnAppSyncFunction2B3DDDE5": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnCreateMovieCacheDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptionOnCreateMovieCacheDataResolverFn/SubscriptionOnCreateMovieCacheDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononCreateMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "onCreateMovieCache",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateMovieCacheauth0FunctionSubscriptiononCreateMovieCacheauth0FunctionAppSyncFunction534D780C",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononCreateMovieCachepostAuth0FunctionSubscriptiononCreateMovieCachepostAuth0FunctionAppSyncFunctionF679A3C2",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnCreateMovieCacheDataResolverFnSubscriptionOnCreateMovieCacheDataResolverFnAppSyncFunction2B3DDDE5",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onCreateMovieCache\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/subscriptionOnCreateMovieCacheResolver"
+   }
+  },
+  "SubscriptiononUpdateMovieCacheauth0FunctionSubscriptiononUpdateMovieCacheauth0FunctionAppSyncFunction8CFBEE39": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateMovieCacheauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/616d9084d37a5192e6c798ff5243c52f88c11adb3c7a2424c4a4948cbfa78618.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononUpdateMovieCacheauth0Function/SubscriptiononUpdateMovieCacheauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateMovieCachepostAuth0FunctionSubscriptiononUpdateMovieCachepostAuth0FunctionAppSyncFunction4065F004": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononUpdateMovieCachepostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononUpdateMovieCachepostAuth0Function/SubscriptiononUpdateMovieCachepostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnUpdateMovieCacheDataResolverFnSubscriptionOnUpdateMovieCacheDataResolverFnAppSyncFunction7D237511": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnUpdateMovieCacheDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptionOnUpdateMovieCacheDataResolverFn/SubscriptionOnUpdateMovieCacheDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononUpdateMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "onUpdateMovieCache",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateMovieCacheauth0FunctionSubscriptiononUpdateMovieCacheauth0FunctionAppSyncFunction8CFBEE39",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononUpdateMovieCachepostAuth0FunctionSubscriptiononUpdateMovieCachepostAuth0FunctionAppSyncFunction4065F004",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnUpdateMovieCacheDataResolverFnSubscriptionOnUpdateMovieCacheDataResolverFnAppSyncFunction7D237511",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onUpdateMovieCache\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/subscriptionOnUpdateMovieCacheResolver"
+   }
+  },
+  "SubscriptiononDeleteMovieCacheauth0FunctionSubscriptiononDeleteMovieCacheauth0FunctionAppSyncFunction9306E6AC": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteMovieCacheauth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/616d9084d37a5192e6c798ff5243c52f88c11adb3c7a2424c4a4948cbfa78618.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononDeleteMovieCacheauth0Function/SubscriptiononDeleteMovieCacheauth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteMovieCachepostAuth0FunctionSubscriptiononDeleteMovieCachepostAuth0FunctionAppSyncFunction938AEBEA": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptiononDeleteMovieCachepostAuth0Function",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c1721bcd774e27c514d3454b5be4f9bdd094c0161b57ddf053d618e3b0086a77.vtl"
+    },
+    "ResponseMappingTemplate": "$util.toJson({})"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptiononDeleteMovieCachepostAuth0Function/SubscriptiononDeleteMovieCachepostAuth0Function.AppSyncFunction"
+   }
+  },
+  "SubscriptionOnDeleteMovieCacheDataResolverFnSubscriptionOnDeleteMovieCacheDataResolverFnAppSyncFunction9820354B": {
+   "Type": "AWS::AppSync::FunctionConfiguration",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "DataSourceName": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPINONEDSDCE53B75Name"
+    },
+    "FunctionVersion": "2018-05-29",
+    "Name": "SubscriptionOnDeleteMovieCacheDataResolverFn",
+    "RequestMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fe3c43ada4b9d681a5e2312663ef7a73386424d73b73e51f8e2e9d4b50f7c502.vtl"
+    },
+    "ResponseMappingTemplateS3Location": {
+     "Fn::Sub": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/e0cff47fb007f0bbf2a4e43ca256d6aa7ec109821769fd79fa7c5e83f0e7f9fc.vtl"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/SubscriptionOnDeleteMovieCacheDataResolverFn/SubscriptionOnDeleteMovieCacheDataResolverFn.AppSyncFunction"
+   }
+  },
+  "SubscriptiononDeleteMovieCacheResolver": {
+   "Type": "AWS::AppSync::Resolver",
+   "Properties": {
+    "ApiId": {
+     "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+    },
+    "FieldName": "onDeleteMovieCache",
+    "Kind": "PIPELINE",
+    "PipelineConfig": {
+     "Functions": [
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteMovieCacheauth0FunctionSubscriptiononDeleteMovieCacheauth0FunctionAppSyncFunction9306E6AC",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptiononDeleteMovieCachepostAuth0FunctionSubscriptiononDeleteMovieCachepostAuth0FunctionAppSyncFunction938AEBEA",
+        "FunctionId"
+       ]
+      },
+      {
+       "Fn::GetAtt": [
+        "SubscriptionOnDeleteMovieCacheDataResolverFnSubscriptionOnDeleteMovieCacheDataResolverFnAppSyncFunction9820354B",
+        "FunctionId"
+       ]
+      }
+     ]
+    },
+    "RequestMappingTemplate": {
+     "Fn::Join": [
+      "",
+      [
+       "$util.qr($ctx.stash.put(\"typeName\", \"Subscription\"))\n$util.qr($ctx.stash.put(\"fieldName\", \"onDeleteMovieCache\"))\n$util.qr($ctx.stash.put(\"conditions\", []))\n$util.qr($ctx.stash.put(\"metadata\", {}))\n$util.qr($ctx.stash.metadata.put(\"dataSourceType\", \"NONE\"))\n$util.qr($ctx.stash.metadata.put(\"apiId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"connectionAttributes\", {}))\n\n$util.qr($ctx.stash.put(\"authRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthauthenticatedUserRole30C2ABF9Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"unauthRole\", \"arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":sts::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":assumed-role/",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthunauthenticatedUserRole94E9B3A4Ref"
+       },
+       "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"",
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134authNestedStackauthNestedStackResource985D5185OutputsamplifyboltexpostarterUsersandboxda7331f134authamplifyAuthIdentityPool849CA7CDRef"
+       },
+       "\"))\n$util.qr($ctx.stash.put(\"adminRoles\", []))\n$util.toJson({})"
+      ]
+     ]
+    },
+    "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+    "TypeName": "Subscription"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/subscriptionOnDeleteMovieCacheResolver"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WOwW6DMAyGn6X34Am4bMcVtGM3we6VSQxKCQmKnVYV4t0n6NRpp9+f/Mn+C8hf3yA/4I0zbcbM2Q6WE7GQaQX1qKref2HEiYTiBlXwxooNXjXEIUVNqkosYfrD3j9nvPF5MXePUzAdfGPn6IhMyuIESxPcww6OVoXzzHevYal3ve5qFGyfJ//TR/J6K1EF39shRdwb/X52V4qr4vKMzCQM71soLuGY9EiyFVg39zPJnETt61ZwsH5YlQ+G4MIv16KAvIT8cGFrs5i82ImgeeQPJixaxzYBAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "amplify-boltexpostarter-User-sandbox-da7331f134/data/amplifyData/MovieCache/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "GetAttMovieCacheTableStreamArn": {
+   "Description": "Your DynamoDB table StreamArn.",
+   "Value": {
+    "Fn::GetAtt": [
+     "MovieCacheTable",
+     "TableStreamArn"
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "GetAtt:MovieCacheTable:StreamArn"
+      ]
+     ]
+    }
+   }
+  },
+  "GetAttMovieCacheTableName": {
+   "Description": "Your DynamoDB table name.",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "MovieCache-",
+      {
+       "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+      },
+      "-NONE"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": {
+     "Fn::Join": [
+      ":",
+      [
+       {
+        "Ref": "referencetoamplifyboltexpostarterUsersandboxda7331f134dataamplifyDataGraphQLAPI6F5760E4ApiId"
+       },
+       "GetAtt:MovieCacheTable:Name"
+      ]
+     ]
+    }
+   }
+  }
+ }
+}
