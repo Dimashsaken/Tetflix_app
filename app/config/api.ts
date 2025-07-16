@@ -1,9 +1,6 @@
 import Constants from 'expo-constants';
 import React from 'react';
 
-<<<<<<< HEAD
-export const TMDB_API_KEY = Constants.expoConfig?.extra?.TMDB_API_KEY;
-=======
 // Use hardcoded API key for now (should be moved to environment variables)
 export const TMDB_API_KEY = Constants.expoConfig?.extra?.TMDB_API_KEY || '3e3f0a46d6f2abc8e557d06b3fc21a77';
 
@@ -21,7 +18,7 @@ if (!TMDB_API_KEY) {
 } else {
   console.log('✅ TMDB API key loaded successfully');
 }
->>>>>>> 79c0fdc (feat: Implement movie management with Redux slices for movies, search, UI, and watchlist)
+
 export const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 export const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 
