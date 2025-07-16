@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Chrome as Home, Heart, Search, Map, LogOut, Settings } from 'lucide-react-native';
+import { Chrome as Home, Heart, Search, Map, LogOut } from 'lucide-react-native';
 import { useAuth } from '../components/auth/AuthProvider';
 import { TouchableOpacity } from 'react-native';
 
@@ -57,13 +57,6 @@ export default function TabLayout() {
         options={{
           title: 'Theatres',
           tabBarIcon: ({ size, color }: { size: number; color: string }) => <Map size={size} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="redux"
-        options={{
-          title: 'Redux Demo',
-          tabBarIcon: ({ size, color }: { size: number; color: string }) => <Settings size={size} color={color} />,
         }}
       />
     </Tabs>

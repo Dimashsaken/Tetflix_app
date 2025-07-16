@@ -7,10 +7,10 @@ import ConfirmationScreen from './ConfirmationScreen';
 type AuthScreens = 'signIn' | 'signUp' | 'confirmation';
 
 interface AuthNavigatorProps {
-  // Optional props for future customization
+  onContinueAsGuest?: () => void;
 }
 
-const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
+const AuthNavigator: React.FC<AuthNavigatorProps> = ({ onContinueAsGuest }) => {
   const [currentScreen, setCurrentScreen] = useState<AuthScreens>('signIn');
   const [confirmationEmail, setConfirmationEmail] = useState('');
 
@@ -34,6 +34,7 @@ const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
         return (
           <SignInScreen 
             onNavigateToSignUp={navigateToSignUp}
+            onContinueAsGuest={onContinueAsGuest}
           />
         );
       
@@ -57,6 +58,7 @@ const AuthNavigator: React.FC<AuthNavigatorProps> = () => {
         return (
           <SignInScreen 
             onNavigateToSignUp={navigateToSignUp}
+            onContinueAsGuest={onContinueAsGuest}
           />
         );
     }

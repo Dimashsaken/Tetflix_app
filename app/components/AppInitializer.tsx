@@ -13,11 +13,14 @@ const AppInitializer: React.FC<AppInitializerProps> = ({ children }) => {
   useEffect(() => {
     const initializeApp = async () => {
       try {
+        console.log('🔧 Initializing app...');
         // Add any app initialization logic here
         // For now, just simulate initialization
         await new Promise(resolve => setTimeout(resolve, 1000));
+        console.log('✅ App initialization complete');
         setIsInitialized(true);
       } catch (err: any) {
+        console.error('❌ App initialization failed:', err);
         setError(err.message || 'Failed to initialize app');
       }
     };

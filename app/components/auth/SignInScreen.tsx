@@ -14,13 +14,14 @@ import { useAuth } from './AuthProvider';
 
 interface SignInScreenProps {
   onNavigateToSignUp: () => void;
+  onContinueAsGuest?: () => void;
 }
 
-const SignInScreen: React.FC<SignInScreenProps> = ({ onNavigateToSignUp }) => {
+const SignInScreen: React.FC<SignInScreenProps> = ({ onNavigateToSignUp, onContinueAsGuest }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, continueAsGuest } = useAuth();
 
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -41,6 +42,11 @@ const SignInScreen: React.FC<SignInScreenProps> = ({ onNavigateToSignUp }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleContinueAsGuest = () => {
+    continueAsGuest();
+    onContinueAsGuest?.();
   };
 
   return (
@@ -92,6 +98,13 @@ const SignInScreen: React.FC<SignInScreenProps> = ({ onNavigateToSignUp }) => {
               <Text style={styles.signUpLink}>Sign Up</Text>
             </TouchableOpacity>
           </View>
+
+          <TouchableOpacity 
+            style={styles.guestButton}
+            onPress={handleContinueAsGuest}
+          >
+            <Text style={styles.guestButtonText}>Continue as Guest</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -162,6 +175,20 @@ const styles = StyleSheet.create({
     color: '#E50914',
     fontSize: 14,
     fontWeight: 'bold',
+  },
+  guestButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#666',
+    borderRadius: 8,
+    padding: 16,
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  guestButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'normal',
   },
 });
 

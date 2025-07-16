@@ -220,9 +220,9 @@ const WatchlistButton = ({ movie }) => {
 };
 ```
 
-## 📱 Demonstration Screen
+## 📱 Redux Implementation in Components
 
-The `ReduxMoviesScreen` component demonstrates:
+The Redux implementation is used throughout the app components:
 
 1. **Redux Async Thunks**: Fetching popular movies using Redux state
 2. **RTK Query**: Fetching top-rated and trending movies with caching

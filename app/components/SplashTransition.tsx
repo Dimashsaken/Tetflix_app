@@ -12,6 +12,8 @@ const SplashTransition: React.FC<SplashTransitionProps> = ({ onAnimationComplete
   const scaleAnim = useRef(new Animated.Value(1)).current;
   
   useEffect(() => {
+    console.log('🎨 Starting splash animation...');
+    
     // Netflix-style animation sequence
     const animationSequence = Animated.sequence([
       // Hold for a moment
@@ -38,6 +40,7 @@ const SplashTransition: React.FC<SplashTransitionProps> = ({ onAnimationComplete
     
     // Start the animation and notify when complete
     animationSequence.start(() => {
+      console.log('🎨 Splash animation complete, calling onAnimationComplete');
       if (onAnimationComplete) {
         onAnimationComplete();
       }

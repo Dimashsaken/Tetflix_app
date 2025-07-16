@@ -6,12 +6,14 @@ interface AuthContextType {
   isLoading: boolean;
   isAuthenticated: boolean;
   isAmplifyConfigured: boolean;
+  isGuestMode: boolean;
   signIn: (email: string, password: string) => Promise<any>;
   signUp: (email: string, password: string, attributes?: Record<string, string>) => Promise<any>;
   confirmSignUp: (email: string, code: string) => Promise<any>;
   resendCode: (email: string) => Promise<any>;
   signOut: () => Promise<void>;
   refreshUser: () => Promise<void>;
+  continueAsGuest: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,6 +26,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAmplifyConfigured, setIsAmplifyConfigured] = useState(false);
+  const [isGuestMode, setIsGuestMode] = useState(false);
 
   const checkAmplifyConfig = () => {
     try {
@@ -31,16 +34,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const userPoolId = process.env.EXPO_PUBLIC_AWS_USER_POOL_ID;
       const clientId = process.env.EXPO_PUBLIC_AWS_CLIENT_ID;
       
+      console.log('🔧 Checking Amplify config:', { userPoolId: !!userPoolId, clientId: !!clientId });
+      
       const configured = !!(userPoolId && clientId);
       setIsAmplifyConfigured(configured);
       
       if (!configured) {
-        console.log('Amplify not configured - running in guest mode');
+        console.log('👤 Amplify not configured - running in guest mode');
+      } else {
+        console.log('✅ Amplify configured successfully');
       }
       
       return configured;
     } catch (error) {
-      console.log('Amplify configuration check failed - running in guest mode');
+      console.log('❌ Amplify configuration check failed - running in guest mode', error);
       setIsAmplifyConfigured(false);
       return false;
     }
@@ -68,16 +75,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const checkAuthState = async () => {
+    console.log('🔍 Starting auth state check...');
     setIsLoading(true);
     try {
       const configured = checkAmplifyConfig();
       if (configured) {
+        console.log('🔄 Refreshing user...');
         await refreshUser();
+      } else {
+        console.log('⏭️  Skipping user refresh - Amplify not configured');
       }
     } catch (error) {
-      console.log('Auth initialization failed:', error);
+      console.log('❌ Auth initialization failed:', error);
     } finally {
       setIsLoading(false);
+      console.log('✅ Auth state check complete');
     }
   };
 
@@ -143,19 +155,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await AuthService.signOut();
     }
     setUser(null);
+    setIsGuestMode(false);
+  };
+
+  const continueAsGuest = () => {
+    console.log('👤 User chose to continue as guest');
+    setIsGuestMode(true);
+    setIsLoading(false);
   };
 
   const value: AuthContextType = {
     user,
     isLoading,
-    isAuthenticated: user !== null,
+    isAuthenticated: user !== null || isGuestMode,
     isAmplifyConfigured,
+    isGuestMode,
     signIn,
     signUp,
     confirmSignUp,
     resendCode,
     signOut,
     refreshUser,
+    continueAsGuest,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

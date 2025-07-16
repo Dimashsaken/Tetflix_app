@@ -23,17 +23,29 @@ const AppContent: React.FC = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
   const isFrameworkReady = useFrameworkReady();
   
+  console.log('🔍 AppContent State:', { 
+    appIsReady, 
+    isFrameworkReady, 
+    isLoading, 
+    isAuthenticated, 
+    isAmplifyConfigured,
+    animationComplete 
+  });
+  
   useEffect(() => {
     async function prepare() {
       try {
+        console.log('🚀 Starting app preparation...');
         // Pre-load fonts, make API calls, etc.
         // Simulate a short loading time
         await new Promise(resolve => setTimeout(resolve, 500));
+        console.log('✅ App preparation complete');
       } catch (e) {
-        console.warn(e);
+        console.warn('❌ App preparation failed:', e);
       } finally {
         // Tell the application to render
         setAppIsReady(true);
+        console.log('🎯 App is ready');
       }
     }
 
@@ -42,25 +54,29 @@ const AppContent: React.FC = () => {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady && isFrameworkReady && !isLoading) {
+      console.log('🎬 Hiding splash screen...');
       // This tells the splash screen to hide immediately
       await SplashScreen.hideAsync().catch(() => {
         /* Ignore error */
       });
+      console.log('🎬 Splash screen hidden');
     }
   }, [appIsReady, isFrameworkReady, isLoading]);
 
   const handleAnimationComplete = () => {
+    console.log('✨ Animation complete - setting animationComplete to true');
     setAnimationComplete(true);
   };
 
   // Show loading while app or auth is initializing
   if (!appIsReady || !isFrameworkReady || isLoading) {
+    console.log('⏳ Still loading...', { appIsReady, isFrameworkReady, isLoading });
     return null;
   }
 
   // If Amplify is not configured, show main app in guest mode
   if (!isAmplifyConfigured) {
-    console.log('Running in guest mode - authentication not configured');
+    console.log('👤 Running in guest mode - authentication not configured');
     return (
       <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
         {!animationComplete && <SplashTransition onAnimationComplete={handleAnimationComplete} />}
@@ -74,11 +90,18 @@ const AppContent: React.FC = () => {
   }
 
   // Show auth screens if user is not authenticated (and Amplify is configured)
-  if (!isAuthenticated) {
-    return <AuthNavigator />;
+  if (!isAuthenticated && isAmplifyConfigured) {
+    console.log('🔐 Showing auth screens');
+    return (
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        {!animationComplete && <SplashTransition onAnimationComplete={handleAnimationComplete} />}
+        <AuthNavigator />
+      </View>
+    );
   }
 
   // Show main app if user is authenticated
+  console.log('🎉 Showing main app');
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       {!animationComplete && <SplashTransition onAnimationComplete={handleAnimationComplete} />}
